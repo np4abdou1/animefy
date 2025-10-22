@@ -1,0 +1,319 @@
+@import "tailwindcss";
+
+/* Custom Fonts */
+@font-face {
+  font-family: 'HeaderFont';
+  src: url('/fonts/header.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NormalText';
+  src: url('/fonts/normal_text.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BigTitlesStylish';
+  src: url('/fonts/big titles stylish.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AnimeTitlesEnglish';
+  src: url('/fonts/anime_titles_english.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #0f0f0f;
+  --foreground: #ffffff;
+  --font-header: 'HeaderFont', sans-serif;
+  --font-normal-text: 'NormalText', sans-serif;
+  --font-big-titles: 'BigTitlesStylish', sans-serif;
+  --font-anime-titles: 'AnimeTitlesEnglish', sans-serif;
+}
+
+/* Fixed: Changed overflow from hidden to auto to enable scrolling */
+body {
+  background-color: #0a0a0a;
+  color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Animated background - Monochrome */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Fixed: Move background behind content */
+  pointer-events: none;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 255, 255, 0.015), transparent),
+    radial-gradient(ellipse 60% 50% at 0% 50%, rgba(255, 255, 255, 0.01), transparent),
+    radial-gradient(ellipse 60% 50% at 100% 50%, rgba(255, 255, 255, 0.01), transparent);
+  animation: backgroundPulse 25s ease-in-out infinite;
+}
+
+@keyframes backgroundPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Floating particles - Monochrome */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.08;
+  }
+  25% {
+    transform: translateY(-30px) translateX(15px);
+    opacity: 0.12;
+  }
+  50% {
+    transform: translateY(-60px) translateX(-15px);
+    opacity: 0.08;
+  }
+  75% {
+    transform: translateY(-30px) translateX(10px);
+    opacity: 0.1;
+  }
+}
+
+.floating-particle {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1; /* Fixed: Lower z-index to prevent overlap with content */
+  animation: float 30s ease-in-out infinite;
+}
+
+.floating-particle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; width: 2px; height: 2px; }
+.floating-particle:nth-child(2) { top: 20%; left: 80%; animation-delay: 5s; }
+.floating-particle:nth-child(3) { top: 40%; left: 20%; animation-delay: 10s; width: 3px; height: 3px; }
+.floating-particle:nth-child(4) { top: 60%; left: 70%; animation-delay: 15s; }
+.floating-particle:nth-child(5) { top: 80%; left: 30%; animation-delay: 20s; width: 2px; height: 2px; }
+.floating-particle:nth-child(6) { top: 30%; left: 50%; animation-delay: 25s; }
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Custom scrollbar - Consolidated and fixed */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Fixed: Allow scrolling in html */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  scroll-snap-type: y mandatory;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Smooth scroll with snap points */
+main {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+/* Hero Section Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-fade-in-delay {
+  opacity: 0;
+  animation: fade-in 1s ease-out 0.3s forwards;
+}
+
+.animate-fade-in-delay-2 {
+  opacity: 0;
+  animation: fade-in 1s ease-out 0.6s forwards;
+}
+
+/* Fixed: Reduced hero section height */
+.hero-section {
+  min-height: 85vh; /* Reduced from 100vh */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+/* Improved Scroll Snapping Styles */
+.scroll-section {
+  position: relative;
+  will-change: opacity, transform;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Fixed: Added space between section titles and header */
+.section-title {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  padding-top: 0;
+}
+
+/* Removed dark overlay effect - sections now stay fully visible */
+.scroll-section:not(.active) {
+  opacity: 1;
+}
+
+.scroll-section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-section > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Fixed: Improved hover styles with proper border effect */
+.hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, border 0.3s ease;
+  border: 1px solid transparent; /* Start with transparent border */
+  position: relative;
+  overflow: visible;
+}
+
+.hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  border-color: rgba(255, 255, 255, 0.2); /* Show border on hover */
+}
+
+/* Fixed: Special hover styles for updates section */
+.updates-section .hover-effect {
+  border-radius: 8px; /* Add rounded corners */
+  transition: all 0.3s ease;
+}
+
+.updates-section .hover-effect:hover {
+  transform: translateY(-3px); /* Reduced movement */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3); /* More visible border */
+  background-color: rgba(255, 255, 255, 0.05); /* Subtle background change */
+}
+
+/* Fixed: Last section specific hover effects */
+.last-section .hover-effect {
+  transition: all 0.25s ease-out;
+}
+
+.last-section .hover-effect:hover {
+  transform: translateY(-3px) scale(1.02); /* Subtle scale effect */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Fixed: Ensure bottom sections are visible */
+.bottom-section {
+  margin-bottom: 5vh;
+  padding-bottom: 5rem; /* Increased padding */
+}
+
+/* Fixed: Prevent unwanted overlays */
+.content-container {
+  position: relative;
+  z-index: 3;
+  background: transparent;
+}
+
+/* Fixed: Animation for section transitions */
+@keyframes slide-up {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-up-animation {
+  animation: slide-up 0.7s ease-out forwards;
+}
+
+/* Vibrant glow pulse animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
