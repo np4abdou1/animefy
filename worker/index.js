@@ -79,6 +79,7 @@ export default {
               browse: '/api/browse',
               animeDetails: '/api/anime/:id',
               animeEpisodes: '/api/anime/:id/episodes',
+              streamingServers: '/api/anime/:id/watch/:episode',
               genres: '/api/genres',
               studios: '/api/studios',
             }
@@ -346,14 +347,72 @@ export default {
         }
       }
 
-      // Get anime details by ID
+      // Get anime details by ID (complete with episodes, characters, and related)
       if (url.pathname.match(/^\/api\/anime\/[^\/]+$/)) {
         try {
           const animeId = url.pathname.split('/').pop();
           
-          const data = await animeifyRequest('anime/load_anime.php', {
+          // Fetch all data in parallel to minimize requests
+          const [animeDetails, episodes, characters, relatedAnime] = await Promise.all([
+            animeifyRequest('anime/load_anime_details.php', {
+              UserId: '0',
+              AnimeId: animeId,
+              Token: ANIMEIFY_TOKEN
+            }),
+            animeifyRequest('episodes/load_episodes.php', {
+              AnimeID: animeId,
+              Token: ANIMEIFY_TOKEN
+            }).catch(() => []),
+            animeifyRequest('characters/characters_list.php', {
+              AnimeId: animeId,
+              Token: ANIMEIFY_TOKEN
+            }).catch(() => []),
+            animeifyRequest('anime/load_related_anime.php', {
+              AnimeId: animeId,
+              Token: ANIMEIFY_TOKEN
+            }).catch(() => [])
+          ]);
+
+          return new Response(
+            JSON.stringify({
+              status: 'success',
+              data: {
+                anime: animeDetails,
+                episodes: episodes || [],
+                characters: characters || [],
+                related: relatedAnime || []
+              }
+            }),
+            { headers: corsHeaders }
+          );
+        } catch (error) {
+          return new Response(
+            JSON.stringify({
+              status: 'error',
+              message: 'Failed to fetch anime details',
+              error: error.message
+            }),
+            { 
+              status: 500,
+              headers: corsHeaders 
+            }
+          );
+        }
+      }
+
+      // Get streaming servers for a specific episode
+      if (url.pathname.match(/^\/api\/anime\/[^\/]+\/watch\/[^\/]+$/)) {
+        try {
+          const pathParts = url.pathname.split('/');
+          const animeId = pathParts[3];
+          const episode = pathParts[5];
+          const animeType = url.searchParams.get('type') || 'SERIES';
+          
+          const data = await animeifyRequest('anime/load_servers.php', {
             UserId: '0',
             AnimeId: animeId,
+            Episode: episode,
+            AnimeType: animeType,
             Token: ANIMEIFY_TOKEN
           });
 
@@ -368,7 +427,7 @@ export default {
           return new Response(
             JSON.stringify({
               status: 'error',
-              message: 'Failed to fetch anime details',
+              message: 'Failed to fetch streaming servers',
               error: error.message
             }),
             { 
