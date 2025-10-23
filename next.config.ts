@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Ensure fonts and static assets are properly handled
+  assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || undefined,
+  // Enable static exports for better Cloudflare Pages compatibility
+  output: process.env.OUTPUT_MODE === 'export' ? 'export' : undefined,
 };
 
 export default nextConfig;
