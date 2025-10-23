@@ -31,7 +31,7 @@ async function animeifyRequest(endpoint: string, params: Record<string, string>)
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string; episode: string }> }
+  { params }: { params: { id: string; episode: string } }
 ) {
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -41,7 +41,8 @@ export async function GET(
   };
 
   try {
-    const { id: animeId, episode } = await params;
+    const animeId = params.id;
+    const episode = params.episode;
     const { searchParams } = new URL(request.url);
     const animeType = searchParams.get('type') || 'SERIES';
     
