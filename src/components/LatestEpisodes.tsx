@@ -60,7 +60,7 @@ export default function LatestEpisodes({ episodes }: LatestEpisodesProps) {
             return (
               <Link
                 key={`${episode.eId || index}`}
-                href={`/watch/${animeId}/${episodeNum}`}
+                href={`/anime/${animeId}/episode/${episodeNum}`}
                 className="group flex-shrink-0 w-[180px] sm:w-[200px] md:w-[220px] lg:w-[240px]"
               >
                 <div className="relative aspect-[2/3] bg-black transition-all duration-300 ease-out group-hover:scale-105 group-hover:ring-2 group-hover:ring-white/80 rounded-md">
