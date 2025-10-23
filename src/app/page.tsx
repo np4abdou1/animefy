@@ -35,7 +35,7 @@ export default async function Home() {
   const homeData = await getHomeContent();
 
   return (
-    <main className="snap-y snap-mandatory overflow-y-scroll overflow-x-hidden h-screen relative scrollbar-hide" style={{
+    <main className="snap-y snap-mandatory overflow-y-scroll h-screen relative scrollbar-hide" style={{
       scrollBehavior: 'smooth',
     }}>
       <ScrollSectionObserver />
@@ -49,7 +49,7 @@ export default async function Home() {
       
       {/* Airing Today Section */}
       {homeData.airingToday && homeData.airingToday.length > 0 && (
-        <section id="airing" className="scroll-section snap-start bg-[#0a0a0a] min-h-screen flex flex-col justify-center pt-24 relative overflow-visible">
+        <section id="airing" className="scroll-section snap-start bg-[#0a0a0a] min-h-screen flex flex-col justify-start pt-24 relative overflow-visible">
           <div className="px-4 md:px-12 lg:px-16 xl:px-24">
             <AiringToday animes={homeData.airingToday} />
           </div>
@@ -58,7 +58,7 @@ export default async function Home() {
       
       {/* Latest Episodes Section */}
       {homeData.latestEpisodes && homeData.latestEpisodes.length > 0 && (
-        <section id="latest" className="scroll-section snap-start bg-[#0a0a0a] min-h-screen flex flex-col justify-center pt-24 relative overflow-visible">
+        <section id="latest" className="scroll-section snap-start bg-[#0a0a0a] min-h-screen flex flex-col justify-start pt-24 relative overflow-visible">
           <div className="px-4 md:px-12 lg:px-16 xl:px-24">
             <LatestEpisodes episodes={homeData.latestEpisodes} />
           </div>
@@ -67,7 +67,7 @@ export default async function Home() {
       
       {/* Trending Anime Section */}
       {homeData.trending && homeData.trending.length > 0 && (
-        <section id="trending" className="scroll-section snap-start bg-[#0a0a0a] min-h-screen flex flex-col justify-center pt-24 relative overflow-visible">
+        <section id="trending" className="scroll-section snap-start bg-[#0a0a0a] min-h-screen flex flex-col justify-start pt-24 relative overflow-visible">
           <div className="px-4 md:px-12 lg:px-16 xl:px-24">
             <TrendingAnime trending={homeData.trending} />
           </div>

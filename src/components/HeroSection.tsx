@@ -104,7 +104,8 @@ export default function HeroSection() {
           <h1 
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white animate-fade-in"
             style={{ 
-              fontFamily: 'var(--font-big-titles)'
+              fontFamily: 'var(--font-big-titles)',
+              textShadow: '0 2px 8px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3)'
             }}
           >
             {currentAnime.titleArabic}
@@ -114,7 +115,8 @@ export default function HeroSection() {
           <p 
             className="text-base md:text-lg text-gray-200 mb-6 animate-fade-in-delay leading-relaxed line-clamp-3"
             style={{ 
-              fontFamily: 'var(--font-normal-text)'
+              fontFamily: 'var(--font-normal-text)',
+              textShadow: '0 1px 4px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4)'
             }}
           >
             {currentAnime.description}
