@@ -84,7 +84,7 @@ export default function DiscoverContent() {
       if (selectedSort) params.append('sortBy', selectedSort);
       params.append('from', fromValue.toString());
 
-      const res = await fetch(`/api/browse?${params}`);
+      const res = await fetch(`https://witanime-api-worker.abdellah2019gg.workers.dev/api/browse?${params}`);
       const json = await res.json();
       const newAnimes = json.data || [];
       

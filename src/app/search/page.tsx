@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Search as SearchIcon, X, SlidersHorizontal } from 'lucide-react';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://witanime-api-worker.abdellah2019gg.workers.dev';
 const THUMBNAILS_BASE = "https://animeify.net/animeify/files/thumbnails/";
 
 interface Anime {
