@@ -1,28 +1,43 @@
-// Animeify API Client - Direct API calls to Animeify.net
+// Animeify API Client - Proxied API calls via Next.js API route to avoid CORS issues
 // Based on API documentation from API_DOCUMENTATION.md
 
-const ANIMEIFY_API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "https://animeify.net/animeify/apis_v4/";
 const ANIMEIFY_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN || "8cnY80AZSbUCmR26Vku1VUUY4";
+const USE_PROXY = typeof window !== 'undefined'; // Use proxy only on client-side
 
 // Helper to make POST requests to Animeify API
 async function animeifyRequest(endpoint: string, params: Record<string, string>) {
-  const url = ANIMEIFY_API_BASE + endpoint;
-  
-  // Build form data as URL-encoded string
-  const formBody = Object.keys(params)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
-    .join('&');
-  
   try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: formBody,
-      // Add Next.js caching configuration
-      next: { revalidate: 300 }, // Cache for 5 minutes
-    });
+    let response;
+    
+    if (USE_PROXY) {
+      // Client-side: use Next.js API proxy to avoid CORS
+      response = await fetch('/api/animeify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ endpoint, params }),
+      });
+    } else {
+      // Server-side: call Animeify API directly
+      const ANIMEIFY_API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "https://animeify.net/animeify/apis_v4/";
+      const url = ANIMEIFY_API_BASE + endpoint;
+      
+      // Build form data as URL-encoded string
+      const formBody = Object.keys(params)
+        .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+        .join('&');
+      
+      response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formBody,
+        // Add Next.js caching configuration
+        next: { revalidate: 300 }, // Cache for 5 minutes
+      });
+    }
     
     if (!response.ok) {
       throw new Error(`API request failed: ${response.status} ${response.statusText}`);
@@ -30,7 +45,7 @@ async function animeifyRequest(endpoint: string, params: Record<string, string>)
     
     return await response.json();
   } catch (error) {
-    console.error(`Failed to fetch from ${url}:`, error);
+    console.error(`Failed to fetch ${endpoint}:`, error);
     throw error;
   }
 }
