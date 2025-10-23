@@ -17,14 +17,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: Unzip DLL files to root folder
+      - name: Unzip DLL files to dll api folder
         run: |
-          unzip -o "dll files decompiled.zip" -d .
+          mkdir -p "dll api"
+          unzip -o "dll files decompiled.zip" -d "dll api"
           
       - name: Commit and push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
-          git diff --staged --quiet || git commit -m "Unzip DLL files to root folder"
+          git diff --staged --quiet || git commit -m "Unzip DLL files to dll api folder"
           git push
