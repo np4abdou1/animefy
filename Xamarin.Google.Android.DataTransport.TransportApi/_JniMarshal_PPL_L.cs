@@ -1,0 +1,5 @@
+﻿using System;
+
+// Token: 0x02000003 RID: 3
+// (Invoke) Token: 0x06000006 RID: 6
+internal delegate IntPtr _JniMarshal_PPL_L(IntPtr jnienv, IntPtr klass, IntPtr p0);

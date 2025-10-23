@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D4662}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xamarin.AndroidX.Core</RootNamespace>
+    <AssemblyName>Xamarin.AndroidX.Core</AssemblyName>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AndroidX\Core\App\ActivityCompat.cs" />
+    <Compile Include="AndroidX\Core\App\ActivityOptionsCompat.cs" />
+    <Compile Include="AndroidX\Core\App\ComponentActivity.cs" />
+    <Compile Include="AndroidX\Core\App\INotificationBuilderWithBuilderAccessor.cs" />
+    <Compile Include="AndroidX\Core\App\INotificationBuilderWithBuilderAccessorInvoker.cs" />
+    <Compile Include="AndroidX\Core\App\IOnMultiWindowModeChangedProvider.cs" />
+    <Compile Include="AndroidX\Core\App\IOnMultiWindowModeChangedProviderInvoker.cs" />
+    <Compile Include="AndroidX\Core\App\IOnNewIntentProvider.cs" />
+    <Compile Include="AndroidX\Core\App\IOnNewIntentProviderInvoker.cs" />
+    <Compile Include="AndroidX\Core\App\IOnPictureInPictureModeChangedProvider.cs" />
+    <Compile Include="AndroidX\Core\App\IOnPictureInPictureModeChangedProviderInvoker.cs" />
+    <Compile Include="AndroidX\Core\App\NotificationChannelCompat.cs" />
+    <Compile Include="AndroidX\Core\App\NotificationChannelGroupCompat.cs" />
+    <Compile Include="AndroidX\Core\App\NotificationCompat.cs" />
+    <Compile Include="AndroidX\Core\App\NotificationManagerCompat.cs" />
+    <Compile Include="AndroidX\Core\App\Person.cs" />
+    <Compile Include="AndroidX\Core\App\RemoteInput.cs" />
+    <Compile Include="AndroidX\Core\App\SharedElementCallback.cs" />
+    <Compile Include="AndroidX\Core\App\SharedElementCallbackInvoker.cs" />
+    <Compile Include="AndroidX\Core\App\TaskStackBuilder.cs" />
+    <Compile Include="AndroidX\Core\Content\ContextCompat.cs" />
+    <Compile Include="AndroidX\Core\Content\IOnConfigurationChangedProvider.cs" />
+    <Compile Include="AndroidX\Core\Content\IOnConfigurationChangedProviderInvoker.cs" />
+    <Compile Include="AndroidX\Core\Content\IOnTrimMemoryProvider.cs" />
+    <Compile Include="AndroidX\Core\Content\IOnTrimMemoryProviderInvoker.cs" />
+    <Compile Include="AndroidX\Core\Content\LocusIdCompat.cs" />
+    <Compile Include="AndroidX\Core\Content\PM\ShortcutInfoCompat.cs" />
+    <Compile Include="AndroidX\Core\Graphics\Drawable\IconCompat.cs" />
+    <Compile Include="AndroidX\Core\Graphics\Insets.cs" />
+    <Compile Include="AndroidX\Core\Internal\View\ISupportMenu.cs" />
+    <Compile Include="AndroidX\Core\Internal\View\ISupportMenuInvoker.cs" />
+    <Compile Include="AndroidX\Core\Internal\View\ISupportMenuItem.cs" />
+    <Compile Include="AndroidX\Core\Internal\View\ISupportMenuItemInvoker.cs" />
+    <Compile Include="AndroidX\Core\OS\LocaleListCompat.cs" />
+    <Compile Include="AndroidX\Core\Util\IConsumer.cs" />
+    <Compile Include="AndroidX\Core\Util\IConsumerInvoker.cs" />
+    <Compile Include="AndroidX\Core\Util\Pair.cs" />
+    <Compile Include="AndroidX\Core\Util\Pools.cs" />
+    <Compile Include="AndroidX\Core\View\AccessibilityDelegateCompat.cs" />
+    <Compile Include="AndroidX\Core\View\Accessibility\AccessibilityNodeInfoCompat.cs" />
+    <Compile Include="AndroidX\Core\View\Accessibility\AccessibilityNodeProviderCompat.cs" />
+    <Compile Include="AndroidX\Core\View\Accessibility\AccessibilityViewCommandCommandArguments.cs" />
+    <Compile Include="AndroidX\Core\View\Accessibility\AccessibilityViewCommandCommandArgumentsInvoker.cs" />
+    <Compile Include="AndroidX\Core\View\Accessibility\AccessibilityWindowInfoCompat.cs" />
+    <Compile Include="AndroidX\Core\View\Accessibility\IAccessibilityViewCommand.cs" />
+    <Compile Include="AndroidX\Core\View\Accessibility\IAccessibilityViewCommandInvoker.cs" />
+    <Compile Include="AndroidX\Core\View\ActionProvider.cs" />
+    <Compile Include="AndroidX\Core\View\ActionProviderInvoker.cs" />
+    <Compile Include="AndroidX\Core\View\DisplayCutoutCompat.cs" />
+    <Compile Include="AndroidX\Core\View\DragAndDropPermissionsCompat.cs" />
+    <Compile Include="AndroidX\Core\View\IMenuHost.cs" />
+    <Compile Include="AndroidX\Core\View\IMenuHostInvoker.cs" />
+    <Compile Include="AndroidX\Core\View\IMenuProvider.cs" />
+    <Compile Include="AndroidX\Core\View\IMenuProviderInvoker.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingChild.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingChild2.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingChild2Invoker.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingChild3.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingChild3Invoker.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingChildInvoker.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingParent.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingParent2.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingParent2Invoker.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingParent3.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingParent3Invoker.cs" />
+    <Compile Include="AndroidX\Core\View\INestedScrollingParentInvoker.cs" />
+    <Compile Include="AndroidX\Core\View\IScrollingView.cs" />
+    <Compile Include="AndroidX\Core\View\IScrollingViewInvoker.cs" />
+    <Compile Include="AndroidX\Core\View\ITintableBackgroundView.cs" />
+    <Compile Include="AndroidX\Core\View\ITintableBackgroundViewInvoker.cs" />
+    <Compile Include="AndroidX\Core\View\IViewPropertyAnimatorListener.cs" />
+    <Compile Include="AndroidX\Core\View\IViewPropertyAnimatorListenerInvoker.cs" />
+    <Compile Include="AndroidX\Core\View\IViewPropertyAnimatorUpdateListener.cs" />
+    <Compile Include="AndroidX\Core\View\IViewPropertyAnimatorUpdateListenerInvoker.cs" />
+    <Compile Include="AndroidX\Core\View\KeyEventDispatcher.cs" />
+    <Compile Include="AndroidX\Core\View\ViewPropertyAnimatorCompat.cs" />
+    <Compile Include="AndroidX\Core\View\WindowInsetsCompat.cs" />
+    <Compile Include="AndroidX\Core\Widget\ITintableCompoundButton.cs" />
+    <Compile Include="AndroidX\Core\Widget\ITintableCompoundButtonInvoker.cs" />
+    <Compile Include="AndroidX\Core\Widget\ITintableCompoundDrawablesView.cs" />
+    <Compile Include="AndroidX\Core\Widget\ITintableCompoundDrawablesViewInvoker.cs" />
+    <Compile Include="AndroidX\Core\Widget\ITintableImageSourceView.cs" />
+    <Compile Include="AndroidX\Core\Widget\ITintableImageSourceViewInvoker.cs" />
+    <Compile Include="Microsoft\CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Runtime\CompilerServices\NullableAttribute.cs" />
+    <Compile Include="System\Runtime\CompilerServices\RefSafetyRulesAttribute.cs" />
+    <Compile Include="_JniMarshal_PPCCII_L.cs" />
+    <Compile Include="_JniMarshal_PPCC_L.cs" />
+    <Compile Include="_JniMarshal_PPCI_L.cs" />
+    <Compile Include="_JniMarshal_PPC_L.cs" />
+    <Compile Include="_JniMarshal_PPFFZ_Z.cs" />
+    <Compile Include="_JniMarshal_PPFF_Z.cs" />
+    <Compile Include="_JniMarshal_PPIIIILIL_V.cs" />
+    <Compile Include="_JniMarshal_PPIIIILI_Z.cs" />
+    <Compile Include="_JniMarshal_PPIIIIL_Z.cs" />
+    <Compile Include="_JniMarshal_PPIIII_L.cs" />
+    <Compile Include="_JniMarshal_PPIIILLLIL_I.cs" />
+    <Compile Include="_JniMarshal_PPIIIL_L.cs" />
+    <Compile Include="_JniMarshal_PPIII_L.cs" />
+    <Compile Include="_JniMarshal_PPIILLI_Z.cs" />
+    <Compile Include="_JniMarshal_PPIILL_Z.cs" />
+    <Compile Include="_JniMarshal_PPIIL_Z.cs" />
+    <Compile Include="_JniMarshal_PPIIZ_L.cs" />
+    <Compile Include="_JniMarshal_PPII_L.cs" />
+    <Compile Include="_JniMarshal_PPII_V.cs" />
+    <Compile Include="_JniMarshal_PPII_Z.cs" />
+    <Compile Include="_JniMarshal_PPILI_Z.cs" />
+    <Compile Include="_JniMarshal_PPILLL_V.cs" />
+    <Compile Include="_JniMarshal_PPILL_L.cs" />
+    <Compile Include="_JniMarshal_PPILL_V.cs" />
+    <Compile Include="_JniMarshal_PPIL_Z.cs" />
+    <Compile Include="_JniMarshal_PPIZZ_V.cs" />
+    <Compile Include="_JniMarshal_PPIZ_V.cs" />
+    <Compile Include="_JniMarshal_PPI_L.cs" />
+    <Compile Include="_JniMarshal_PPI_V.cs" />
+    <Compile Include="_JniMarshal_PPI_Z.cs" />
+    <Compile Include="_JniMarshal_PPJ_L.cs" />
+    <Compile Include="_JniMarshal_PPJ_V.cs" />
+    <Compile Include="_JniMarshal_PPLFFZ_Z.cs" />
+    <Compile Include="_JniMarshal_PPLFF_Z.cs" />
+    <Compile Include="_JniMarshal_PPLIIIIIL_V.cs" />
+    <Compile Include="_JniMarshal_PPLIIIII_V.cs" />
+    <Compile Include="_JniMarshal_PPLIIII_V.cs" />
+    <Compile Include="_JniMarshal_PPLIILI_V.cs" />
+    <Compile Include="_JniMarshal_PPLIIL_V.cs" />
+    <Compile Include="_JniMarshal_PPLIIL_Z.cs" />
+    <Compile Include="_JniMarshal_PPLIL_Z.cs" />
+    <Compile Include="_JniMarshal_PPLI_L.cs" />
+    <Compile Include="_JniMarshal_PPLI_V.cs" />
+    <Compile Include="_JniMarshal_PPLI_Z.cs" />
+    <Compile Include="_JniMarshal_PPLLII_V.cs" />
+    <Compile Include="_JniMarshal_PPLLII_Z.cs" />
+    <Compile Include="_JniMarshal_PPLLI_V.cs" />
+    <Compile Include="_JniMarshal_PPLLI_Z.cs" />
+    <Compile Include="_JniMarshal_PPLLL_L.cs" />
+    <Compile Include="_JniMarshal_PPLLL_V.cs" />
+    <Compile Include="_JniMarshal_PPLLL_Z.cs" />
+    <Compile Include="_JniMarshal_PPLL_L.cs" />
+    <Compile Include="_JniMarshal_PPLL_V.cs" />
+    <Compile Include="_JniMarshal_PPLL_Z.cs" />
+    <Compile Include="_JniMarshal_PPLZ_L.cs" />
+    <Compile Include="_JniMarshal_PPLZ_V.cs" />
+    <Compile Include="_JniMarshal_PPL_L.cs" />
+    <Compile Include="_JniMarshal_PPL_V.cs" />
+    <Compile Include="_JniMarshal_PPL_Z.cs" />
+    <Compile Include="_JniMarshal_PPZIZ_L.cs" />
+    <Compile Include="_JniMarshal_PPZ_L.cs" />
+    <Compile Include="_JniMarshal_PPZ_V.cs" />
+    <Compile Include="_JniMarshal_PP_C.cs" />
+    <Compile Include="_JniMarshal_PP_F.cs" />
+    <Compile Include="_JniMarshal_PP_I.cs" />
+    <Compile Include="_JniMarshal_PP_J.cs" />
+    <Compile Include="_JniMarshal_PP_L.cs" />
+    <Compile Include="_JniMarshal_PP_V.cs" />
+    <Compile Include="_JniMarshal_PP_Z.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Java.Interop\Java.Interop.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4642}</Project>
+      <Name>Java.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.Android\Mono.Android.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4643}</Project>
+      <Name>Mono.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Xml\System.Xml.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4654}</Project>
+      <Name>System.Xml</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System\System.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4650}</Project>
+      <Name>System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.Lifecycle.Common\Xamarin.AndroidX.Lifecycle.Common.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4667}</Project>
+      <Name>Xamarin.AndroidX.Lifecycle.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.VersionedParcelable\Xamarin.AndroidX.VersionedParcelable.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D466F}</Project>
+      <Name>Xamarin.AndroidX.VersionedParcelable</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.Google.Guava.ListenableFuture\Xamarin.Google.Guava.ListenableFuture.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D467A}</Project>
+      <Name>Xamarin.Google.Guava.ListenableFuture</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

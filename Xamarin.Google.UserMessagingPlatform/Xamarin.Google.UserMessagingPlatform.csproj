@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D467B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xamarin.Google.UserMessagingPlatform</RootNamespace>
+    <AssemblyName>Xamarin.Google.UserMessagingPlatform</AssemblyName>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Java\Interop\__TypeRegistrations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Runtime\Versioning\SupportedOSPlatformAttribute.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\ConsentDebugSettings.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\ConsentFormOnConsentFormDismissedEventArgs.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\ConsentInformationConsentStatus.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\ConsentInformationConsentStatusConsts.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\ConsentInformationOnConsentInfoUpdateFailureEventArgs.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\ConsentRequestParameters.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\FormError.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentForm.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentFormInvoker.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentFormOnConsentFormDismissedListener.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentFormOnConsentFormDismissedListenerImplementor.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentFormOnConsentFormDismissedListenerInvoker.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentInformation.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentInformationConsentStatus.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentInformationConsentStatusInvoker.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentInformationInvoker.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentInformationOnConsentInfoUpdateFailureListener.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentInformationOnConsentInfoUpdateFailureListenerImpleme.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentInformationOnConsentInfoUpdateFailureListenerInvoker.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentInformationOnConsentInfoUpdateSuccessListener.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentInformationOnConsentInfoUpdateSuccessListenerImpleme.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\IConsentInformationOnConsentInfoUpdateSuccessListenerInvoker.cs" />
+    <Compile Include="Xamarin\Google\UserMesssagingPlatform\UserMessagingPlatform.cs" />
+    <Compile Include="_JniMarshal_PPI_L.cs" />
+    <Compile Include="_JniMarshal_PPLLLL_V.cs" />
+    <Compile Include="_JniMarshal_PPLL_V.cs" />
+    <Compile Include="_JniMarshal_PPL_L.cs" />
+    <Compile Include="_JniMarshal_PPL_V.cs" />
+    <Compile Include="_JniMarshal_PPL_Z.cs" />
+    <Compile Include="_JniMarshal_PPZ_L.cs" />
+    <Compile Include="_JniMarshal_PP_I.cs" />
+    <Compile Include="_JniMarshal_PP_L.cs" />
+    <Compile Include="_JniMarshal_PP_V.cs" />
+    <Compile Include="_JniMarshal_PP_Z.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Java.Interop\Java.Interop.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4642}</Project>
+      <Name>Java.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.Android\Mono.Android.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4643}</Project>
+      <Name>Mono.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System\System.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4650}</Project>
+      <Name>System</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

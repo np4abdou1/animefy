@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D4679}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xamarin.Google.ErrorProne.Annotations</RootNamespace>
+    <AssemblyName>Xamarin.Google.ErrorProne.Annotations</AssemblyName>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CanIgnoreReturnValueAttribute.cs" />
+    <Compile Include="CheckReturnValueAttribute.cs" />
+    <Compile Include="CompatibleWithAttribute.cs" />
+    <Compile Include="CompileTimeConstantAttribute.cs" />
+    <Compile Include="Concurrent\GuardedByAttribute.cs" />
+    <Compile Include="Concurrent\IGuardedBy.cs" />
+    <Compile Include="Concurrent\IGuardedByInvoker.cs" />
+    <Compile Include="Concurrent\ILazyInit.cs" />
+    <Compile Include="Concurrent\ILazyInitInvoker.cs" />
+    <Compile Include="Concurrent\ILockMethod.cs" />
+    <Compile Include="Concurrent\ILockMethodInvoker.cs" />
+    <Compile Include="Concurrent\IUnlockMethod.cs" />
+    <Compile Include="Concurrent\IUnlockMethodInvoker.cs" />
+    <Compile Include="Concurrent\LazyInitAttribute.cs" />
+    <Compile Include="Concurrent\LockMethodAttribute.cs" />
+    <Compile Include="Concurrent\UnlockMethodAttribute.cs" />
+    <Compile Include="DoNotCallAttribute.cs" />
+    <Compile Include="DoNotMockAttribute.cs" />
+    <Compile Include="FormatMethodAttribute.cs" />
+    <Compile Include="FormatStringAttribute.cs" />
+    <Compile Include="ForOverrideAttribute.cs" />
+    <Compile Include="ICanIgnoreReturnValue.cs" />
+    <Compile Include="ICanIgnoreReturnValueInvoker.cs" />
+    <Compile Include="ICheckReturnValue.cs" />
+    <Compile Include="ICheckReturnValueInvoker.cs" />
+    <Compile Include="ICompatibleWith.cs" />
+    <Compile Include="ICompatibleWithInvoker.cs" />
+    <Compile Include="ICompileTimeConstant.cs" />
+    <Compile Include="ICompileTimeConstantInvoker.cs" />
+    <Compile Include="IDoNotCall.cs" />
+    <Compile Include="IDoNotCallInvoker.cs" />
+    <Compile Include="IDoNotMock.cs" />
+    <Compile Include="IDoNotMockInvoker.cs" />
+    <Compile Include="IFormatMethod.cs" />
+    <Compile Include="IFormatMethodInvoker.cs" />
+    <Compile Include="IFormatString.cs" />
+    <Compile Include="IFormatStringInvoker.cs" />
+    <Compile Include="IForOverride.cs" />
+    <Compile Include="IForOverrideInvoker.cs" />
+    <Compile Include="IImmutable.cs" />
+    <Compile Include="IImmutableInvoker.cs" />
+    <Compile Include="IIncompatibleModifiers.cs" />
+    <Compile Include="IIncompatibleModifiersInvoker.cs" />
+    <Compile Include="IInlineMe.cs" />
+    <Compile Include="IInlineMeInvoker.cs" />
+    <Compile Include="IInlineMeValidationDisabled.cs" />
+    <Compile Include="IInlineMeValidationDisabledInvoker.cs" />
+    <Compile Include="IKeep.cs" />
+    <Compile Include="IKeepInvoker.cs" />
+    <Compile Include="ImmutableAttribute.cs" />
+    <Compile Include="IMustBeClosed.cs" />
+    <Compile Include="IMustBeClosedInvoker.cs" />
+    <Compile Include="IncompatibleModifiersAttribute.cs" />
+    <Compile Include="InlineMeAttribute.cs" />
+    <Compile Include="InlineMeValidationDisabledAttribute.cs" />
+    <Compile Include="INoAllocation.cs" />
+    <Compile Include="INoAllocationInvoker.cs" />
+    <Compile Include="IOverridingMethodsMustInvokeSuper.cs" />
+    <Compile Include="IOverridingMethodsMustInvokeSuperInvoker.cs" />
+    <Compile Include="IRequiredModifiers.cs" />
+    <Compile Include="IRequiredModifiersInvoker.cs" />
+    <Compile Include="IRestrictedApi.cs" />
+    <Compile Include="IRestrictedApiInvoker.cs" />
+    <Compile Include="ISuppressPackageLocation.cs" />
+    <Compile Include="ISuppressPackageLocationInvoker.cs" />
+    <Compile Include="IThreadSafe.cs" />
+    <Compile Include="IThreadSafeInvoker.cs" />
+    <Compile Include="IVar.cs" />
+    <Compile Include="IVarInvoker.cs" />
+    <Compile Include="Java\Interop\__TypeRegistrations.cs" />
+    <Compile Include="KeepAttribute.cs" />
+    <Compile Include="Modifier.cs" />
+    <Compile Include="MustBeClosedAttribute.cs" />
+    <Compile Include="NoAllocationAttribute.cs" />
+    <Compile Include="OverridingMethodsMustInvokeSuperAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequiredModifiersAttribute.cs" />
+    <Compile Include="RestrictedApiAttribute.cs" />
+    <Compile Include="SuppressPackageLocationAttribute.cs" />
+    <Compile Include="System\Runtime\Versioning\SupportedOSPlatformAttribute.cs" />
+    <Compile Include="ThreadSafeAttribute.cs" />
+    <Compile Include="VarAttribute.cs" />
+    <Compile Include="_JniMarshal_PPL_Z.cs" />
+    <Compile Include="_JniMarshal_PP_I.cs" />
+    <Compile Include="_JniMarshal_PP_L.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Java.Interop\Java.Interop.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4642}</Project>
+      <Name>Java.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.Android\Mono.Android.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4643}</Project>
+      <Name>Mono.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System\System.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4650}</Project>
+      <Name>System</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

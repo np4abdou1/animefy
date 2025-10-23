@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D463F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdColony</RootNamespace>
+    <AssemblyName>AdColony</AssemblyName>
+    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Com\Adcolony\Adcolonysdk\BuildConfig.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColony.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyAdOptions.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyAdSize.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyAdView.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyAdViewListener.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyAdViewListenerInvoker.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyAppOptions.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyCustomMessage.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyCustomMessageEventArgs.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyEventTracker.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyInterstitial.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyInterstitialListener.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyInterstitialListenerInvoker.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyReward.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyRewardEventArgs.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonySignalsListener.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonySignalsListenerInvoker.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyUserMetadata.cs" />
+    <Compile Include="Com\Adcolony\Sdk\AdColonyZone.cs" />
+    <Compile Include="Com\Adcolony\Sdk\IAdColonyCustomMessageListener.cs" />
+    <Compile Include="Com\Adcolony\Sdk\IAdColonyCustomMessageListenerImplementor.cs" />
+    <Compile Include="Com\Adcolony\Sdk\IAdColonyCustomMessageListenerInvoker.cs" />
+    <Compile Include="Com\Adcolony\Sdk\IAdColonyRewardListener.cs" />
+    <Compile Include="Com\Adcolony\Sdk\IAdColonyRewardListenerImplementor.cs" />
+    <Compile Include="Com\Adcolony\Sdk\IAdColonyRewardListenerInvoker.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\AdEvents.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\AdSession.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\AdSessionConfiguration.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\AdSessionContext.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\AdSessionContextType.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\AdSessionInvoker.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\CreativeType.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\ErrorType.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\FriendlyObstructionPurpose.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\ImpressionType.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\IPossibleObstructionListener.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\IPossibleObstructionListenerImplementor.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\IPossibleObstructionListenerInvoker.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\Media\InteractionType.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\Media\MediaEvents.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\Media\PlayerState.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\Media\Position.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\Media\VastProperties.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\Owner.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\Partner.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\PossibleObstructionEventArgs.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Adsession\VerificationScriptResource.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Omid.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Publisher\AdSessionStatePublisher.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Publisher\AdSessionStatePublisherInvoker.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\ScriptInjector.cs" />
+    <Compile Include="Com\Iab\Omid\Library\Adcolony\Walking\TreeWalker.cs" />
+    <Compile Include="Java\Interop\__TypeRegistrations.cs" />
+    <Compile Include="Microsoft\CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Runtime\CompilerServices\NullableAttribute.cs" />
+    <Compile Include="System\Runtime\CompilerServices\NullableContextAttribute.cs" />
+    <Compile Include="System\Runtime\Versioning\SupportedOSPlatformAttribute.cs" />
+    <Compile Include="_JniMarshal_PPF_V.cs" />
+    <Compile Include="_JniMarshal_PPIJ_V.cs" />
+    <Compile Include="_JniMarshal_PPI_L.cs" />
+    <Compile Include="_JniMarshal_PPLD_L.cs" />
+    <Compile Include="_JniMarshal_PPLJ_V.cs" />
+    <Compile Include="_JniMarshal_PPLLI_V.cs" />
+    <Compile Include="_JniMarshal_PPLLL_V.cs" />
+    <Compile Include="_JniMarshal_PPLL_L.cs" />
+    <Compile Include="_JniMarshal_PPLL_V.cs" />
+    <Compile Include="_JniMarshal_PPLZ_L.cs" />
+    <Compile Include="_JniMarshal_PPL_L.cs" />
+    <Compile Include="_JniMarshal_PPL_V.cs" />
+    <Compile Include="_JniMarshal_PPL_Z.cs" />
+    <Compile Include="_JniMarshal_PPZ_L.cs" />
+    <Compile Include="_JniMarshal_PPZ_V.cs" />
+    <Compile Include="_JniMarshal_PP_I.cs" />
+    <Compile Include="_JniMarshal_PP_L.cs" />
+    <Compile Include="_JniMarshal_PP_V.cs" />
+    <Compile Include="_JniMarshal_PP_Z.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Java.Interop\Java.Interop.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4642}</Project>
+      <Name>Java.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.Android\Mono.Android.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4643}</Project>
+      <Name>Mono.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System\System.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4650}</Project>
+      <Name>System</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D4682}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xamarin.Jetbrains.Annotations</RootNamespace>
+    <AssemblyName>Xamarin.Jetbrains.Annotations</AssemblyName>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IntelliJ\Lang\Annotations\Flow.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\FlowAttribute.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\FlowConsts.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IdentifierAttribute.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IFlow.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IFlowInvoker.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IIdentifier.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IIdentifierInvoker.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\ILanguage.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\ILanguageInvoker.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IMagicConstant.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IMagicConstantInvoker.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IPattern.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IPatternInvoker.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IPrintFormat.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IPrintFormatInvoker.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IRegExp.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\IRegExpInvoker.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\ISubst.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\ISubstInvoker.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\JdkConstants.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\LanguageAttribute.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\MagicConstantAttribute.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\PatternAttribute.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\PrintFormatAttribute.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\RegExpAttribute.cs" />
+    <Compile Include="IntelliJ\Lang\Annotations\SubstAttribute.cs" />
+    <Compile Include="Java\Interop\__TypeRegistrations.cs" />
+    <Compile Include="JetBrains\Annotations\ApiStatus.cs" />
+    <Compile Include="JetBrains\Annotations\Async.cs" />
+    <Compile Include="JetBrains\Annotations\BlockingAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\BlockingExecutorAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\CheckReturnValueAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\ContractAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\Debug.cs" />
+    <Compile Include="JetBrains\Annotations\IBlocking.cs" />
+    <Compile Include="JetBrains\Annotations\IBlockingExecutor.cs" />
+    <Compile Include="JetBrains\Annotations\IBlockingExecutorInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\IBlockingInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\ICheckReturnValue.cs" />
+    <Compile Include="JetBrains\Annotations\ICheckReturnValueInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\IContract.cs" />
+    <Compile Include="JetBrains\Annotations\IContractInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\IMustBeInvokedByOverriders.cs" />
+    <Compile Include="JetBrains\Annotations\IMustBeInvokedByOverridersInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\INls.cs" />
+    <Compile Include="JetBrains\Annotations\INlsInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\INonBlocking.cs" />
+    <Compile Include="JetBrains\Annotations\INonBlockingExecutor.cs" />
+    <Compile Include="JetBrains\Annotations\INonBlockingExecutorInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\INonBlockingInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\INonNls.cs" />
+    <Compile Include="JetBrains\Annotations\INonNlsInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\INotNull.cs" />
+    <Compile Include="JetBrains\Annotations\INotNullInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\INullable.cs" />
+    <Compile Include="JetBrains\Annotations\INullableInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\IPropertyKey.cs" />
+    <Compile Include="JetBrains\Annotations\IPropertyKeyInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\IRange.cs" />
+    <Compile Include="JetBrains\Annotations\IRangeInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\ITestOnly.cs" />
+    <Compile Include="JetBrains\Annotations\ITestOnlyInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\IUnknownNullability.cs" />
+    <Compile Include="JetBrains\Annotations\IUnknownNullabilityInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\IUnmodifiable.cs" />
+    <Compile Include="JetBrains\Annotations\IUnmodifiableInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\IUnmodifiableView.cs" />
+    <Compile Include="JetBrains\Annotations\IUnmodifiableViewInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\IVisibleForTesting.cs" />
+    <Compile Include="JetBrains\Annotations\IVisibleForTestingInvoker.cs" />
+    <Compile Include="JetBrains\Annotations\MustBeInvokedByOverridersAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\NlsAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\NlsCapitalization.cs" />
+    <Compile Include="JetBrains\Annotations\NonBlockingAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\NonBlockingExecutorAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\NonNlsAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\NotNullAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\NullableAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\PropertyKeyAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\RangeAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\TestOnlyAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\UnknownNullabilityAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\UnmodifiableAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\UnmodifiableViewAttribute.cs" />
+    <Compile Include="JetBrains\Annotations\VisibleForTestingAttribute.cs" />
+    <Compile Include="Microsoft\CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Runtime\CompilerServices\NullableAttribute.cs" />
+    <Compile Include="System\Runtime\CompilerServices\NullableContextAttribute.cs" />
+    <Compile Include="System\Runtime\CompilerServices\RefSafetyRulesAttribute.cs" />
+    <Compile Include="System\Runtime\Versioning\SupportedOSPlatformAttribute.cs" />
+    <Compile Include="_JniMarshal_PPL_Z.cs" />
+    <Compile Include="_JniMarshal_PP_I.cs" />
+    <Compile Include="_JniMarshal_PP_J.cs" />
+    <Compile Include="_JniMarshal_PP_L.cs" />
+    <Compile Include="_JniMarshal_PP_Z.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Java.Interop\Java.Interop.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4642}</Project>
+      <Name>Java.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.Android\Mono.Android.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4643}</Project>
+      <Name>Mono.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System\System.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4650}</Project>
+      <Name>System</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

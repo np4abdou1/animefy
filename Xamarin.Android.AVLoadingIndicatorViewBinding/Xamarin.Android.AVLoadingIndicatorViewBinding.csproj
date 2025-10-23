@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D4658}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xamarin.Android.AVLoadingIndicatorViewBinding</RootNamespace>
+    <AssemblyName>Xamarin.Android.AVLoadingIndicatorViewBinding</AssemblyName>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Com\Wang\Avi\AVLoadingIndicatorView.cs" />
+    <Compile Include="Com\Wang\Avi\BuildConfig.cs" />
+    <Compile Include="Com\Wang\Avi\Indicator.cs" />
+    <Compile Include="Com\Wang\Avi\IndicatorInvoker.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallBeatIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallClipRotateIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallClipRotateMultipleIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallClipRotatePulseIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallGridBeatIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallGridPulseIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallPulseIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallPulseRiseIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallPulseSyncIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallRotateIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallScaleIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallScaleMultipleIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallScaleRippleIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallScaleRippleMultipleIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallSpinFadeLoaderIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallTrianglePathIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallZigZagDeflectIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\BallZigZagIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\CubeTransitionIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\LineScaleIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\LineScalePartyIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\LineScalePulseOutIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\LineScalePulseOutRapidIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\LineSpinFadeLoaderIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\PacmanIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\SemiCircleSpinIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\SquareSpinIndicator.cs" />
+    <Compile Include="Com\Wang\Avi\Indicators\TriangleSkewSpinIndicator.cs" />
+    <Compile Include="Java\Interop\__TypeRegistrations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mono.Android\Mono.Android.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4643}</Project>
+      <Name>Mono.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

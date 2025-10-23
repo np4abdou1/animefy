@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D464A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SQLitePCLRaw.core</RootNamespace>
+    <AssemblyName>SQLitePCLRaw.core</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Microsoft\CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLitePCL\authorizer_hook_info.cs" />
+    <Compile Include="SQLitePCL\collation_hook_info.cs" />
+    <Compile Include="SQLitePCL\commit_hook_info.cs" />
+    <Compile Include="SQLitePCL\CompareBuf.cs" />
+    <Compile Include="SQLitePCL\CompareFuncName.cs" />
+    <Compile Include="SQLitePCL\delegate_authorizer.cs" />
+    <Compile Include="SQLitePCL\delegate_collation.cs" />
+    <Compile Include="SQLitePCL\delegate_commit.cs" />
+    <Compile Include="SQLitePCL\delegate_exec.cs" />
+    <Compile Include="SQLitePCL\delegate_function_aggregate_final.cs" />
+    <Compile Include="SQLitePCL\delegate_function_aggregate_step.cs" />
+    <Compile Include="SQLitePCL\delegate_function_scalar.cs" />
+    <Compile Include="SQLitePCL\delegate_log.cs" />
+    <Compile Include="SQLitePCL\delegate_profile.cs" />
+    <Compile Include="SQLitePCL\delegate_progress.cs" />
+    <Compile Include="SQLitePCL\delegate_rollback.cs" />
+    <Compile Include="SQLitePCL\delegate_trace.cs" />
+    <Compile Include="SQLitePCL\delegate_update.cs" />
+    <Compile Include="SQLitePCL\EntryPointAttribute.cs" />
+    <Compile Include="SQLitePCL\exec_hook_info.cs" />
+    <Compile Include="SQLitePCL\FuncName.cs" />
+    <Compile Include="SQLitePCL\function_hook_info.cs" />
+    <Compile Include="SQLitePCL\hook_handle.cs" />
+    <Compile Include="SQLitePCL\hook_handles.cs" />
+    <Compile Include="SQLitePCL\IGetFunctionPointer.cs" />
+    <Compile Include="SQLitePCL\ISQLite3Provider.cs" />
+    <Compile Include="SQLitePCL\log_hook_info.cs" />
+    <Compile Include="SQLitePCL\MonoPInvokeCallbackAttribute.cs" />
+    <Compile Include="SQLitePCL\PreserveAttribute.cs" />
+    <Compile Include="SQLitePCL\profile_hook_info.cs" />
+    <Compile Include="SQLitePCL\progress_hook_info.cs" />
+    <Compile Include="SQLitePCL\raw.cs" />
+    <Compile Include="SQLitePCL\rollback_hook_info.cs" />
+    <Compile Include="SQLitePCL\SafeGCHandle.cs" />
+    <Compile Include="SQLitePCL\sqlite3.cs" />
+    <Compile Include="SQLitePCL\sqlite3_backup.cs" />
+    <Compile Include="SQLitePCL\sqlite3_blob.cs" />
+    <Compile Include="SQLitePCL\sqlite3_context.cs" />
+    <Compile Include="SQLitePCL\sqlite3_stmt.cs" />
+    <Compile Include="SQLitePCL\sqlite3_value.cs" />
+    <Compile Include="SQLitePCL\strdelegate_authorizer.cs" />
+    <Compile Include="SQLitePCL\strdelegate_collation.cs" />
+    <Compile Include="SQLitePCL\strdelegate_exec.cs" />
+    <Compile Include="SQLitePCL\strdelegate_log.cs" />
+    <Compile Include="SQLitePCL\strdelegate_profile.cs" />
+    <Compile Include="SQLitePCL\strdelegate_trace.cs" />
+    <Compile Include="SQLitePCL\strdelegate_update.cs" />
+    <Compile Include="SQLitePCL\trace_hook_info.cs" />
+    <Compile Include="SQLitePCL\update_hook_info.cs" />
+    <Compile Include="SQLitePCL\utf8z.cs" />
+    <Compile Include="SQLitePCL\util.cs" />
+    <Compile Include="System\Runtime\CompilerServices\IsByRefLikeAttribute.cs" />
+    <Compile Include="System\Runtime\CompilerServices\IsReadOnlyAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
