@@ -7,7 +7,9 @@ import Footer from '@/components/Footer';
 
 async function getHomeContent() {
   try {
-    const res = await fetch('https://witanime-api-worker.abdellah2019gg.workers.dev/api/home_content', {
+    // Use absolute URL for the API route
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://animefy.pages.dev';
+    const res = await fetch(`${baseUrl}/api/home_content`, {
       next: { revalidate: 300 } // Revalidate every 5 minutes
     });
     

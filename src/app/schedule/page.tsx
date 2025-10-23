@@ -8,8 +8,11 @@ export const metadata: Metadata = {
 
 async function getScheduleData() {
   try {
+    // Use absolute URL for the API route
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://animefy.pages.dev';
+    
     // Fetch schedule for all days
-    const res = await fetch('https://witanime-api-worker.abdellah2019gg.workers.dev/api/schedule', {
+    const res = await fetch(`${baseUrl}/api/schedule`, {
       next: { revalidate: 3600 } // Revalidate every hour
     });
     
