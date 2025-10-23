@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -21,7 +21,7 @@ interface Anime {
   Premiered: string;
 }
 
-export default function BrowsePage() {
+function BrowsePageContent() {
   const searchParams = useSearchParams();
   const typeParam = searchParams.get('type');
   
@@ -209,5 +209,31 @@ export default function BrowsePage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function BrowsePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen pt-[70px] pb-16" dir="rtl">
+        <div className="bg-gradient-to-b from-black via-black/95 to-black/90 border-b border-gray-800/30 py-8">
+          <div className="px-4 md:px-12 lg:px-16">
+            <h3 className="text-lg font-semibold text-white mb-4" style={{ fontFamily: 'var(--font-normal-text)' }}>التصنيفات</h3>
+            <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide pb-2">
+              <div className="px-6 py-2.5 text-sm whitespace-nowrap bg-white text-black rounded-lg">
+                الكل
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="px-4 md:px-12 lg:px-16 mt-10 mb-12">
+          <div className="flex justify-center items-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white/50"></div>
+          </div>
+        </div>
+      </div>
+    }>
+      <BrowsePageContent />
+    </Suspense>
   );
 }

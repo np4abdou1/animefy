@@ -2,13 +2,13 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { Search } from "lucide-react"
 
-export default function Header() {
+function HeaderContent() {
   const [searchQuery, setSearchQuery] = useState("")
   const [searchOpen, setSearchOpen] = useState(false)
   const [hasScroll, setHasScroll] = useState(false)
@@ -124,5 +124,30 @@ export default function Header() {
         </div>
       </div>
     </header>
+  )
+}
+
+export default function Header() {
+  return (
+    <Suspense fallback={
+      <header className="fixed top-0 left-0 right-0 z-[100] h-[70px] bg-transparent">
+        <div className="relative px-4 md:px-12 lg:px-16 xl:px-24 h-full">
+          <div className="flex items-center justify-between h-full">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/logo-wide.png"
+                alt="WitAnime Logo"
+                width={110}
+                height={30}
+                className="h-[30px] w-auto"
+                priority
+              />
+            </Link>
+          </div>
+        </div>
+      </header>
+    }>
+      <HeaderContent />
+    </Suspense>
   )
 }

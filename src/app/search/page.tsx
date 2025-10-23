@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Search as SearchIcon, X, SlidersHorizontal } from 'lucide-react';
@@ -22,7 +22,7 @@ interface Anime {
   Premiered: string;
 }
 
-export default function SearchPage() {
+function SearchPageContent() {
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
   const [animeList, setAnimeList] = useState<Anime[]>([]);
@@ -392,5 +392,37 @@ export default function SearchPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen pt-[70px] pb-16" dir="rtl">
+        <div className="bg-black border-b border-gray-800/50">
+          <div className="px-4 md:px-12 lg:px-16 py-6">
+            <div className="flex gap-4 items-center max-w-3xl">
+              <div className="flex-1 relative">
+                <SearchIcon className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="ابحث عن أنمي..."
+                  className="w-full bg-white/10 border border-white/20 pr-12 pl-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:bg-white/15 focus:border-white/30 transition-all rounded"
+                  style={{ fontFamily: 'var(--font-normal-text)' }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="px-4 md:px-12 lg:px-16 mt-10 mb-12">
+          <div className="text-center py-20">
+            <SearchIcon className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+            <p className="text-xl text-gray-300" style={{ fontFamily: 'var(--font-normal-text)' }}>ابحث عن الأنمي المفضل لديك</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <SearchPageContent />
+    </Suspense>
   );
 }
