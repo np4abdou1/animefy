@@ -37,7 +37,7 @@ export default function TrendingAnime({ trending }: TrendingAnimeProps) {
 
   return (
     <section id="trending" className="py-12">
-      <div className="mb-8">
+      <div className="mb-4">
         <div className="flex items-center gap-2">
           <h2
             className="text-4xl md:text-5xl font-semibold text-white"
@@ -49,8 +49,8 @@ export default function TrendingAnime({ trending }: TrendingAnimeProps) {
         </div>
       </div>
 
-      <div className="relative -mr-4 md:-mr-12 lg:-mr-16 xl:-mr-24 -ml-4 md:-ml-12 lg:-ml-16 xl:-ml-24">
-        <div className="flex overflow-x-auto gap-3 py-8 pb-6 scrollbar-hide pr-4 md:pr-12 lg:pr-16 xl:pr-24 pl-4 md:pl-12 lg:pl-16 xl:pl-24">
+      <div className="relative">
+        <div className="flex overflow-x-auto gap-3 py-8 pb-6 scrollbar-hide">
           {episodeTrending.map((item, index) => {
             const animeId = item.SubjectId || item.Anime?.AnimeId || item.Anime?.anime_id || ""
             const title = item.Title || item.Anime?.Synonyms || item.Anime?.EN_Title || item.Anime?.AR_Title || ""
@@ -93,8 +93,9 @@ export default function TrendingAnime({ trending }: TrendingAnimeProps) {
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 p-4">
                         <h3
-                          className="text-lg font-semibold text-white line-clamp-2"
+                          className="text-lg font-semibold text-white line-clamp-2 text-center"
                           style={{ fontFamily: "var(--font-normal-text)" }}
+                          dir="ltr"
                         >
                           {title}
                         </h3>
