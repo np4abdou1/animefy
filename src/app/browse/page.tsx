@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { browseAnime } from '@/lib/animeify-api';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://witanime-api-worker.abdellah2019gg.workers.dev';
 const THUMBNAILS_BASE = "https://animeify.net/animeify/files/thumbnails/";
 
 interface Anime {
@@ -51,24 +51,18 @@ function BrowsePageContent() {
   const fetchAnime = useCallback(async (type: string, genre: string, fromIndex: number, append: boolean = false) => {
     setLoading(true);
     try {
-      const params = new URLSearchParams();
-      params.append('type', type);
-      if (genre) {
-        params.append('genre', genre);
-      }
-      params.append('from', fromIndex.toString());
+      const results = await browseAnime({
+        type,
+        genre,
+        from: fromIndex
+      });
 
-      const response = await fetch(`${API_URL}/api/browse?${params}`);
-      const data = await response.json();
-
-      if (data.status === 'success') {
-        if (append) {
-          setAnimeList(prev => [...prev, ...data.data]);
-        } else {
-          setAnimeList(data.data);
-        }
-        setHasMore(data.pagination.hasMore);
+      if (append) {
+        setAnimeList(prev => [...prev, ...results]);
+      } else {
+        setAnimeList(results);
       }
+      setHasMore(results && results.length >= 20);
     } catch (error) {
       console.error('Error fetching anime:', error);
     } finally {

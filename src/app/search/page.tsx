@@ -4,8 +4,8 @@ import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Search as SearchIcon, X, SlidersHorizontal } from 'lucide-react';
+import { searchAnime } from '@/lib/animeify-api';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://witanime-api-worker.abdellah2019gg.workers.dev';
 const THUMBNAILS_BASE = "https://animeify.net/animeify/files/thumbnails/";
 
 interface Anime {
@@ -78,46 +78,36 @@ function SearchPageContent() {
 
     setLoading(true);
     try {
-      const params = new URLSearchParams();
-      params.append('q', query);
-      params.append('from', fromIndex.toString());
+      const type = selectedTypes.length > 0 ? selectedTypes[0] : '';
+      const results = await searchAnime(query, type, fromIndex);
+
+      // Client-side filtering for multiple selections
+      let filteredResults = results;
       
-      if (selectedTypes.length > 0) {
-        params.append('type', selectedTypes[0]); // API supports single type
+      if (selectedGenres.length > 0) {
+        filteredResults = filteredResults.filter((anime: Anime) =>
+          selectedGenres.some(genre => anime.Genres?.includes(genre))
+        );
       }
 
-      const response = await fetch(`${API_URL}/api/search?${params}`);
-      const data = await response.json();
-
-      if (data.status === 'success') {
-        let results = data.data || [];
-
-        // Client-side filtering for multiple selections
-        if (selectedGenres.length > 0) {
-          results = results.filter((anime: Anime) =>
-            selectedGenres.some(genre => anime.Genres?.includes(genre))
-          );
-        }
-
-        if (selectedStatus.length > 0) {
-          results = results.filter((anime: Anime) =>
-            selectedStatus.includes(anime.Status)
-          );
-        }
-
-        if (selectedTypes.length > 1) {
-          results = results.filter((anime: Anime) =>
-            selectedTypes.includes(anime.Type)
-          );
-        }
-
-        if (append) {
-          setAnimeList(prev => [...prev, ...results]);
-        } else {
-          setAnimeList(results);
-        }
-        setHasMore(data.pagination?.hasMore && results.length >= 20);
+      if (selectedStatus.length > 0) {
+        filteredResults = filteredResults.filter((anime: Anime) =>
+          selectedStatus.includes(anime.Status)
+        );
       }
+
+      if (selectedTypes.length > 1) {
+        filteredResults = filteredResults.filter((anime: Anime) =>
+          selectedTypes.includes(anime.Type)
+        );
+      }
+
+      if (append) {
+        setAnimeList(prev => [...prev, ...filteredResults]);
+      } else {
+        setAnimeList(filteredResults);
+      }
+      setHasMore(results && results.length >= 20);
     } catch (error) {
       console.error('Error searching anime:', error);
     } finally {
