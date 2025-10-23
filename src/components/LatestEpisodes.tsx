@@ -31,18 +31,18 @@ export default function LatestEpisodes({ episodes }: LatestEpisodesProps) {
   if (!episodes || episodes.length === 0) return null
 
   return (
-    <section id="latest" className="relative py-12">
-      <div className="mb-4">
+    <section id="latest" className="relative py-12 -mt-16">
+      <div className="mb-8">
         <h2
-          className="text-4xl md:text-5xl font-semibold text-white"
+          className="text-4xl md:text-5xl font-semibold text-white mb-8"
           style={{ fontFamily: "var(--font-big-titles)" }}
         >
           اخر التحديثات
         </h2>
       </div>
 
-      <div className="relative">
-        <div className="flex overflow-x-auto gap-3 py-8 pb-6 scrollbar-hide">
+      <div className="relative -mr-4 md:-mr-12 lg:-mr-16 xl:-mr-24 -ml-4 md:-ml-12 lg:-ml-16 xl:-ml-24">
+        <div className="flex overflow-x-auto gap-3 py-8 pb-6 scrollbar-hide pr-4 md:pr-12 lg:pr-16 xl:pr-24 pl-4 md:pl-12 lg:pl-16 xl:pl-24">
           {episodes.map((episode, index) => {
             const animeId = episode.AnimeID || episode.Anime?.anime_id || ""
 
@@ -83,9 +83,8 @@ export default function LatestEpisodes({ episodes }: LatestEpisodesProps) {
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 p-4">
                         <h3
-                          className="text-base font-semibold text-white line-clamp-2 text-center"
+                          className="text-base font-semibold text-white line-clamp-2"
                           style={{ fontFamily: "var(--font-normal-text)" }}
-                          dir="ltr"
                         >
                           {title}
                         </h3>
