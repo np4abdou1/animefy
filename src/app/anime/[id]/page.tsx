@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Star, Calendar, Clock, Play, Users, TrendingUp } from 'lucide-react';
 
+export const runtime = 'edge';
+
 const API_BASE = 'https://witanime-api-worker.abdellah2019gg.workers.dev';
 const THUMBNAILS_BASE = 'https://animeify.net/animeify/files/thumbnails/';
 const CHARACTERS_BASE = 'https://animeify.net/animeify/files/characters/photos/chars/';

@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { ChevronRight, ChevronLeft, List, Info } from 'lucide-react';
 import VideoPlayer from '@/components/VideoPlayer';
 
+export const runtime = 'edge';
+
 const API_BASE = 'https://witanime-api-worker.abdellah2019gg.workers.dev';
 const THUMBNAILS_BASE = 'https://animeify.net/animeify/files/thumbnails/';
 
