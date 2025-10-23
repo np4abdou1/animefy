@@ -31,7 +31,7 @@ async function animeifyRequest(endpoint: string, params: Record<string, string>)
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -41,7 +41,7 @@ export async function GET(
   };
 
   try {
-    const animeId = params.id;
+    const { id: animeId } = await params;
     
     // Fetch all data in parallel to minimize requests
     const [animeDetails, episodes, characters, relatedAnime] = await Promise.all([
