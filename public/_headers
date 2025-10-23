@@ -1,0 +1,25 @@
+# Font files - Add proper CORS and caching headers
+/fonts/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: font/ttf
+  
+/fonts/*.otf
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: font/otf
+
+/fonts/*.ttf
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: font/ttf
+
+/fonts/*.woff
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: font/woff
+
+/fonts/*.woff2
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: font/woff2
