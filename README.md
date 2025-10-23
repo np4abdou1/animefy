@@ -14,6 +14,7 @@ The application requires access to the Animeify API. You can configure the API e
 2. (Optional) Update the API endpoint in `.env.local`:
    ```bash
    NEXT_PUBLIC_API_BASE_URL=https://animeify.net/animeify/apis_v4/
+   # Note: The token shown is a public API token from the decompiled Android app
    NEXT_PUBLIC_API_TOKEN=8cnY80AZSbUCmR26Vku1VUUY4
    ```
 
