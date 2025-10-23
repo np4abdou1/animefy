@@ -41,7 +41,7 @@ export default async function Home() {
       <ScrollSectionObserver />
       
       {/* Hero Section - with space to show next section */}
-      <div id="hero" className="scroll-section snap-start active min-h-screen flex items-start pt-[calc(6rem-15px)] px-4 md:px-12 lg:px-16 xl:px-24 relative z-10">
+      <div id="hero" className="scroll-section snap-start active min-h-screen flex items-start pt-[calc(6rem-25px)] px-4 md:px-12 lg:px-16 xl:px-24 relative z-10">
         <div className="w-full h-[85vh]">
           <HeroSection />
         </div>

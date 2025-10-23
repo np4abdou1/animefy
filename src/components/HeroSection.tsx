@@ -177,7 +177,7 @@ export default function HeroSection() {
       )}
 
       {/* Smooth Fade to Content Effect - Reduced shadow */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/20 via-black/5 to-transparent pointer-events-none rounded-b-2xl" />
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/20 via-black/5 to-transparent pointer-events-none rounded-2xl" />
     </section>
   );
 }
