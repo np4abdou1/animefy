@@ -6,7 +6,6 @@ import { Star, Calendar, Clock, Play, Users, TrendingUp } from 'lucide-react';
 
 export const runtime = 'edge';
 
-const API_BASE = 'https://witanime-api-worker.abdellah2019gg.workers.dev';
 const THUMBNAILS_BASE = 'https://animeify.net/animeify/files/thumbnails/';
 const CHARACTERS_BASE = 'https://animeify.net/animeify/files/characters/photos/chars/';
 
@@ -19,7 +18,9 @@ interface AnimeDetailsData {
 
 async function getAnimeDetails(id: string): Promise<AnimeDetailsData | null> {
   try {
-    const res = await fetch(`${API_BASE}/api/anime/${id}`, {
+    // Use absolute URL for the API route
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://animefy.pages.dev';
+    const res = await fetch(`${baseUrl}/api/anime/${id}`, {
       next: { revalidate: 600 } // Revalidate every 10 minutes
     });
     

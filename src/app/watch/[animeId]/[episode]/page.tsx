@@ -7,7 +7,6 @@ import VideoPlayer from '@/components/VideoPlayer';
 
 export const runtime = 'edge';
 
-const API_BASE = 'https://witanime-api-worker.abdellah2019gg.workers.dev';
 const THUMBNAILS_BASE = 'https://animeify.net/animeify/files/thumbnails/';
 
 interface WatchPageData {
@@ -18,12 +17,15 @@ interface WatchPageData {
 
 async function getWatchData(animeId: string, episode: string): Promise<WatchPageData | null> {
   try {
+    // Use absolute URL for the API route
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://animefy.pages.dev';
+    
     // Fetch anime details and streaming servers in parallel
     const [animeRes, serversRes] = await Promise.all([
-      fetch(`${API_BASE}/api/anime/${animeId}`, {
+      fetch(`${baseUrl}/api/anime/${animeId}`, {
         next: { revalidate: 600 }
       }),
-      fetch(`${API_BASE}/api/anime/${animeId}/watch/${episode}`, {
+      fetch(`${baseUrl}/api/anime/${animeId}/watch/${episode}`, {
         next: { revalidate: 300 }
       })
     ]);
