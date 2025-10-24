@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { createAnimeUrl } from '@/lib/slug';
 
 interface AnimeCardProps {
   anime: any;
@@ -8,13 +9,14 @@ interface AnimeCardProps {
 }
 
 export function AnimeCard({ anime, className = '' }: AnimeCardProps) {
-  // Temporary: Just display the card without navigation
-  // Will be reimplemented with proper slug-based navigation
-
   const thumbnailUrl = `https://animeify.net/animeify/files/thumbnails/${anime.Thumbnail}`;
+  const animeUrl = createAnimeUrl(anime);
 
   return (
-    <div className={`group relative block overflow-hidden rounded-lg bg-gray-900 transition-transform hover:scale-105 ${className}`}>
+    <Link 
+      href={animeUrl}
+      className={`group relative block overflow-hidden rounded-lg bg-gray-900 transition-transform hover:scale-105 ${className}`}
+    >
       <div className="aspect-[2/3] relative">
         <img
           src={thumbnailUrl}
@@ -44,6 +46,6 @@ export function AnimeCard({ anime, className = '' }: AnimeCardProps) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
