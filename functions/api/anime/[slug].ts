@@ -35,29 +35,35 @@ export const onRequest = async (context: any) => {
   const { KV_BINDING } = context.env;
 
   try {
-    // Step 1: Get basic anime data from KV
-    const storedData = await KV_BINDING.get(slug);
-    
-    if (!storedData) {
-      return new Response(
-        JSON.stringify({ error: 'Anime not found in KV', slug }),
-        { 
-          status: 404,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
-          }
+    // Step 1: Try to get anime data from KV
+    let basicAnime: AnimeBasicData | null = null;
+    let animeId = '';
+    let animeName = '';
+    let animeType = 'SERIES';
+
+    if (KV_BINDING) {
+      try {
+        const storedData = await KV_BINDING.get(slug);
+        if (storedData) {
+          const parsed = JSON.parse(storedData);
+          basicAnime = parsed;
+          animeId = parsed.AnimeId;
+          animeName = parsed.EN_Title || parsed.AR_Title || '';
+          animeType = (parsed.Type || 'SERIES').toUpperCase();
         }
-      );
+      } catch (kvError) {
+        console.warn('KV fetch failed, will search by slug:', kvError);
+      }
     }
 
-    // Step 2: Parse the stored anime data
-    const basicAnime: AnimeBasicData = JSON.parse(storedData);
-    const animeId = basicAnime.AnimeId;
-    const animeName = basicAnime.EN_Title || basicAnime.AR_Title || '';
-    const animeType = (basicAnime.Type || 'SERIES').toUpperCase();
+    // Step 2: If no data from KV, convert slug back to search term
+    if (!basicAnime) {
+      // Convert slug to search term: "naruto-shippuden" -> "naruto shippuden"
+      animeName = slug.replace(/-/g, ' ');
+      animeType = 'SERIES';
+    }
 
-    // Step 3: Search for the anime using its exact name to get complete data
+    // Step 3: Search for the anime using its name to get complete data
     const searchResponse = await fetch(`${API_BASE}anime/load_anime_list_v2.php`, {
       method: 'POST',
       headers: {
@@ -74,19 +80,43 @@ export const onRequest = async (context: any) => {
       })
     });
 
-    let fullAnimeData = basicAnime;
+    let fullAnimeData: AnimeBasicData | null = null;
     if (searchResponse.ok) {
       const searchResults = await searchResponse.json();
       if (Array.isArray(searchResults) && searchResults.length > 0) {
-        // Find exact match by AnimeId
-        const exactMatch = searchResults.find((item: any) => item.AnimeId === animeId);
-        if (exactMatch) {
-          fullAnimeData = { ...basicAnime, ...exactMatch };
+        if (animeId) {
+          // Find exact match by AnimeId if we have it from KV
+          const exactMatch = searchResults.find((item: any) => item.AnimeId === animeId);
+          fullAnimeData = exactMatch || searchResults[0];
         } else {
-          // Use first result if no exact match
-          fullAnimeData = { ...basicAnime, ...searchResults[0] };
+          // Use first result if searching by slug
+          fullAnimeData = searchResults[0];
         }
       }
+    }
+
+    // If search failed and we have basic data from KV, use that
+    if (!fullAnimeData && basicAnime) {
+      fullAnimeData = basicAnime;
+    }
+
+    // If still no data, return 404
+    if (!fullAnimeData) {
+      return new Response(
+        JSON.stringify({ 
+          error: 'Anime not found', 
+          slug,
+          searchTerm: animeName,
+          message: 'Could not find anime in API. Please try searching from the browse page.'
+        }),
+        { 
+          status: 404,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+          }
+        }
+      );
     }
 
     // Step 4: Fetch additional details (plot, related anime, statistics)

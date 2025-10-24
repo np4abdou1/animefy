@@ -22,29 +22,22 @@ export function AnimeCard({ anime, className = '' }: AnimeCardProps) {
     setIsStoring(true);
 
     try {
-      // Store anime data in KV with slug as key
-      const response = await fetch('/api/anime/store-url', {
+      // Create slug from anime title
+      const slug = createAnimeSlug(anime.EN_Title || anime.AR_Title || anime.AnimeId);
+      
+      // Store anime data in KV (fire and forget - don't wait)
+      fetch('/api/anime/store-url', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(anime)
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        if (result.success && result.url) {
-          // Navigate to the clean URL
-          window.location.href = result.url;
-          return;
-        }
-      }
+      }).catch(err => console.warn('KV store failed:', err));
       
-      // Fallback: create slug and navigate
-      const fallbackSlug = createAnimeSlug(anime.EN_Title || anime.AR_Title || anime.AnimeId);
-      window.location.href = `/anime/${fallbackSlug}`;
+      // Navigate immediately to the anime page
+      window.location.href = `/anime/${slug}`;
     } catch (error) {
-      console.error('Error storing anime URL:', error);
+      console.error('Error navigating to anime:', error);
       // Fallback: use slug directly
       const fallbackSlug = createAnimeSlug(anime.EN_Title || anime.AR_Title || anime.AnimeId);
       window.location.href = `/anime/${fallbackSlug}`;
