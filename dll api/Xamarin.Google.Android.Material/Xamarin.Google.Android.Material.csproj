@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D4678}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xamarin.Google.Android.Material</RootNamespace>
+    <AssemblyName>Xamarin.Google.Android.Material</AssemblyName>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Google\Android\Material\Animation\ITransformationCallback.cs" />
+    <Compile Include="Google\Android\Material\Animation\ITransformationCallbackInvoker.cs" />
+    <Compile Include="Google\Android\Material\Animation\MotionSpec.cs" />
+    <Compile Include="Google\Android\Material\Animation\MotionTiming.cs" />
+    <Compile Include="Google\Android\Material\AppBar\CollapsingToolbarLayout.cs" />
+    <Compile Include="Google\Android\Material\Badge\BadgeDrawable.cs" />
+    <Compile Include="Google\Android\Material\Behavior\SwipeDismissBehavior.cs" />
+    <Compile Include="Google\Android\Material\BottomSheet\BottomSheetBehavior.cs" />
+    <Compile Include="Google\Android\Material\BottomSheet\BottomSheetDialogFragment.cs" />
+    <Compile Include="Google\Android\Material\Button\MaterialButtonToggleGroup.cs" />
+    <Compile Include="Google\Android\Material\Expandable\IExpandableTransformationWidget.cs" />
+    <Compile Include="Google\Android\Material\Expandable\IExpandableTransformationWidgetInvoker.cs" />
+    <Compile Include="Google\Android\Material\Expandable\IExpandableWidget.cs" />
+    <Compile Include="Google\Android\Material\Expandable\IExpandableWidgetInvoker.cs" />
+    <Compile Include="Google\Android\Material\FloatingActionButton\FloatingActionButton.cs" />
+    <Compile Include="Google\Android\Material\Internal\IStaticLayoutBuilderConfigurer.cs" />
+    <Compile Include="Google\Android\Material\Internal\IStaticLayoutBuilderConfigurerInvoker.cs" />
+    <Compile Include="Google\Android\Material\Internal\ScrimInsetsFrameLayout.cs" />
+    <Compile Include="Google\Android\Material\Internal\TextDrawableHelper.cs" />
+    <Compile Include="Google\Android\Material\Internal\VisibilityAwareImageButton.cs" />
+    <Compile Include="Google\Android\Material\Navigation\NavigationView.cs" />
+    <Compile Include="Google\Android\Material\Resources\TextAppearance.cs" />
+    <Compile Include="Google\Android\Material\Resources\TextAppearanceFontCallback.cs" />
+    <Compile Include="Google\Android\Material\Resources\TextAppearanceFontCallbackInvoker.cs" />
+    <Compile Include="Google\Android\Material\Shape\CornerTreatment.cs" />
+    <Compile Include="Google\Android\Material\Shape\EdgeTreatment.cs" />
+    <Compile Include="Google\Android\Material\Shape\ICornerSize.cs" />
+    <Compile Include="Google\Android\Material\Shape\ICornerSizeInvoker.cs" />
+    <Compile Include="Google\Android\Material\Shape\IShapeable.cs" />
+    <Compile Include="Google\Android\Material\Shape\IShapeableInvoker.cs" />
+    <Compile Include="Google\Android\Material\Shape\ShapeAppearanceModel.cs" />
+    <Compile Include="Google\Android\Material\Shape\ShapePath.cs" />
+    <Compile Include="Google\Android\Material\Snackbar\BaseTransientBottomBar.cs" />
+    <Compile Include="Google\Android\Material\Snackbar\BaseTransientBottomBarInvoker.cs" />
+    <Compile Include="Google\Android\Material\Snackbar\IContentViewCallback.cs" />
+    <Compile Include="Google\Android\Material\Snackbar\IContentViewCallbackInvoker.cs" />
+    <Compile Include="Google\Android\Material\Snackbar\Snackbar.cs" />
+    <Compile Include="Google\Android\Material\Tabs\TabLayout.cs" />
+    <Compile Include="Google\Android\Material\TextField\TextInputLayout.cs" />
+    <Compile Include="Microsoft\CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Runtime\CompilerServices\NullableAttribute.cs" />
+    <Compile Include="System\Runtime\CompilerServices\RefSafetyRulesAttribute.cs" />
+    <Compile Include="_JniMarshal_PPFFFFFF_V.cs" />
+    <Compile Include="_JniMarshal_PPFFFF_V.cs" />
+    <Compile Include="_JniMarshal_PPFFFL_V.cs" />
+    <Compile Include="_JniMarshal_PPFFL_V.cs" />
+    <Compile Include="_JniMarshal_PPFF_V.cs" />
+    <Compile Include="_JniMarshal_PPF_L.cs" />
+    <Compile Include="_JniMarshal_PPF_V.cs" />
+    <Compile Include="_JniMarshal_PPIFZZ_V.cs" />
+    <Compile Include="_JniMarshal_PPIFZ_V.cs" />
+    <Compile Include="_JniMarshal_PPIIII_V.cs" />
+    <Compile Include="_JniMarshal_PPII_V.cs" />
+    <Compile Include="_JniMarshal_PPIL_L.cs" />
+    <Compile Include="_JniMarshal_PPI_L.cs" />
+    <Compile Include="_JniMarshal_PPI_V.cs" />
+    <Compile Include="_JniMarshal_PPJF_Z.cs" />
+    <Compile Include="_JniMarshal_PPJ_V.cs" />
+    <Compile Include="_JniMarshal_PPLFFF_V.cs" />
+    <Compile Include="_JniMarshal_PPLFFLL_V.cs" />
+    <Compile Include="_JniMarshal_PPLF_V.cs" />
+    <Compile Include="_JniMarshal_PPLIZ_V.cs" />
+    <Compile Include="_JniMarshal_PPLI_V.cs" />
+    <Compile Include="_JniMarshal_PPLLIIII_Z.cs" />
+    <Compile Include="_JniMarshal_PPLLI_Z.cs" />
+    <Compile Include="_JniMarshal_PPLLLFF_Z.cs" />
+    <Compile Include="_JniMarshal_PPLLLIIIIIL_V.cs" />
+    <Compile Include="_JniMarshal_PPLLLIILI_V.cs" />
+    <Compile Include="_JniMarshal_PPLLLI_V.cs" />
+    <Compile Include="_JniMarshal_PPLLLLII_Z.cs" />
+    <Compile Include="_JniMarshal_PPLLL_L.cs" />
+    <Compile Include="_JniMarshal_PPLLL_V.cs" />
+    <Compile Include="_JniMarshal_PPLLL_Z.cs" />
+    <Compile Include="_JniMarshal_PPLL_L.cs" />
+    <Compile Include="_JniMarshal_PPLL_V.cs" />
+    <Compile Include="_JniMarshal_PPLZ_V.cs" />
+    <Compile Include="_JniMarshal_PPL_F.cs" />
+    <Compile Include="_JniMarshal_PPL_I.cs" />
+    <Compile Include="_JniMarshal_PPL_L.cs" />
+    <Compile Include="_JniMarshal_PPL_V.cs" />
+    <Compile Include="_JniMarshal_PPL_Z.cs" />
+    <Compile Include="_JniMarshal_PPZZ_V.cs" />
+    <Compile Include="_JniMarshal_PPZ_L.cs" />
+    <Compile Include="_JniMarshal_PPZ_V.cs" />
+    <Compile Include="_JniMarshal_PPZ_Z.cs" />
+    <Compile Include="_JniMarshal_PP_F.cs" />
+    <Compile Include="_JniMarshal_PP_I.cs" />
+    <Compile Include="_JniMarshal_PP_J.cs" />
+    <Compile Include="_JniMarshal_PP_L.cs" />
+    <Compile Include="_JniMarshal_PP_V.cs" />
+    <Compile Include="_JniMarshal_PP_Z.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Java.Interop\Java.Interop.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4642}</Project>
+      <Name>Java.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.Android\Mono.Android.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4643}</Project>
+      <Name>Mono.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System\System.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4650}</Project>
+      <Name>System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.AppCompat\Xamarin.AndroidX.AppCompat.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D465E}</Project>
+      <Name>Xamarin.AndroidX.AppCompat</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.CardView\Xamarin.AndroidX.CardView.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D465F}</Project>
+      <Name>Xamarin.AndroidX.CardView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.Collection\Xamarin.AndroidX.Collection.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4660}</Project>
+      <Name>Xamarin.AndroidX.Collection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.CoordinatorLayout\Xamarin.AndroidX.CoordinatorLayout.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4661}</Project>
+      <Name>Xamarin.AndroidX.CoordinatorLayout</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.Core\Xamarin.AndroidX.Core.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4662}</Project>
+      <Name>Xamarin.AndroidX.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.CustomView\Xamarin.AndroidX.CustomView.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4664}</Project>
+      <Name>Xamarin.AndroidX.CustomView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.Fragment\Xamarin.AndroidX.Fragment.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4666}</Project>
+      <Name>Xamarin.AndroidX.Fragment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.RecyclerView\Xamarin.AndroidX.RecyclerView.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D466B}</Project>
+      <Name>Xamarin.AndroidX.RecyclerView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.VectorDrawable.Animated\Xamarin.AndroidX.VectorDrawable.Animated.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D466E}</Project>
+      <Name>Xamarin.AndroidX.VectorDrawable.Animated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.ViewPager2\Xamarin.AndroidX.ViewPager2.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4671}</Project>
+      <Name>Xamarin.AndroidX.ViewPager2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.ViewPager\Xamarin.AndroidX.ViewPager.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4670}</Project>
+      <Name>Xamarin.AndroidX.ViewPager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D467C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Android.Gms.Ads</RootNamespace>
+    <AssemblyName>Xamarin.GooglePlayServices.Ads.Lite</AssemblyName>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdapterResponseInfo.cs" />
+    <Compile Include="AdError.cs" />
+    <Compile Include="AdInspectorError.cs" />
+    <Compile Include="AdLoadCallback.cs" />
+    <Compile Include="AdLoadCallbackInvoker.cs" />
+    <Compile Include="AdManager\AdManagerAdRequest.cs" />
+    <Compile Include="AdRequest.cs" />
+    <Compile Include="AdValue.cs" />
+    <Compile Include="FullScreenContentCallback.cs" />
+    <Compile Include="FullScreenContentCallbackInvoker.cs" />
+    <Compile Include="Initialization\AdapterStatusState.cs" />
+    <Compile Include="Initialization\IAdapterStatus.cs" />
+    <Compile Include="Initialization\IAdapterStatusInvoker.cs" />
+    <Compile Include="Initialization\IInitializationStatus.cs" />
+    <Compile Include="Initialization\IInitializationStatusInvoker.cs" />
+    <Compile Include="Initialization\IOnInitializationCompleteListener.cs" />
+    <Compile Include="Initialization\IOnInitializationCompleteListenerInvoker.cs" />
+    <Compile Include="Interstitial\InterstitialAd.cs" />
+    <Compile Include="Interstitial\InterstitialAdInvoker.cs" />
+    <Compile Include="Interstitial\InterstitialAdLoadCallback.cs" />
+    <Compile Include="Interstitial\InterstitialAdLoadCallbackInvoker.cs" />
+    <Compile Include="IOnAdInspectorClosedListener.cs" />
+    <Compile Include="IOnAdInspectorClosedListenerInvoker.cs" />
+    <Compile Include="IOnPaidEventListener.cs" />
+    <Compile Include="IOnPaidEventListenerImplementor.cs" />
+    <Compile Include="IOnPaidEventListenerInvoker.cs" />
+    <Compile Include="IOnUserEarnedRewardListener.cs" />
+    <Compile Include="IOnUserEarnedRewardListenerInvoker.cs" />
+    <Compile Include="LoadAdError.cs" />
+    <Compile Include="MobileAds.cs" />
+    <Compile Include="PaidEventEventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestConfiguration.cs" />
+    <Compile Include="ResponseInfo.cs" />
+    <Compile Include="Rewarded\IOnAdMetadataChangedListener.cs" />
+    <Compile Include="Rewarded\IOnAdMetadataChangedListenerImplementor.cs" />
+    <Compile Include="Rewarded\IOnAdMetadataChangedListenerInvoker.cs" />
+    <Compile Include="Rewarded\IRewardItem.cs" />
+    <Compile Include="Rewarded\IRewardItemInvoker.cs" />
+    <Compile Include="Rewarded\RewardedAd.cs" />
+    <Compile Include="Rewarded\RewardedAdInvoker.cs" />
+    <Compile Include="Rewarded\RewardedAdLoadCallback.cs" />
+    <Compile Include="Rewarded\RewardedAdLoadCallbackInvoker.cs" />
+    <Compile Include="Rewarded\ServerSideVerificationOptions.cs" />
+    <Compile Include="VersionInfo.cs" />
+    <Compile Include="_JniMarshal_PPI_L.cs" />
+    <Compile Include="_JniMarshal_PPLL_L.cs" />
+    <Compile Include="_JniMarshal_PPLL_V.cs" />
+    <Compile Include="_JniMarshal_PPL_L.cs" />
+    <Compile Include="_JniMarshal_PPL_V.cs" />
+    <Compile Include="_JniMarshal_PPL_Z.cs" />
+    <Compile Include="_JniMarshal_PPZ_V.cs" />
+    <Compile Include="_JniMarshal_PP_I.cs" />
+    <Compile Include="_JniMarshal_PP_L.cs" />
+    <Compile Include="_JniMarshal_PP_V.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Java.Interop\Java.Interop.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4642}</Project>
+      <Name>Java.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.Android\Mono.Android.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4643}</Project>
+      <Name>Mono.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System\System.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4650}</Project>
+      <Name>System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.GooglePlayServices.Basement\Xamarin.GooglePlayServices.Basement.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D467F}</Project>
+      <Name>Xamarin.GooglePlayServices.Basement</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
