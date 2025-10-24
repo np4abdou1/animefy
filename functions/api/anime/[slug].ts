@@ -39,8 +39,8 @@ export const onRequest = async (context: any) => {
     const storedData = await KV_BINDING.get(slug);
     
     if (!storedData) {
-      return Response.json(
-        { error: 'Anime not found in KV', slug },
+      return new Response(
+        JSON.stringify({ error: 'Anime not found in KV', slug }),
         { 
           status: 404,
           headers: {
@@ -147,9 +147,10 @@ export const onRequest = async (context: any) => {
       anime_id: fullAnimeData.AnimeId
     };
 
-    return Response.json(
-      { success: true, data: completeData },
+    return new Response(
+      JSON.stringify({ success: true, data: completeData }),
       {
+        status: 200,
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
@@ -160,8 +161,11 @@ export const onRequest = async (context: any) => {
 
   } catch (error) {
     console.error('Error fetching anime:', error);
-    return Response.json(
-      { error: 'Failed to fetch anime data', message: error instanceof Error ? error.message : 'Unknown error' },
+    return new Response(
+      JSON.stringify({ 
+        error: 'Failed to fetch anime data', 
+        message: error instanceof Error ? error.message : 'Unknown error' 
+      }),
       { 
         status: 500,
         headers: {
