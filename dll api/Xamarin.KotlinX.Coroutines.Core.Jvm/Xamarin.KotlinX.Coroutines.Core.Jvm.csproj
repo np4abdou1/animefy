@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D4688}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xamarin.KotlinX.Coroutines.Core.Jvm</RootNamespace>
+    <AssemblyName>Xamarin.KotlinX.Coroutines.Core.Jvm</AssemblyName>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Java\Interop\__TypeRegistrations.cs" />
+    <Compile Include="Microsoft\CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Runtime\CompilerServices\NullableAttribute.cs" />
+    <Compile Include="System\Runtime\CompilerServices\NullableContextAttribute.cs" />
+    <Compile Include="System\Runtime\CompilerServices\RefSafetyRulesAttribute.cs" />
+    <Compile Include="System\Runtime\Versioning\SupportedOSPlatformAttribute.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\AbstractTimeSourceKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\AwaitKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\BuildersKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CancellableContinuationDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CancellableContinuationImplKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CancellableContinuationKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ActorKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ActorScopeDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\BroadcastChannelDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\BroadcastChannelKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\BroadcastKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\BufferedChannelKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\BufferOverflow.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\Channel.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ChannelConsts.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ChannelDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ChannelFactory.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ChannelIteratorDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ChannelKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ChannelResult.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ChannelsKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ClosedReceiveChannelException.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ClosedSendChannelException.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ConflatedBroadcastChannel.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IActorScope.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IActorScopeInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IBroadcastChannel.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IBroadcastChannelInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IChannel.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IChannelInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IChannelIterator.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IChannelIteratorInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IProducerScope.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IProducerScopeInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IReceiveChannel.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\IReceiveChannelInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ISendChannel.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ISendChannelInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ProduceKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ProducerScopeDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\ReceiveChannelDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\SendChannelDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\TickerChannelsKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Channels\TickerMode.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ChildHandleDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ChildJobDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CompletableDeferredDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CompletableDeferredKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CompletableJobDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CompletionHandlerException.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CompletionHandlerKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CompletionHandler_commonKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CompletionStateKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CopyableThreadContextElementDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CoroutineContextKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CoroutineDispatcher.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CoroutineDispatcherInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CoroutineExceptionHandler.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CoroutineExceptionHandlerConsts.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CoroutineExceptionHandlerDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CoroutineExceptionHandlerKey.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CoroutineExceptionHandlerKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CoroutineName.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CoroutineScopeKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\CoroutineStart.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\DebugKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\DebugStringsKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\DefaultExecutorKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\DeferredDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\DelayDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\DelayKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\DelicateCoroutinesApiAttribute.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\DispatchedTaskKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Dispatchers.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\DispatchersKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\EventLoopKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\EventLoop_commonKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ExceptionsKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ExecutorCoroutineDispatcher.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ExecutorCoroutineDispatcherInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ExecutorsKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ExperimentalCoroutinesApiAttribute.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\FlowPreviewAttribute.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\FlowKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\IFlow.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\IFlowCollector.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\IFlowCollectorInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\IFlowInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\IMutableSharedFlow.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\IMutableSharedFlowInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\IMutableStateFlow.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\IMutableStateFlowInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\ISharedFlow.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\ISharedFlowInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\ISharingStarted.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\ISharingStartedInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\IStateFlow.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\IStateFlowInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\LintKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\SharedFlowKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\SharingCommand.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\SharingStarted.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\SharingStartedCompanion.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\SharingStartedConsts.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\SharingStartedKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Flow\StateFlowKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Future\FutureKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\GlobalScope.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICancellableContinuation.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICancellableContinuationInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IChildHandle.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IChildHandleInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IChildJob.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IChildJobInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICompletableDeferred.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICompletableDeferredInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICompletableJob.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICompletableJobInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICopyableThreadContextElement.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICopyableThreadContextElementInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICopyableThrowable.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICopyableThrowableInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICoroutineExceptionHandler.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICoroutineExceptionHandlerInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICoroutineScope.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ICoroutineScopeInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IDeferred.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IDeferredInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IDelay.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IDelayInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IDelicateCoroutinesApi.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IDelicateCoroutinesApiInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IDisposableHandle.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IDisposableHandleInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IExperimentalCoroutinesApi.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IExperimentalCoroutinesApiInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IFlowPreview.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IFlowPreviewInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IInternalCoroutinesApi.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IInternalCoroutinesApiInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IJob.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IJobInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\InternalCoroutinesApiAttribute.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\InterruptibleKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Intrinsics\CancellableKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Intrinsics\UndispatchedKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IObsoleteCoroutinesApi.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IObsoleteCoroutinesApiInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IParentJob.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IParentJobInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IThreadContextElement.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\IThreadContextElementInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Job.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\JobConsts.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\JobDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\JobKey.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\JobKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\JobSupport.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\JobSupportKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\MainCoroutineDispatcher.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\MainCoroutineDispatcherInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\NonCancellable.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\NonDisposableHandle.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ObsoleteCoroutinesApiAttribute.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ParentJobDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\RunnableKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\SchedulerTaskKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Scheduling\CoroutineSchedulerKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Scheduling\TasksKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Scheduling\WorkQueueKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectBuilder.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectBuilderInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectClause.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectClause0.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectClause0Invoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectClause1.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectClause1Invoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectClause2.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectClause2Invoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectClauseInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectInstance.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\ISelectInstanceInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\OnTimeoutKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\SelectBuilderDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\SelectKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\SelectOldKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\SelectUnbiasedKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Selects\WhileSelectKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Stream\StreamKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\SupervisorKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Sync\IMutex.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Sync\IMutexInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Sync\ISemaphore.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Sync\ISemaphoreInvoker.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Sync\MutexDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Sync\MutexKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Sync\SemaphoreKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ThreadContextElementDefaultImpls.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ThreadContextElementKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\ThreadPoolDispatcherKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\TimeoutCancellationException.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\TimeoutKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\Time\TimeKt.cs" />
+    <Compile Include="Xamarin\KotlinX\Coroutines\YieldKt.cs" />
+    <Compile Include="_COROUTINE\CoroutineDebuggingKt.cs" />
+    <Compile Include="_JniMarshal_PPI_L.cs" />
+    <Compile Include="_JniMarshal_PPJLL_L.cs" />
+    <Compile Include="_JniMarshal_PPJL_L.cs" />
+    <Compile Include="_JniMarshal_PPJL_V.cs" />
+    <Compile Include="_JniMarshal_PPLLL_L.cs" />
+    <Compile Include="_JniMarshal_PPLLL_V.cs" />
+    <Compile Include="_JniMarshal_PPLL_L.cs" />
+    <Compile Include="_JniMarshal_PPLL_V.cs" />
+    <Compile Include="_JniMarshal_PPLL_Z.cs" />
+    <Compile Include="_JniMarshal_PPL_L.cs" />
+    <Compile Include="_JniMarshal_PPL_V.cs" />
+    <Compile Include="_JniMarshal_PPL_Z.cs" />
+    <Compile Include="_JniMarshal_PPZZL_L.cs" />
+    <Compile Include="_JniMarshal_PP_I.cs" />
+    <Compile Include="_JniMarshal_PP_L.cs" />
+    <Compile Include="_JniMarshal_PP_V.cs" />
+    <Compile Include="_JniMarshal_PP_Z.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Java.Interop\Java.Interop.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4642}</Project>
+      <Name>Java.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.Android\Mono.Android.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4643}</Project>
+      <Name>Mono.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System\System.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4650}</Project>
+      <Name>System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.Kotlin.StdLib\Xamarin.Kotlin.StdLib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4684}</Project>
+      <Name>Xamarin.Kotlin.StdLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D4641}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AQ</RootNamespace>
+    <AssemblyName>AQ</AssemblyName>
+    <TargetFrameworkVersion>v13.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activities\AboutApp.cs" />
+    <Compile Include="Activities\AccountCPActivity.cs" />
+    <Compile Include="Activities\AnimeDetails.cs" />
+    <Compile Include="Activities\AppSettingsActivity.cs" />
+    <Compile Include="Activities\CharacterDetailsActivity.cs" />
+    <Compile Include="Activities\CharactersActivity.cs" />
+    <Compile Include="Activities\EpisodesActivity.cs" />
+    <Compile Include="Activities\FavouriteCharcters.cs" />
+    <Compile Include="Activities\FavouritesActivity.cs" />
+    <Compile Include="Activities\FeedbackActivity.cs" />
+    <Compile Include="Activities\FeedbackConversationActivity.cs" />
+    <Compile Include="Activities\FindMoreActivity.cs" />
+    <Compile Include="Activities\LatestAnimeActivity.cs" />
+    <Compile Include="Activities\LatestEpisodesActivity.cs" />
+    <Compile Include="Activities\LibraryActivity.cs" />
+    <Compile Include="Activities\NewContentActivity.cs" />
+    <Compile Include="Activities\ServersListActivity.cs" />
+    <Compile Include="Activities\SignInUpDashboard.cs" />
+    <Compile Include="Activities\UserNotificationsActivity.cs" />
+    <Compile Include="Activities\UserProfileActivity.cs" />
+    <Compile Include="Activities\WatchFDActivity.cs" />
+    <Compile Include="Activities\WatchHistoryActivity.cs" />
+    <Compile Include="Activities\WatchLBActivity.cs" />
+    <Compile Include="Activities\WatchMAActivity.cs" />
+    <Compile Include="Activities\WatchOKActivity.cs" />
+    <Compile Include="Activities\WatchSVActivity.cs" />
+    <Compile Include="Activities\WatchUVActivity.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Dialogs\AccountActivation.cs" />
+    <Compile Include="Dialogs\AnimeDetailsGlance.cs" />
+    <Compile Include="Dialogs\AppStatus.cs" />
+    <Compile Include="Dialogs\AppUpdate.cs" />
+    <Compile Include="Dialogs\Comments.cs" />
+    <Compile Include="Dialogs\CommentsReplies.cs" />
+    <Compile Include="Dialogs\CommunicationBlock.cs" />
+    <Compile Include="Dialogs\ContactBottomSheet.cs" />
+    <Compile Include="Dialogs\DownloadBy.cs" />
+    <Compile Include="Dialogs\FirstEntranceSettingsPicker.cs" />
+    <Compile Include="Dialogs\LibrarySheet.cs" />
+    <Compile Include="Dialogs\PageClose.cs" />
+    <Compile Include="Dialogs\PrivacyPolicyDialog.cs" />
+    <Compile Include="Dialogs\RelatedAnimeSheet.cs" />
+    <Compile Include="Dialogs\RoundedBottomSheet.cs" />
+    <Compile Include="Dialogs\ThumbnailsDialog.cs" />
+    <Compile Include="Dialogs\TrailersDialog.cs" />
+    <Compile Include="Dialogs\WatchBy.cs" />
+    <Compile Include="Fragments\DialogCharctersSettings.cs" />
+    <Compile Include="Fragments\DialogPopupMessage.cs" />
+    <Compile Include="Fragments\DialogReportServers.cs" />
+    <Compile Include="Fragments\DialogSigninPrompt.cs" />
+    <Compile Include="Fragments\DialogUpdateUserBio.cs" />
+    <Compile Include="Fragments\DialogUpdateUserInfo.cs" />
+    <Compile Include="Fragments\DialogUpdateUserPassword.cs" />
+    <Compile Include="Fragments\DialogUserProfile.cs" />
+    <Compile Include="Fragments\DialogWatchAd.cs" />
+    <Compile Include="Fragments\ExploreFragment.cs" />
+    <Compile Include="Fragments\FeedbackFragment.cs" />
+    <Compile Include="Fragments\HomeFragment.cs" />
+    <Compile Include="Fragments\LoginFragment.cs" />
+    <Compile Include="Fragments\MainAnimeList.cs" />
+    <Compile Include="Fragments\NewsFragment.cs" />
+    <Compile Include="Fragments\PasswordResetFragment.cs" />
+    <Compile Include="Fragments\SignupFragment.cs" />
+    <Compile Include="Fragments\SignupSetPhotoFragment.cs" />
+    <Compile Include="Helpers\ActivationMail.cs" />
+    <Compile Include="Helpers\BitmapStreamer.cs" />
+    <Compile Include="Helpers\Calculators.cs" />
+    <Compile Include="Helpers\CustomizedDownloader.cs" />
+    <Compile Include="Helpers\CustomizedSnackbar.cs" />
+    <Compile Include="Helpers\CustomizedToast.cs" />
+    <Compile Include="Helpers\EmailFilter.cs" />
+    <Compile Include="Helpers\FixedCollections.cs" />
+    <Compile Include="Helpers\FullnameFilter.cs" />
+    <Compile Include="Helpers\LanguageConvertor.cs" />
+    <Compile Include="Helpers\LocalizationChanger.cs" />
+    <Compile Include="Helpers\PasswordGenerator.cs" />
+    <Compile Include="Helpers\PopupConfirm.cs" />
+    <Compile Include="Helpers\PublicFunctions.cs" />
+    <Compile Include="Helpers\RatingCalculator.cs" />
+    <Compile Include="Helpers\SharedPreferencesSaves.cs" />
+    <Compile Include="Helpers\Suffixer.cs" />
+    <Compile Include="Helpers\UsernameFilter.cs" />
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="MainSplash.cs" />
+    <Compile Include="Microsoft\CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="Models\AnimeDetailsModel.cs" />
+    <Compile Include="Models\AnimeModel.cs" />
+    <Compile Include="Models\AnimeModelWithOtherData.cs" />
+    <Compile Include="Models\AnimeStatistics.cs" />
+    <Compile Include="Models\CharacterDetails.cs" />
+    <Compile Include="Models\CharacterModel.cs" />
+    <Compile Include="Models\CharacterQuotes.cs" />
+    <Compile Include="Models\CharacterVoiceActors.cs" />
+    <Compile Include="Models\CommentRepliesModel.cs" />
+    <Compile Include="Models\CommentsModel.cs" />
+    <Compile Include="Models\CommentsStatistics.cs" />
+    <Compile Include="Models\Configurations.cs" />
+    <Compile Include="Models\EpisodeModel.cs" />
+    <Compile Include="Models\EpisodeResponse.cs" />
+    <Compile Include="Models\EpisodesStatistics.cs" />
+    <Compile Include="Models\ExploreModel.cs" />
+    <Compile Include="Models\FeedBackModel.cs" />
+    <Compile Include="Models\FeedBackRepliesModel.cs" />
+    <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\HomeTrendingModel.cs" />
+    <Compile Include="Models\IMDbModel.cs" />
+    <Compile Include="Models\Jikan.cs" />
+    <Compile Include="Models\JikanModel.cs" />
+    <Compile Include="Models\LibraryModel.cs" />
+    <Compile Include="Models\LocaleHistoryModel.cs" />
+    <Compile Include="Models\LovedCharacters.cs" />
+    <Compile Include="Models\MainModel.cs" />
+    <Compile Include="Models\NewsModel.cs" />
+    <Compile Include="Models\NotificationsModel.cs" />
+    <Compile Include="Models\RepliesStatistics.cs" />
+    <Compile Include="Models\SelectableListModel.cs" />
+    <Compile Include="Models\ServersFeedBackModel.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="Models\UpdatesChart.cs" />
+    <Compile Include="Models\UserNotificationsModel.cs" />
+    <Compile Include="Models\UserResponse.cs" />
+    <Compile Include="Models\UsersModel.cs" />
+    <Compile Include="Models\UserStatistics.cs" />
+    <Compile Include="Models\WatchHistorySqliteModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.cs" />
+    <Compile Include="Sdks\FD\CustomFrameLayout.cs" />
+    <Compile Include="Sdks\FD\CustomWebChromeClient.cs" />
+    <Compile Include="Sdks\FD\CustomWebViewClient.cs" />
+    <Compile Include="Sdks\FD\FDWebVideoView.cs" />
+    <Compile Include="Sdks\GMSAds.cs" />
+    <Compile Include="Sdks\LB\CustomFrameLayout.cs" />
+    <Compile Include="Sdks\LB\CustomWebChromeClient.cs" />
+    <Compile Include="Sdks\LB\CustomWebViewClient.cs" />
+    <Compile Include="Sdks\LB\LBWebVideoView.cs" />
+    <Compile Include="Sdks\MA\CustomFrameLayout.cs" />
+    <Compile Include="Sdks\MA\CustomWebChromeClient.cs" />
+    <Compile Include="Sdks\MA\CustomWebViewClient.cs" />
+    <Compile Include="Sdks\MA\MaWebVideoView.cs" />
+    <Compile Include="Sdks\Ok\CustomFrameLayout.cs" />
+    <Compile Include="Sdks\Ok\CustomWebChromeClient.cs" />
+    <Compile Include="Sdks\Ok\CustomWebViewClient.cs" />
+    <Compile Include="Sdks\Ok\OkWebVideoView.cs" />
+    <Compile Include="Sdks\SV\CustomFrameLayout.cs" />
+    <Compile Include="Sdks\SV\CustomWebChromeClient.cs" />
+    <Compile Include="Sdks\SV\CustomWebViewClient.cs" />
+    <Compile Include="Sdks\SV\SVWebVideoView.cs" />
+    <Compile Include="Sdks\UV\CustomFrameLayout.cs" />
+    <Compile Include="Sdks\UV\CustomWebChromeClient.cs" />
+    <Compile Include="Sdks\UV\CustomWebViewClient.cs" />
+    <Compile Include="Sdks\UV\UVWebVideoView.cs" />
+    <Compile Include="System\Runtime\CompilerServices\NullableAttribute.cs" />
+    <Compile Include="System\Runtime\CompilerServices\NullableContextAttribute.cs" />
+    <Compile Include="ViewAdapters\AnimeCatalogGridAdapter.cs" />
+    <Compile Include="ViewAdapters\AnimeCatalogGridAdapterViewHolder.cs" />
+    <Compile Include="ViewAdapters\AnimeCatalogListAdapter.cs" />
+    <Compile Include="ViewAdapters\AnimeCatalogListAdapterViewHolder.cs" />
+    <Compile Include="ViewAdapters\AnimeDetailsViewPager2Adapter.cs" />
+    <Compile Include="ViewAdapters\AnimeDetailsViewPagerAdapter.cs" />
+    <Compile Include="ViewAdapters\AnimeDetailsViewPagerAdapterAr.cs" />
+    <Compile Include="ViewAdapters\CharacterQuotesHolder.cs" />
+    <Compile Include="ViewAdapters\CharacterQuotesListAdapter.cs" />
+    <Compile Include="ViewAdapters\CharacterRelatedCharsAdapter.cs" />
+    <Compile Include="ViewAdapters\CharacterRelatedCharsHolder.cs" />
+    <Compile Include="ViewAdapters\CharactersExtraPhotosListAdapter.cs" />
+    <Compile Include="ViewAdapters\CharactersExtraPhotosListHolder.cs" />
+    <Compile Include="ViewAdapters\CharactersListAdapter.cs" />
+    <Compile Include="ViewAdapters\CharactersListHolder.cs" />
+    <Compile Include="ViewAdapters\CharactersVoiceActorsListAdapter.cs" />
+    <Compile Include="ViewAdapters\CharactersVoiceActorsListHolder.cs" />
+    <Compile Include="ViewAdapters\ClickableTextsAdapter.cs" />
+    <Compile Include="ViewAdapters\ClickableTextsAdapter2.cs" />
+    <Compile Include="ViewAdapters\ClickableTextsAdapter3.cs" />
+    <Compile Include="ViewAdapters\ClickableTextsViewHolder.cs" />
+    <Compile Include="ViewAdapters\CommentsListAdapter.cs" />
+    <Compile Include="ViewAdapters\CommentsListHolder.cs" />
+    <Compile Include="ViewAdapters\CommentsRepliesListHolder.cs" />
+    <Compile Include="ViewAdapters\CommentsRpliesListAdapter.cs" />
+    <Compile Include="ViewAdapters\EpisodesListAdapter.cs" />
+    <Compile Include="ViewAdapters\EpisodesListHolder.cs" />
+    <Compile Include="ViewAdapters\ExploreSeasonalAdapter.cs" />
+    <Compile Include="ViewAdapters\FavouriteCharsListAdapter.cs" />
+    <Compile Include="ViewAdapters\FavouriteCharsListHolder.cs" />
+    <Compile Include="ViewAdapters\FeedbacksListAdapter.cs" />
+    <Compile Include="ViewAdapters\FeedbacksListHolder.cs" />
+    <Compile Include="ViewAdapters\FeedbacksRepliesListAdapter.cs" />
+    <Compile Include="ViewAdapters\FeedbacksRepliesListHolder.cs" />
+    <Compile Include="ViewAdapters\HomeGenresAdapter.cs" />
+    <Compile Include="ViewAdapters\HomeNewsListAdapter.cs" />
+    <Compile Include="ViewAdapters\HomeTrendingAdapter.cs" />
+    <Compile Include="ViewAdapters\HomeTrendingAdapterViewHolder.cs" />
+    <Compile Include="ViewAdapters\LatestCharactersListAdapter.cs" />
+    <Compile Include="ViewAdapters\LatestCharactersListHolder.cs" />
+    <Compile Include="ViewAdapters\LatestEpisodesGridViewHolder.cs" />
+    <Compile Include="ViewAdapters\LatestEpisodesListAdapter.cs" />
+    <Compile Include="ViewAdapters\LatestEpisodesListViewHolder.cs" />
+    <Compile Include="ViewAdapters\LatestEpisodesStaticGridAdapter.cs" />
+    <Compile Include="ViewAdapters\MainGenresAdapter.cs" />
+    <Compile Include="ViewAdapters\MainGenresAdapterV2.cs" />
+    <Compile Include="ViewAdapters\MainGenresViewHolder.cs" />
+    <Compile Include="ViewAdapters\MainGenresViewHolderV2.cs" />
+    <Compile Include="ViewAdapters\NewsListAdapter.cs" />
+    <Compile Include="ViewAdapters\NewsListHolder.cs" />
+    <Compile Include="ViewAdapters\ReedMoreHelper.cs" />
+    <Compile Include="ViewAdapters\UserNotificationsAdapter.cs" />
+    <Compile Include="ViewAdapters\UserNotificationsViewHolder.cs" />
+    <Compile Include="ViewAdapters\WatchHistoryHolder.cs" />
+    <Compile Include="ViewAdapters\WatchHistoryListAdapter.cs" />
+    <Compile Include="ViewModels\CommentsViewModel.cs" />
+    <Compile Include="ViewModels\FavouritesViewModel.cs" />
+    <Compile Include="ViewModels\FeedBackViewModel.cs" />
+    <Compile Include="ViewModels\LibraryViewModel.cs" />
+    <Compile Include="ViewModels\NotificationsViewModel.cs" />
+    <Compile Include="ViewModels\UsersViewModel.cs" />
+    <Compile Include="ViewModels\WatchHistoryViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdColony\AdColony.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D463F}</Project>
+      <Name>AdColony</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AppLovin\AppLovin.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4640}</Project>
+      <Name>AppLovin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Java.Interop\Java.Interop.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4642}</Project>
+      <Name>Java.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.Android\Mono.Android.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4643}</Project>
+      <Name>Mono.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Newtonsoft.Json\Newtonsoft.Json.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4646}</Project>
+      <Name>Newtonsoft.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Refractored.Controls.CircleImageView\Refractored.Controls.CircleImageView.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4647}</Project>
+      <Name>Refractored.Controls.CircleImageView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SQLite-net\SQLite-net.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4648}</Project>
+      <Name>SQLite-net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System.Core\System.Core.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D464E}</Project>
+      <Name>System.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System\System.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4650}</Project>
+      <Name>System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnityAds\UnityAds.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4656}</Project>
+      <Name>UnityAds</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Warkiz.IndicatorSeekBar\Warkiz.IndicatorSeekBar.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4657}</Project>
+      <Name>Warkiz.IndicatorSeekBar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.Android.AVLoadingIndicatorViewBinding\Xamarin.Android.AVLoadingIndicatorViewBinding.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4658}</Project>
+      <Name>Xamarin.Android.AVLoadingIndicatorViewBinding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.Android.Glide\Xamarin.Android.Glide.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D465B}</Project>
+      <Name>Xamarin.Android.Glide</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.AppCompat\Xamarin.AndroidX.AppCompat.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D465E}</Project>
+      <Name>Xamarin.AndroidX.AppCompat</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.CardView\Xamarin.AndroidX.CardView.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D465F}</Project>
+      <Name>Xamarin.AndroidX.CardView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.Core\Xamarin.AndroidX.Core.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4662}</Project>
+      <Name>Xamarin.AndroidX.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.DrawerLayout\Xamarin.AndroidX.DrawerLayout.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4665}</Project>
+      <Name>Xamarin.AndroidX.DrawerLayout</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.Fragment\Xamarin.AndroidX.Fragment.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4666}</Project>
+      <Name>Xamarin.AndroidX.Fragment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.RecyclerView\Xamarin.AndroidX.RecyclerView.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D466B}</Project>
+      <Name>Xamarin.AndroidX.RecyclerView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.SwipeRefreshLayout\Xamarin.AndroidX.SwipeRefreshLayout.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D466D}</Project>
+      <Name>Xamarin.AndroidX.SwipeRefreshLayout</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.ViewPager2\Xamarin.AndroidX.ViewPager2.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4671}</Project>
+      <Name>Xamarin.AndroidX.ViewPager2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.Firebase.Messaging\Xamarin.Firebase.Messaging.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4674}</Project>
+      <Name>Xamarin.Firebase.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.Google.Android.Material\Xamarin.Google.Android.Material.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4678}</Project>
+      <Name>Xamarin.Google.Android.Material</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.GooglePlayServices.Ads.Lite\Xamarin.GooglePlayServices.Ads.Lite.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D467C}</Project>
+      <Name>Xamarin.GooglePlayServices.Ads.Lite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.GooglePlayServices.Auth\Xamarin.GooglePlayServices.Auth.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D467D}</Project>
+      <Name>Xamarin.GooglePlayServices.Auth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.GooglePlayServices.Base\Xamarin.GooglePlayServices.Base.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D467E}</Project>
+      <Name>Xamarin.GooglePlayServices.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.GooglePlayServices.Tasks\Xamarin.GooglePlayServices.Tasks.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4680}</Project>
+      <Name>Xamarin.GooglePlayServices.Tasks</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

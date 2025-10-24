@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7872419-39DA-4368-A13A-00050B9D465D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xamarin.AndroidX.Activity</RootNamespace>
+    <AssemblyName>Xamarin.AndroidX.Activity</AssemblyName>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AndroidX\Activity\ComponentActivity.cs" />
+    <Compile Include="AndroidX\Activity\ComponentDialog.cs" />
+    <Compile Include="AndroidX\Activity\ContextAware\ContextAvailableEventArgs.cs" />
+    <Compile Include="AndroidX\Activity\ContextAware\IContextAware.cs" />
+    <Compile Include="AndroidX\Activity\ContextAware\IContextAwareInvoker.cs" />
+    <Compile Include="AndroidX\Activity\ContextAware\IOnContextAvailableListener.cs" />
+    <Compile Include="AndroidX\Activity\ContextAware\IOnContextAvailableListenerImplementor.cs" />
+    <Compile Include="AndroidX\Activity\ContextAware\IOnContextAvailableListenerInvoker.cs" />
+    <Compile Include="AndroidX\Activity\FullyDrawnReporter.cs" />
+    <Compile Include="AndroidX\Activity\IFullyDrawnReporterOwner.cs" />
+    <Compile Include="AndroidX\Activity\IFullyDrawnReporterOwnerInvoker.cs" />
+    <Compile Include="AndroidX\Activity\IOnBackPressedDispatcherOwner.cs" />
+    <Compile Include="AndroidX\Activity\IOnBackPressedDispatcherOwnerInvoker.cs" />
+    <Compile Include="AndroidX\Activity\OnBackPressedCallback.cs" />
+    <Compile Include="AndroidX\Activity\OnBackPressedCallbackInvoker.cs" />
+    <Compile Include="AndroidX\Activity\OnBackPressedDispatcher.cs" />
+    <Compile Include="AndroidX\Activity\Result\ActivityResultLauncher.cs" />
+    <Compile Include="AndroidX\Activity\Result\ActivityResultLauncherInvoker.cs" />
+    <Compile Include="AndroidX\Activity\Result\ActivityResultRegistry.cs" />
+    <Compile Include="AndroidX\Activity\Result\ActivityResultRegistryInvoker.cs" />
+    <Compile Include="AndroidX\Activity\Result\Contract\ActivityResultContract.cs" />
+    <Compile Include="AndroidX\Activity\Result\Contract\ActivityResultContractInvoker.cs" />
+    <Compile Include="AndroidX\Activity\Result\Contract\_JniMarshal_PPLL_L.cs" />
+    <Compile Include="AndroidX\Activity\Result\IActivityResultCallback.cs" />
+    <Compile Include="AndroidX\Activity\Result\IActivityResultCallbackInvoker.cs" />
+    <Compile Include="AndroidX\Activity\Result\IActivityResultCaller.cs" />
+    <Compile Include="AndroidX\Activity\Result\IActivityResultCallerInvoker.cs" />
+    <Compile Include="AndroidX\Activity\Result\IActivityResultRegistryOwner.cs" />
+    <Compile Include="AndroidX\Activity\Result\IActivityResultRegistryOwnerInvoker.cs" />
+    <Compile Include="Microsoft\CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Runtime\CompilerServices\NullableAttribute.cs" />
+    <Compile Include="System\Runtime\CompilerServices\RefSafetyRulesAttribute.cs" />
+    <Compile Include="_JniMarshal_PPILLL_V.cs" />
+    <Compile Include="_JniMarshal_PPIL_L.cs" />
+    <Compile Include="_JniMarshal_PPLLL_L.cs" />
+    <Compile Include="_JniMarshal_PPLLL_V.cs" />
+    <Compile Include="_JniMarshal_PPLL_L.cs" />
+    <Compile Include="_JniMarshal_PPLL_V.cs" />
+    <Compile Include="_JniMarshal_PPL_V.cs" />
+    <Compile Include="_JniMarshal_PP_L.cs" />
+    <Compile Include="_JniMarshal_PP_V.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Java.Interop\Java.Interop.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4642}</Project>
+      <Name>Java.Interop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mono.Android\Mono.Android.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4643}</Project>
+      <Name>Mono.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mscorlib\mscorlib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4645}</Project>
+      <Name>mscorlib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\System\System.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4650}</Project>
+      <Name>System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.Core\Xamarin.AndroidX.Core.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4662}</Project>
+      <Name>Xamarin.AndroidX.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.Lifecycle.Common\Xamarin.AndroidX.Lifecycle.Common.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4667}</Project>
+      <Name>Xamarin.AndroidX.Lifecycle.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.Lifecycle.ViewModel\Xamarin.AndroidX.Lifecycle.ViewModel.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4669}</Project>
+      <Name>Xamarin.AndroidX.Lifecycle.ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.AndroidX.SavedState\Xamarin.AndroidX.SavedState.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D466C}</Project>
+      <Name>Xamarin.AndroidX.SavedState</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xamarin.Kotlin.StdLib\Xamarin.Kotlin.StdLib.csproj">
+      <Project>{A7872419-39DA-4368-A13A-00050B9D4684}</Project>
+      <Name>Xamarin.Kotlin.StdLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
