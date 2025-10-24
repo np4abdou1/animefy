@@ -31,14 +31,18 @@ export function createSlug(text: string): string {
 
 /**
  * Convert slug back to searchable title
- * "naruto-shippuden" -> "naruto shippuden"
+ * "naruto-shippuden" -> "Naruto Shippuden"
+ * Capitalizes each word for better search results
  */
 export function slugToTitle(slug: string): string {
   if (!slug) return '';
   
   return slug
     .replace(/-/g, ' ')
-    .trim();
+    .trim()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
 }
 
 /**

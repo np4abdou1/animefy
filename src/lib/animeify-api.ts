@@ -102,10 +102,12 @@ export interface Episode {
 /**
  * Search anime by title
  * Returns complete anime metadata
+ * Tries with type filter first, then without if no results
  */
 export async function searchAnime(title: string, type: string = 'SERIES'): Promise<AnimeBasic[]> {
   try {
-    const response = await fetch(`${API_BASE}anime/load_anime_list_v2.php`, {
+    // First try with type filter
+    let response = await fetch(`${API_BASE}anime/load_anime_list_v2.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -119,15 +121,42 @@ export async function searchAnime(title: string, type: string = 'SERIES'): Promi
         From: '0',
         Token: TOKEN,
       }),
-      cache: 'no-store', // Always fetch fresh data
+      cache: 'no-store',
     });
 
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`);
     }
 
-    const data = await response.json();
-    return Array.isArray(data.value) ? data.value : [];
+    let data = await response.json();
+    let results = Array.isArray(data.value) ? data.value : [];
+
+    // If no results with type filter, try without type filter (search all types)
+    if (results.length === 0) {
+      response = await fetch(`${API_BASE}anime/load_anime_list_v2.php`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          UserId: '0',
+          Language: 'EN',
+          FilterType: 'SEARCH',
+          FilterData: title,
+          Type: 'ALL',
+          From: '0',
+          Token: TOKEN,
+        }),
+        cache: 'no-store',
+      });
+
+      if (response.ok) {
+        data = await response.json();
+        results = Array.isArray(data.value) ? data.value : [];
+      }
+    }
+
+    return results;
   } catch (error) {
     console.error('Search anime error:', error);
     return [];
