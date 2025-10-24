@@ -1,5 +1,0 @@
-﻿using System;
-
-// Token: 0x0200000C RID: 12
-// (Invoke) Token: 0x06000021 RID: 33
-internal delegate bool _JniMarshal_PPII_Z(IntPtr jnienv, IntPtr klass, int p0, int p1);
