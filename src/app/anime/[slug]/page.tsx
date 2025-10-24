@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getCompleteAnimeData } from '@/lib/animeify-api';
+import { getCompleteAnimeData, getCompleteAnimeDataById } from '@/lib/animeify-api';
 import { slugToTitle, createAnimeUrl } from '@/lib/slug';
 
 export const runtime = 'edge';
@@ -16,11 +16,19 @@ const THUMBNAILS_BASE = 'https://animeify.net/animeify/files/thumbnails/';
 export default async function AnimePage({ params }: AnimePageProps) {
   const { slug } = await params;
   
-  // Convert slug to searchable title
-  const searchTitle = slugToTitle(slug);
+  // Check if slug is an AnimeId (starts with 'x' or is alphanumeric)
+  const isAnimeId = slug.startsWith('x') || /^[a-zA-Z0-9]+$/.test(slug);
   
-  // Fetch complete anime data (parallel API calls)
-  const data = await getCompleteAnimeData(searchTitle);
+  let data;
+  
+  if (isAnimeId) {
+    // Fetch by AnimeId directly (most reliable)
+    data = await getCompleteAnimeDataById(slug);
+  } else {
+    // Fallback: convert slug to title and search
+    const searchTitle = slugToTitle(slug);
+    data = await getCompleteAnimeData(searchTitle);
+  }
   
   if (!data || !data.anime) {
     notFound();
@@ -129,7 +137,7 @@ export default async function AnimePage({ params }: AnimePageProps) {
               {/* Genres */}
               {genres.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {genres.map((genre) => (
+                  {genres.map((genre: string) => (
                     <span
                       key={genre}
                       className="px-3 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm rounded-lg border border-purple-500/30 text-sm font-medium hover:border-purple-500/60 transition-colors"
@@ -168,7 +176,7 @@ export default async function AnimePage({ params }: AnimePageProps) {
                   الحلقات ({episodes.length})
                 </h2>
                 <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
-                  {episodes.map((ep) => (
+                  {episodes.map((ep: any) => (
                     <div
                       key={ep.eId}
                       className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm hover:from-blue-500/20 hover:to-purple-500/20 border border-white/10 hover:border-blue-500/50 rounded-xl p-4 text-center transition-all duration-300 cursor-pointer"
@@ -193,7 +201,7 @@ export default async function AnimePage({ params }: AnimePageProps) {
                   أنمي ذات صلة
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                  {details.RelatedAnime.map((related) => {
+                  {details.RelatedAnime.map((related: any) => {
                     const relatedUrl = createAnimeUrl(related);
                     return (
                       <Link

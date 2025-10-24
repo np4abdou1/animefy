@@ -47,22 +47,28 @@ export function slugToTitle(slug: string): string {
 
 /**
  * Create anime URL from anime data
- * Prioritizes EN_Title, falls back to AR_Title, then AnimeId
+ * Uses AnimeId directly for reliability
+ * Format: /anime/xNarutoShippuuden
  */
 export function createAnimeUrl(anime: {
   EN_Title?: string;
   AR_Title?: string;
   AnimeId?: string;
+  anime_id?: string;
 }): string {
-  const title = anime.EN_Title || anime.AR_Title || anime.AnimeId || '';
-  const slug = createSlug(title);
+  // Use AnimeId or anime_id (both exist in API responses)
+  const animeId = anime.AnimeId || anime.anime_id;
   
-  // If slug is empty (e.g., only Arabic text), use AnimeId
-  if (!slug && anime.AnimeId) {
-    return `/anime/${anime.AnimeId.toLowerCase()}`;
+  if (animeId) {
+    // Use the AnimeId directly - it's already a clean identifier
+    return `/anime/${animeId}`;
   }
   
-  return `/anime/${slug}`;
+  // Fallback: create slug from title
+  const title = anime.EN_Title || anime.AR_Title || '';
+  const slug = createSlug(title);
+  
+  return slug ? `/anime/${slug}` : '/';
 }
 
 /**

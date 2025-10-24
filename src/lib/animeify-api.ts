@@ -240,8 +240,40 @@ export async function getAnimeEpisodes(animeId: string): Promise<Episode[]> {
 }
 
 /**
- * Get complete anime data (parallel API calls for speed)
- * This is the main function to use for anime detail pages
+ * Get complete anime data by AnimeId (RECOMMENDED - most reliable)
+ * Use this when you have the AnimeId from the anime card
+ */
+export async function getCompleteAnimeDataById(animeId: string) {
+  try {
+    // First, get the anime basic data with Arabic language
+    const searchResults = await performSearch(animeId.replace(/^x/, ''), 'ALL');
+    
+    if (!searchResults || searchResults.length === 0) {
+      return null;
+    }
+
+    const anime = searchResults[0];
+
+    // Fetch details (with Arabic description) and episodes in parallel
+    const [details, episodes] = await Promise.all([
+      getAnimeDetails(anime.AnimeId, anime.RelationId),
+      getAnimeEpisodes(anime.AnimeId),
+    ]);
+
+    return {
+      anime,
+      details,
+      episodes,
+    };
+  } catch (error) {
+    console.error('Get complete anime data by ID error:', error);
+    return null;
+  }
+}
+
+/**
+ * Get complete anime data by title search (fallback method)
+ * Less reliable than getCompleteAnimeDataById
  */
 export async function getCompleteAnimeData(searchTitle: string) {
   try {
