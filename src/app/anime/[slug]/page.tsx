@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { getCompleteAnimeDataByTitle } from '@/lib/animeify-api';
 import { slugToTitle, createAnimeUrl } from '@/lib/slug';
 
-export const runtime = 'edge';
-
 interface AnimePageProps {
   params: Promise<{
     slug: string;
