@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { createAnimeSlug } from '@/lib/anime-url';
 
+export const runtime = 'edge';
+
 const THUMBNAILS_BASE = "https://animeify.net/animeify/files/thumbnails/";
 
 interface AnimeDetailsProps {
