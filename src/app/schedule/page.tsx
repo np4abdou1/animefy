@@ -1,17 +1,23 @@
 import { Metadata } from 'next';
 import ScheduleContent from '@/components/ScheduleContent';
+import { headers } from 'next/headers';
 
 export const metadata: Metadata = {
   title: 'مواعيد العرض | WitAnime',
   description: 'جدول مواعيد عرض الأنمي حسب الأيام والمواسم',
 };
 
+export const runtime = 'edge';
+export const revalidate = 3600; // Revalidate every hour
+
 async function getScheduleData() {
   try {
-    // Fetch schedule for all days
-    const res = await fetch('https://witanime-api-worker.abdellah2019gg.workers.dev/api/schedule', {
-      next: { revalidate: 3600 } // Revalidate every hour
-    });
+    // Fetch schedule for all days (Edge requires absolute URL)
+    const h = await headers();
+    const proto = h.get('x-forwarded-proto') ?? 'https';
+    const host = h.get('x-forwarded-host') ?? h.get('host');
+    const base = `${proto}://${host}`;
+    const res = await fetch(`${base}/api/schedule`);
     
     if (!res.ok) {
       throw new Error('Failed to fetch schedule');

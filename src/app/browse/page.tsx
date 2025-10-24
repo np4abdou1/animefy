@@ -4,7 +4,8 @@ import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://witanime-api-worker.abdellah2019gg.workers.dev';
+// Use internal Next.js API route to hide external upstream URLs from the browser
+const API_BASE = '';
 const THUMBNAILS_BASE = "https://animeify.net/animeify/files/thumbnails/";
 
 interface Anime {
@@ -58,7 +59,7 @@ function BrowsePageContent() {
       }
       params.append('from', fromIndex.toString());
 
-      const response = await fetch(`${API_URL}/api/browse?${params}`);
+  const response = await fetch(`${API_BASE}/api/browse?${params}`);
       const data = await response.json();
 
       if (data.status === 'success') {

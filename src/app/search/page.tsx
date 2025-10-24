@@ -5,7 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Search as SearchIcon, X, SlidersHorizontal } from 'lucide-react';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://witanime-api-worker.abdellah2019gg.workers.dev';
+// Use internal Next.js API routes to avoid exposing third-party endpoints in DevTools
+const API_BASE = '';
 const THUMBNAILS_BASE = "https://animeify.net/animeify/files/thumbnails/";
 
 interface Anime {
@@ -86,7 +87,7 @@ function SearchPageContent() {
         params.append('type', selectedTypes[0]); // API supports single type
       }
 
-      const response = await fetch(`${API_URL}/api/search?${params}`);
+  const response = await fetch(`${API_BASE}/api/search?${params}`);
       const data = await response.json();
 
       if (data.status === 'success') {
