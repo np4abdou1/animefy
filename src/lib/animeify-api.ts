@@ -158,7 +158,7 @@ async function performSearch(title: string, type: string): Promise<AnimeBasic[]>
       },
       body: new URLSearchParams({
         UserId: '0',
-        Language: 'EN',
+        Language: 'AR', // Use Arabic to get AR_Title and Arabic data
         FilterType: 'SEARCH',
         FilterData: title,
         Type: type,
@@ -181,6 +181,7 @@ async function performSearch(title: string, type: string): Promise<AnimeBasic[]>
 
 /**
  * Get anime details (plot, statistics, related anime)
+ * Uses Arabic language to get Arabic descriptions
  */
 export async function getAnimeDetails(animeId: string, relationId?: string): Promise<AnimeDetails | null> {
   try {
@@ -191,7 +192,7 @@ export async function getAnimeDetails(animeId: string, relationId?: string): Pro
       },
       body: new URLSearchParams({
         UserId: '0',
-        Language: 'EN',
+        Language: 'AR', // Use Arabic to get Arabic plot/description
         AnimeId: animeId,
         AnimeRelationId: relationId || '',
         Token: TOKEN,
