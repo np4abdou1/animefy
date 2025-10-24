@@ -164,17 +164,16 @@ export default async function AnimeDetailsPage({ params }: AnimeDetailsProps) {
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
                   {anime.Episodes.map((ep: any) => (
-                    <Link
+                    <div
                       key={ep.Episode}
-                      href={`/watch/${anime.anime_id || anime.AnimeId}/${ep.Episode}`}
-                      className="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30 rounded-lg p-4 text-center transition-all"
+                      className="bg-white/5 border border-white/10 rounded-lg p-4 text-center"
                     >
                       <div className="text-sm text-gray-400 mb-1" dir="rtl">الحلقة</div>
                       <div className="text-lg font-semibold">{ep.Episode}</div>
                       {ep.Type !== 'Episode' && (
                         <div className="text-xs text-gray-500 mt-1">{ep.Type}</div>
                       )}
-                    </Link>
+                    </div>
                   ))}
                 </div>
               </section>
