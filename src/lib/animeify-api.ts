@@ -1,8 +1,8 @@
 // Animeify API Client - Direct API calls to Animeify.net
 // Based on API documentation from API_DOCUMENTATION.md
 
-const ANIMEIFY_API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "https://animeify.net/animeify/apis_v4/";
-const ANIMEIFY_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN || "8cnY80AZSbUCmR26Vku1VUUY4";
+const ANIMEIFY_API_BASE = "https://animeify.net/animeify/apis_v4/";
+const ANIMEIFY_TOKEN = "8cnY80AZSbUCmR26Vku1VUUY4";
 
 // Helper to make POST requests to Animeify API
 async function animeifyRequest(endpoint: string, params: Record<string, string>) {
@@ -13,26 +13,19 @@ async function animeifyRequest(endpoint: string, params: Record<string, string>)
     .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
     .join('&');
   
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: formBody,
-      // Add Next.js caching configuration
-      next: { revalidate: 300 }, // Cache for 5 minutes
-    });
-    
-    if (!response.ok) {
-      throw new Error(`API request failed: ${response.status} ${response.statusText}`);
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error(`Failed to fetch from ${url}:`, error);
-    throw error;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: formBody
+  });
+  
+  if (!response.ok) {
+    throw new Error(`API request failed: ${response.status}`);
   }
+  
+  return await response.json();
 }
 
 // Get current day of week in format API expects
