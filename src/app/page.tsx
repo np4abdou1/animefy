@@ -4,10 +4,34 @@ import AiringToday from '@/components/AiringToday';
 import TrendingAnime from '@/components/TrendingAnime';
 import ScrollSectionObserver from '@/components/ScrollSectionObserver';
 import Footer from '@/components/Footer';
-import { getHomeContent } from '@/lib/animeify-api';
+
+async function getHomeContent() {
+  try {
+    const res = await fetch('https://witanime-api-worker.abdellah2019gg.workers.dev/api/home_content', {
+      next: { revalidate: 300 } // Revalidate every 5 minutes
+    });
+    
+    if (!res.ok) {
+      throw new Error('Failed to fetch home content');
+    }
+    
+    const json = await res.json();
+    return json.data || {
+      latestEpisodes: [],
+      airingToday: [],
+      trending: []
+    };
+  } catch (error) {
+    console.error('Error fetching home content:', error);
+    return {
+      latestEpisodes: [],
+      airingToday: [],
+      trending: []
+    };
+  }
+}
 
 export default async function Home() {
-  // Fetch home content data with caching
   const homeData = await getHomeContent();
 
   return (

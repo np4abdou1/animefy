@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { Filter, ChevronDown } from 'lucide-react';
-import { browseAnime } from '@/lib/animeify-api';
 
 interface Anime {
   Id?: string;
@@ -76,17 +75,18 @@ export default function DiscoverContent() {
     
     setLoading(true);
     try {
-      const seasonParam = selectedSeason && selectedYear ? `${selectedSeason} ${selectedYear}` : '';
-      
-      const newAnimes = await browseAnime({
-        type: selectedType,
-        genre: selectedGenres.length > 0 ? selectedGenres[0] : '',
-        studio: selectedStudio,
-        season: seasonParam,
-        status: selectedStatus,
-        sortBy: selectedSort,
-        from: fromValue
-      });
+      const params = new URLSearchParams();
+      if (selectedType) params.append('type', selectedType);
+      if (selectedGenres.length > 0) params.append('genre', selectedGenres[0]);
+      if (selectedStudio) params.append('studio', selectedStudio);
+      if (selectedSeason && selectedYear) params.append('season', `${selectedSeason} ${selectedYear}`);
+      if (selectedStatus) params.append('status', selectedStatus);
+      if (selectedSort) params.append('sortBy', selectedSort);
+      params.append('from', fromValue.toString());
+
+      const res = await fetch(`https://witanime-api-worker.abdellah2019gg.workers.dev/api/browse?${params}`);
+      const json = await res.json();
+      const newAnimes = json.data || [];
       
       if (append) {
         setAnimes(prev => [...prev, ...newAnimes]);
