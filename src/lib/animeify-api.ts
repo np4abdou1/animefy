@@ -100,14 +100,58 @@ export interface Episode {
 }
 
 /**
- * Search anime by title
+ * Search anime by title with multiple fallback strategies
  * Returns complete anime metadata
- * Tries with type filter first, then without if no results
  */
 export async function searchAnime(title: string, type: string = 'SERIES'): Promise<AnimeBasic[]> {
   try {
-    // First try with type filter
-    let response = await fetch(`${API_BASE}anime/load_anime_list_v2.php`, {
+    // Strategy 1: Search with exact title and type
+    let results = await performSearch(title, type);
+    if (results.length > 0) return results;
+
+    // Strategy 2: Search with exact title, all types
+    results = await performSearch(title, 'ALL');
+    if (results.length > 0) return results;
+
+    // Strategy 3: Remove common suffixes and try again
+    // "Africa No Salaryman Tv" -> "Africa No Salaryman"
+    const cleanTitle = title
+      .replace(/\s+(TV|Movie|OVA|Special|ONA)$/i, '')
+      .trim();
+    
+    if (cleanTitle !== title) {
+      results = await performSearch(cleanTitle, 'ALL');
+      if (results.length > 0) return results;
+    }
+
+    // Strategy 4: Try with first 3 words only (for long titles)
+    const words = title.split(' ');
+    if (words.length > 3) {
+      const shortTitle = words.slice(0, 3).join(' ');
+      results = await performSearch(shortTitle, 'ALL');
+      if (results.length > 0) return results;
+    }
+
+    // Strategy 5: Try with first 2 words (last resort)
+    if (words.length > 2) {
+      const veryShortTitle = words.slice(0, 2).join(' ');
+      results = await performSearch(veryShortTitle, 'ALL');
+      if (results.length > 0) return results;
+    }
+
+    return [];
+  } catch (error) {
+    console.error('Search anime error:', error);
+    return [];
+  }
+}
+
+/**
+ * Helper function to perform a single search request
+ */
+async function performSearch(title: string, type: string): Promise<AnimeBasic[]> {
+  try {
+    const response = await fetch(`${API_BASE}anime/load_anime_list_v2.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -125,40 +169,12 @@ export async function searchAnime(title: string, type: string = 'SERIES'): Promi
     });
 
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      return [];
     }
 
-    let data = await response.json();
-    let results = Array.isArray(data.value) ? data.value : [];
-
-    // If no results with type filter, try without type filter (search all types)
-    if (results.length === 0) {
-      response = await fetch(`${API_BASE}anime/load_anime_list_v2.php`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          UserId: '0',
-          Language: 'EN',
-          FilterType: 'SEARCH',
-          FilterData: title,
-          Type: 'ALL',
-          From: '0',
-          Token: TOKEN,
-        }),
-        cache: 'no-store',
-      });
-
-      if (response.ok) {
-        data = await response.json();
-        results = Array.isArray(data.value) ? data.value : [];
-      }
-    }
-
-    return results;
+    const data = await response.json();
+    return Array.isArray(data.value) ? data.value : [];
   } catch (error) {
-    console.error('Search anime error:', error);
     return [];
   }
 }
