@@ -272,22 +272,39 @@ export async function getCompleteAnimeDataById(animeId: string) {
 }
 
 /**
- * Get complete anime data by title search (fallback method)
- * Less reliable than getCompleteAnimeDataById
+ * Get complete anime data by title and type (OPTIMIZED - RECOMMENDED)
+ * This is the fastest and most accurate method
+ * 
+ * Flow:
+ * 1. Search by title + type → Get AnimeId
+ * 2. Fetch details + episodes in parallel → Get everything
  */
-export async function getCompleteAnimeData(searchTitle: string) {
+export async function getCompleteAnimeDataByTitle(searchTitle: string, type: string = 'SERIES') {
   try {
-    // Step 1: Search for anime by title
-    const searchResults = await searchAnime(searchTitle);
+    // Step 1: Search for anime by title and type (with Arabic language)
+    const searchResults = await performSearch(searchTitle, type);
     
     if (!searchResults || searchResults.length === 0) {
-      return null;
+      // Fallback: try with ALL types
+      const fallbackResults = await performSearch(searchTitle, 'ALL');
+      if (!fallbackResults || fallbackResults.length === 0) {
+        return null;
+      }
+      const anime = fallbackResults[0];
+      
+      // Step 2 & 3: Fetch details and episodes in PARALLEL (FAST!)
+      const [details, episodes] = await Promise.all([
+        getAnimeDetails(anime.AnimeId, anime.RelationId),
+        getAnimeEpisodes(anime.AnimeId),
+      ]);
+
+      return { anime, details, episodes };
     }
 
     // Get the first (best) match
     const anime = searchResults[0];
 
-    // Step 2 & 3: Fetch details and episodes in parallel for speed
+    // Step 2 & 3: Fetch details and episodes in PARALLEL (FAST!)
     const [details, episodes] = await Promise.all([
       getAnimeDetails(anime.AnimeId, anime.RelationId),
       getAnimeEpisodes(anime.AnimeId),
@@ -299,7 +316,15 @@ export async function getCompleteAnimeData(searchTitle: string) {
       episodes,
     };
   } catch (error) {
-    console.error('Get complete anime data error:', error);
+    console.error('Get complete anime data by title error:', error);
     return null;
   }
+}
+
+/**
+ * Get complete anime data by title search (fallback method)
+ * @deprecated Use getCompleteAnimeDataByTitle instead
+ */
+export async function getCompleteAnimeData(searchTitle: string) {
+  return getCompleteAnimeDataByTitle(searchTitle, 'SERIES');
 }

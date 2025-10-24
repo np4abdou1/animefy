@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getCompleteAnimeData, getCompleteAnimeDataById } from '@/lib/animeify-api';
+import { getCompleteAnimeDataByTitle } from '@/lib/animeify-api';
 import { slugToTitle, createAnimeUrl } from '@/lib/slug';
 
 export const runtime = 'edge';
@@ -9,26 +9,23 @@ interface AnimePageProps {
   params: Promise<{
     slug: string;
   }>;
+  searchParams: Promise<{
+    type?: string;
+  }>;
 }
 
 const THUMBNAILS_BASE = 'https://animeify.net/animeify/files/thumbnails/';
 
-export default async function AnimePage({ params }: AnimePageProps) {
+export default async function AnimePage({ params, searchParams }: AnimePageProps) {
   const { slug } = await params;
+  const { type } = await searchParams;
   
-  // Check if slug is an AnimeId (starts with 'x' or is alphanumeric)
-  const isAnimeId = slug.startsWith('x') || /^[a-zA-Z0-9]+$/.test(slug);
+  // Convert slug to title: "one-piece" -> "One Piece"
+  const searchTitle = slugToTitle(slug);
+  const animeType = type || 'SERIES';
   
-  let data;
-  
-  if (isAnimeId) {
-    // Fetch by AnimeId directly (most reliable)
-    data = await getCompleteAnimeDataById(slug);
-  } else {
-    // Fallback: convert slug to title and search
-    const searchTitle = slugToTitle(slug);
-    data = await getCompleteAnimeData(searchTitle);
-  }
+  // Fetch complete anime data with title and type
+  const data = await getCompleteAnimeDataByTitle(searchTitle, animeType);
   
   if (!data || !data.anime) {
     notFound();

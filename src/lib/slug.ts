@@ -47,28 +47,25 @@ export function slugToTitle(slug: string): string {
 
 /**
  * Create anime URL from anime data
- * Uses AnimeId directly for reliability
- * Format: /anime/xNarutoShippuuden
+ * Format: /anime/one-piece?type=SERIES
+ * Includes type parameter for accurate API search
  */
 export function createAnimeUrl(anime: {
   EN_Title?: string;
   AR_Title?: string;
   AnimeId?: string;
   anime_id?: string;
+  Type?: string;
 }): string {
-  // Use AnimeId or anime_id (both exist in API responses)
-  const animeId = anime.AnimeId || anime.anime_id;
-  
-  if (animeId) {
-    // Use the AnimeId directly - it's already a clean identifier
-    return `/anime/${animeId}`;
-  }
-  
-  // Fallback: create slug from title
-  const title = anime.EN_Title || anime.AR_Title || '';
+  // Get the title for the slug
+  const title = anime.EN_Title || anime.AR_Title || anime.AnimeId || anime.anime_id || '';
   const slug = createSlug(title);
   
-  return slug ? `/anime/${slug}` : '/';
+  if (!slug) return '/';
+  
+  // Add type as query parameter for accurate search
+  const type = anime.Type || 'SERIES';
+  return `/anime/${slug}?type=${type}`;
 }
 
 /**
