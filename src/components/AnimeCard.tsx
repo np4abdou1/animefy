@@ -14,10 +14,7 @@ export function AnimeCard({ anime, className = '' }: AnimeCardProps) {
   const [isStoring, setIsStoring] = useState(false);
 
   const handleClick = async (e: React.MouseEvent) => {
-    // If URL already generated, let the link work normally
-    if (animeUrl) return;
-
-    // Prevent navigation until URL is stored
+    // Prevent default navigation
     e.preventDefault();
 
     if (isStoring) return;
@@ -25,16 +22,31 @@ export function AnimeCard({ anime, className = '' }: AnimeCardProps) {
     setIsStoring(true);
 
     try {
-      // Store anime data and get clean URL
-      const url = await storeAnimeUrl(anime);
-      setAnimeUrl(url);
+      // Store anime data in KV with slug as key
+      const response = await fetch('/api/anime/store-url', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(anime)
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.success && result.url) {
+          // Navigate to the clean URL
+          window.location.href = result.url;
+          return;
+        }
+      }
       
-      // Navigate to the clean URL
-      window.location.href = url;
+      // Fallback: create slug and navigate
+      const fallbackSlug = createAnimeSlug(anime.EN_Title || anime.AR_Title || anime.AnimeId);
+      window.location.href = `/anime/${fallbackSlug}`;
     } catch (error) {
-      console.error('Error generating URL:', error);
+      console.error('Error storing anime URL:', error);
       // Fallback: use slug directly
-      const fallbackSlug = createAnimeSlug(anime.EN_Title);
+      const fallbackSlug = createAnimeSlug(anime.EN_Title || anime.AR_Title || anime.AnimeId);
       window.location.href = `/anime/${fallbackSlug}`;
     } finally {
       setIsStoring(false);
