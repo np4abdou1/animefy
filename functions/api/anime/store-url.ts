@@ -9,9 +9,13 @@ function createSlug(title: string): string {
   return title
     .toLowerCase()
     .trim()
-    // Replace special characters and spaces with hyphens
+    // Remove special characters except spaces, hyphens, and alphanumeric
     .replace(/[^\w\s-]/g, '')
+    // Replace multiple spaces or underscores with single hyphen
     .replace(/[\s_]+/g, '-')
+    // Replace multiple consecutive hyphens with single hyphen
+    .replace(/-+/g, '-')
+    // Remove leading/trailing hyphens
     .replace(/^-+|-+$/g, '');
 }
 

@@ -36,19 +36,20 @@ export interface AnimeData {
 /**
  * Creates a clean URL slug from anime title
  * Handles special characters, spaces, and edge cases
+ * Must match the server-side slug generation exactly
  */
 export function createAnimeSlug(title: string): string {
   return title
     .toLowerCase()
     .trim()
-    // Remove special characters except spaces and hyphens
+    // Remove special characters except spaces, hyphens, and alphanumeric
     .replace(/[^\w\s-]/g, '')
-    // Replace multiple spaces/underscores with single hyphen
+    // Replace multiple spaces or underscores with single hyphen
     .replace(/[\s_]+/g, '-')
-    // Remove leading/trailing hyphens
-    .replace(/^-+|-+$/g, '')
     // Replace multiple consecutive hyphens with single hyphen
-    .replace(/-+/g, '-');
+    .replace(/-+/g, '-')
+    // Remove leading/trailing hyphens
+    .replace(/^-+|-+$/g, '');
 }
 
 /**

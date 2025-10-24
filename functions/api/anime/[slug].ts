@@ -1,19 +1,19 @@
 // Cloudflare Pages Function for anime details
-// This runs on Cloudflare Edge, not exposed to client
+// Fetches anime data from KV and enriches with API calls
 
 interface Env {
   KV_BINDING: any;
 }
 
-interface AnimeData {
+interface AnimeBasicData {
   AnimeId: string;
-  EN_Title: string;
+  EN_Title?: string;
   JP_Title?: string;
   AR_Title?: string;
-  Thumbnail: string;
-  Type: string;
-  Episodes: number;
-  Status: string;
+  Thumbnail?: string;
+  Type?: string;
+  Episodes?: number;
+  Status?: string;
   Genres?: string;
   Season?: string;
   Premiered?: string;
@@ -24,18 +24,7 @@ interface AnimeData {
   Rating?: string;
   RelationId?: string;
   MalId?: string;
-  views?: number;
-  library_favourites?: number;
-  rates_1?: number;
-  rates_2?: number;
-  rates_3?: number;
-  rates_4?: number;
-  rates_5?: number;
-  rates_6?: number;
-  rates_7?: number;
-  rates_8?: number;
-  rates_9?: number;
-  rates_10?: number;
+  [key: string]: any; // Allow additional properties
 }
 
 const API_BASE = 'https://animeify.net/animeify/apis_v4/';
@@ -62,8 +51,8 @@ export const onRequest = async (context: any) => {
       );
     }
 
-    // Step 2: Decode the anime data
-    const animeData: AnimeData = JSON.parse(encodedData);
+    // Step 2: Parse the anime data from KV
+    const animeData: AnimeBasicData = JSON.parse(encodedData);
 
     // Step 3: Fetch additional details (plot, related anime) from API
     const detailsResponse = await fetch(`${API_BASE}anime/load_anime_details.php`, {
