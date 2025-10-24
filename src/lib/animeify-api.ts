@@ -282,40 +282,48 @@ export async function getCompleteAnimeDataById(animeId: string) {
  */
 export async function getCompleteAnimeDataByTitle(searchTitle: string, type: string = 'SERIES') {
   try {
-    // Step 1: Search for anime by title and type (with Arabic language)
-    const searchResults = await performSearch(searchTitle, type);
-    
-    if (!searchResults || searchResults.length === 0) {
-      // Fallback: try with ALL types
-      const fallbackResults = await performSearch(searchTitle, 'ALL');
-      if (!fallbackResults || fallbackResults.length === 0) {
-        return null;
-      }
-      const anime = fallbackResults[0];
-      
-      // Step 2 & 3: Fetch details and episodes in PARALLEL (FAST!)
-      const [details, episodes] = await Promise.all([
-        getAnimeDetails(anime.AnimeId, anime.RelationId),
-        getAnimeEpisodes(anime.AnimeId),
-      ]);
+    // Try multiple search variations to handle special characters
+    const searchVariations = [
+      searchTitle, // Original: "16bit Sensation Another Layer"
+      searchTitle.replace(/\s+/g, ' ').trim(), // Clean spaces
+      searchTitle.split(' ').slice(0, 3).join(' '), // First 3 words: "16bit Sensation Another"
+      searchTitle.split(' ').slice(0, 2).join(' '), // First 2 words: "16bit Sensation"
+      searchTitle.split(' ')[0], // First word only: "16bit"
+    ];
 
-      return { anime, details, episodes };
+    for (const variation of searchVariations) {
+      // Try with specified type first
+      let searchResults = await performSearch(variation, type);
+      
+      if (searchResults && searchResults.length > 0) {
+        const anime = searchResults[0];
+        
+        // Fetch details and episodes in PARALLEL (FAST!)
+        const [details, episodes] = await Promise.all([
+          getAnimeDetails(anime.AnimeId, anime.RelationId),
+          getAnimeEpisodes(anime.AnimeId),
+        ]);
+
+        return { anime, details, episodes };
+      }
+
+      // Try with ALL types
+      searchResults = await performSearch(variation, 'ALL');
+      
+      if (searchResults && searchResults.length > 0) {
+        const anime = searchResults[0];
+        
+        // Fetch details and episodes in PARALLEL (FAST!)
+        const [details, episodes] = await Promise.all([
+          getAnimeDetails(anime.AnimeId, anime.RelationId),
+          getAnimeEpisodes(anime.AnimeId),
+        ]);
+
+        return { anime, details, episodes };
+      }
     }
 
-    // Get the first (best) match
-    const anime = searchResults[0];
-
-    // Step 2 & 3: Fetch details and episodes in PARALLEL (FAST!)
-    const [details, episodes] = await Promise.all([
-      getAnimeDetails(anime.AnimeId, anime.RelationId),
-      getAnimeEpisodes(anime.AnimeId),
-    ]);
-
-    return {
-      anime,
-      details,
-      episodes,
-    };
+    return null;
   } catch (error) {
     console.error('Get complete anime data by title error:', error);
     return null;
