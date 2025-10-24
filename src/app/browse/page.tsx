@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import Link from 'next/link';
+import { createAnimeUrl } from '@/utils/slugify';
+import { useSearchParams } from 'next/navigation';
 
 // Use internal Next.js API route to hide external upstream URLs from the browser
 const API_BASE = '';
@@ -156,14 +157,14 @@ function BrowsePageContent() {
             {animeList.map((anime) => (
               <Link
                 key={anime.AnimeId}
-                href={`/anime/${anime.AnimeId}`}
+                href={createAnimeUrl(anime.AnimeId, anime.AR_Title || anime.EN_Title || anime.Synonyms || '', anime.Type || 'SERIES')}
                 className="group p-1"
               >
                 <div className="relative aspect-[2/3] bg-black transition-all duration-300 ease-out group-hover:scale-105 group-hover:ring-2 group-hover:ring-white/80 rounded-md">
                   <div className="absolute inset-0 overflow-hidden rounded-md">
                     <img
                       src={`${THUMBNAILS_BASE}${anime.Thumbnail}`}
-                      alt={anime.Synonyms || anime.EN_Title || anime.AR_Title}
+                      alt={anime.AR_Title || anime.EN_Title || anime.Synonyms}
                       className="w-full h-full object-cover"
                     />
                     
@@ -176,7 +177,7 @@ function BrowsePageContent() {
                       )}
                       <div className="absolute bottom-0 left-0 right-0 p-4">
                         <h3 className="text-base font-semibold text-white line-clamp-2" style={{ fontFamily: 'var(--font-normal-text)' }}>
-                          {anime.Synonyms || anime.EN_Title || anime.AR_Title}
+                          {anime.AR_Title || anime.EN_Title || anime.Synonyms}
                         </h3>
                         {anime.Episodes && (
                           <p className="text-sm text-gray-300 mt-1" style={{ fontFamily: 'var(--font-normal-text)' }}>

@@ -1,0 +1,37 @@
+{
+  "routes": [
+    {
+      "routePath": "/api/anime/store-url",
+      "mountPath": "/api/anime",
+      "method": "OPTIONS",
+      "module": [
+        "api/anime/store-url.ts:onRequestOptions"
+      ]
+    },
+    {
+      "routePath": "/api/anime/store-url",
+      "mountPath": "/api/anime",
+      "method": "POST",
+      "module": [
+        "api/anime/store-url.ts:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/api/anime/:slug",
+      "mountPath": "/api/anime",
+      "method": "OPTIONS",
+      "module": [
+        "api/anime/[slug].ts:onRequestOptions"
+      ]
+    },
+    {
+      "routePath": "/api/anime/:slug",
+      "mountPath": "/api/anime",
+      "method": "",
+      "module": [
+        "api/anime/[slug].ts:onRequest"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}

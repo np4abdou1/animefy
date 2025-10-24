@@ -1,0 +1,16 @@
+node_modules/
+dll api/
+.git/
+.github/
+*.md
+*.py
+*.js
+*.ps1
+*.sh
+*.txt
+image.png
+test-*
+API-FINDINGS.md
+API_REFERENCE.md
+animeify_browser_v1.0.py
+animeify_browser_v1.0.js

@@ -1,0 +1,129 @@
+// Cloudflare Pages Function for anime details
+// This runs on Cloudflare Edge, not exposed to client
+
+interface Env {
+  ANIME_URLS: any;
+}
+
+interface AnimeData {
+  AnimeId: string;
+  EN_Title: string;
+  JP_Title?: string;
+  AR_Title?: string;
+  Thumbnail: string;
+  Type: string;
+  Episodes: number;
+  Status: string;
+  Genres?: string;
+  Season?: string;
+  Premiered?: string;
+  Aired?: string;
+  Duration?: string;
+  Score?: number;
+  Rank?: number;
+  Rating?: string;
+  RelationId?: string;
+  MalId?: string;
+  views?: number;
+  library_favourites?: number;
+  rates_1?: number;
+  rates_2?: number;
+  rates_3?: number;
+  rates_4?: number;
+  rates_5?: number;
+  rates_6?: number;
+  rates_7?: number;
+  rates_8?: number;
+  rates_9?: number;
+  rates_10?: number;
+}
+
+const API_BASE = 'https://animeify.net/animeify/apis_v4/';
+const TOKEN = '8cnY80AZSbUCmR26Vku1VUUY4';
+
+export const onRequest = async (context: any) => {
+  const { slug } = context.params as { slug: string };
+  const { ANIME_URLS } = context.env;
+
+  try {
+    // Step 1: Get encoded data from KV
+    const encodedData = await ANIME_URLS.get(slug);
+    
+    if (!encodedData) {
+      return Response.json(
+        { error: 'Anime not found', slug },
+        { 
+          status: 404,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+    }
+
+    // Step 2: Decode the anime data
+    const animeData: AnimeData = JSON.parse(encodedData);
+
+    // Step 3: Fetch additional details (plot, related anime) from API
+    const detailsResponse = await fetch(`${API_BASE}anime/load_anime_details.php`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        UserId: '0',
+        Language: 'EN',
+        AnimeId: animeData.AnimeId,
+        AnimeRelationId: animeData.RelationId || '',
+        Token: TOKEN
+      })
+    });
+
+    const details = await detailsResponse.json();
+
+    // Step 4: Merge data
+    const completeData = {
+      ...animeData,
+      plot: details.Plot || '',
+      related_anime: details.RelatedAnime || [],
+      anime_statistics: details.AnimeStatistics || {},
+      library: details.Library || {}
+    };
+
+    return Response.json(
+      { success: true, data: completeData },
+      {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400'
+        }
+      }
+    );
+
+  } catch (error) {
+    console.error('Error fetching anime:', error);
+    return Response.json(
+      { error: 'Failed to fetch anime data' },
+      { 
+        status: 500,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+  }
+};
+
+// Handle CORS preflight
+export const onRequestOptions = async () => {
+  return new Response(null, {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    }
+  });
+};

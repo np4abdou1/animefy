@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import Link from 'next/link';
+import Link from 'next/link'
+import { AnimeCard } from '@/components/AnimeCard';
 import { Filter, ChevronDown } from 'lucide-react';
 
 interface Anime {
@@ -367,7 +368,8 @@ export default function DiscoverContent() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {animes.map((anime, index) => {
               const animeId = anime.AnimeId || anime.anime_id || '';
-              const title = anime.Synonyms || anime.EN_Title || anime.AR_Title || '';
+              // Try multiple Arabic title fields that the API might use
+              const title = anime.AR_Title || (anime as any).Arabic_Title || (anime as any).Title_AR || anime.EN_Title || anime.Synonyms || '';
               const thumbnail = anime.Thumbnail || '';
               const type = anime.Type || '';
               const status = anime.Status || '';
@@ -385,41 +387,10 @@ export default function DiscoverContent() {
               }
               
               return (
-                <Link
+                <AnimeCard
                   key={`${animeId}-${index}`}
-                  href={`/anime/${animeId}`}
-                  className="group"
-                >
-                  <div className="relative aspect-[2/3] bg-white/5 transition-all duration-300 ease-out group-hover:scale-105 group-hover:ring-2 group-hover:ring-white rounded-lg overflow-hidden">
-                    {thumbnail && (
-                      <img
-                        src={THUMBNAILS_BASE + thumbnail}
-                        alt={title}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    )}
-                    
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-0 left-0 right-0 p-3">
-                        <h3 
-                          className="text-white text-sm font-semibold line-clamp-2"
-                          style={{ fontFamily: 'var(--font-normal-text)' }}
-                        >
-                          {title}
-                        </h3>
-                      </div>
-                    </div>
-
-                    {/* Unified Badge */}
-                    {badgeText && (
-                      <div className="absolute top-2 right-2 bg-black/80 backdrop-blur-sm px-2 py-1 rounded text-xs text-white font-semibold">
-                        {badgeText}
-                      </div>
-                    )}
-                  </div>
-                </Link>
+                  anime={anime as any}
+                />
               );
             })}
           </div>

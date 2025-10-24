@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import Link from 'next/link'
+import { createAnimeUrl } from '@/utils/slugify';
 
 interface Anime {
   Id?: string;
@@ -127,7 +128,7 @@ export default function ScheduleContent({ schedule, seasons }: ScheduleContentPr
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {currentAnimes.map((anime, index) => {
             const animeId = anime.AnimeId || anime.anime_id || anime.Id || '';
-            const title = anime.Synonyms || anime.EN_Title || anime.AR_Title || '';
+            const title = anime.AR_Title || anime.EN_Title || anime.Synonyms || '';
             const thumbnail = anime.Thumbnail || '';
             const episodeNum = anime.EpisodeNumber || '';
             const type = anime.Type || '';
@@ -150,7 +151,7 @@ export default function ScheduleContent({ schedule, seasons }: ScheduleContentPr
             return (
               <Link
                 key={`${animeId}-${index}`}
-                href={`/anime/${animeId}`}
+                href={createAnimeUrl(animeId, title, 'SERIES')}
                 className="group"
               >
                 <div className="relative aspect-[16/9] bg-white/5 rounded-lg overflow-hidden transition-all duration-300 ease-out group-hover:scale-[1.02] group-hover:ring-2 group-hover:ring-white">

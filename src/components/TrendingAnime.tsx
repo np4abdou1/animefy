@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { createAnimeUrl } from '@/utils/slugify'
 import { TrendingUp, Crown } from "lucide-react"
 
 interface TrendingItem {
@@ -53,7 +54,7 @@ export default function TrendingAnime({ trending }: TrendingAnimeProps) {
         <div className="flex overflow-x-auto gap-3 py-8 pb-6 scrollbar-hide pr-4 md:pr-12 lg:pr-16 xl:pr-24 pl-4 md:pl-12 lg:pl-16 xl:pl-24">
           {episodeTrending.map((item, index) => {
             const animeId = item.SubjectId || item.Anime?.AnimeId || item.Anime?.anime_id || ""
-            const title = item.Title || item.Anime?.Synonyms || item.Anime?.EN_Title || item.Anime?.AR_Title || ""
+            const title = item.Title || item.Anime?.AR_Title || item.Anime?.EN_Title || item.Anime?.Synonyms || ""
 
             // Trending items have Photo field (slider images), fallback to Anime.Thumbnail
             const photo = item.Photo || ""
@@ -72,7 +73,7 @@ export default function TrendingAnime({ trending }: TrendingAnimeProps) {
             return (
               <Link
                 key={`${item.Id || index}`}
-                href={`/anime/${animeId}`}
+                href={createAnimeUrl(animeId, title, 'SERIES')}
                 className="group flex-shrink-0 w-[320px] sm:w-[360px] md:w-[400px] lg:w-[450px]"
               >
                 <div className="relative aspect-[16/9] bg-black transition-all duration-300 ease-out group-hover:scale-105 group-hover:ring-2 group-hover:ring-white/80 rounded-md">

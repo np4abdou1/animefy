@@ -1,6 +1,7 @@
 "use client"
 
-import Link from "next/link"
+import Link from 'next/link'
+import { createAnimeUrl } from '@/utils/slugify'
 import { Clock } from "lucide-react"
 
 interface Anime {
@@ -55,14 +56,14 @@ export default function AiringToday({ animes }: AiringTodayProps) {
         <div className="flex overflow-x-auto gap-3 py-8 pb-6 scrollbar-hide pr-4 md:pr-12 lg:pr-16 xl:pr-24 pl-4 md:pl-12 lg:pl-16 xl:pl-24">
           {animes.map((anime, index) => {
             const animeId = anime.AnimeId || anime.anime_id || ""
-            const title = anime.Synonyms || anime.EN_Title || anime.AR_Title || ""
+            const title = anime.AR_Title || anime.EN_Title || anime.Synonyms || ""
             const thumbnail = anime.Thumbnail || ""
             const episodes = anime.Episodes || ""
 
             return (
               <Link
                 key={`${animeId}-${index}`}
-                href={`/anime/${animeId}`}
+                href={createAnimeUrl(animeId, title, 'SERIES')}
                 className="group flex-shrink-0 w-[180px] sm:w-[200px] md:w-[220px] lg:w-[240px]"
               >
                 <div className="relative aspect-[2/3] bg-black transition-all duration-300 ease-out group-hover:scale-105 group-hover:ring-2 group-hover:ring-white/80 rounded-md">
