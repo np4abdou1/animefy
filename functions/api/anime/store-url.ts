@@ -2,7 +2,7 @@
 // Called when user clicks an anime from discover/home page
 
 interface Env {
-  ANIME_URLS: any;
+  KV_BINDING: any;
 }
 
 function createSlug(title: string): string {
@@ -16,7 +16,7 @@ function createSlug(title: string): string {
 }
 
 export const onRequestPost = async (context: any) => {
-  const { ANIME_URLS } = context.env;
+  const { KV_BINDING } = context.env;
 
   try {
     const animeData = await context.request.json();
@@ -25,7 +25,7 @@ export const onRequestPost = async (context: any) => {
     const slug = createSlug(animeData.EN_Title || animeData.JP_Title || animeData.AnimeId);
 
     // Store the full anime data in KV with slug as key
-    await ANIME_URLS.put(slug, JSON.stringify(animeData), {
+    await KV_BINDING.put(slug, JSON.stringify(animeData), {
       expirationTtl: 60 * 60 * 24 * 30 // 30 days
     });
 

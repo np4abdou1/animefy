@@ -2,7 +2,7 @@
 // This runs on Cloudflare Edge, not exposed to client
 
 interface Env {
-  ANIME_URLS: any;
+  KV_BINDING: any;
 }
 
 interface AnimeData {
@@ -43,11 +43,11 @@ const TOKEN = '8cnY80AZSbUCmR26Vku1VUUY4';
 
 export const onRequest = async (context: any) => {
   const { slug } = context.params as { slug: string };
-  const { ANIME_URLS } = context.env;
+  const { KV_BINDING } = context.env;
 
   try {
     // Step 1: Get encoded data from KV
-    const encodedData = await ANIME_URLS.get(slug);
+    const encodedData = await KV_BINDING.get(slug);
     
     if (!encodedData) {
       return Response.json(
