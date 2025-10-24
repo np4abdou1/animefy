@@ -18,12 +18,13 @@ async function getAnimeData(id: string) {
   return res.json();
 }
 
-export default async function WatchPage({ params, searchParams }: { params: Promise<{ id: string }>, searchParams: { episode?: string } }) {
+export default async function WatchPage({ params, searchParams }: { params: Promise<{ id: string }>, searchParams: Promise<{ episode?: string }> }) {
   const { id } = await params;
+  const resolvedSearchParams = await searchParams;
   const { episodes, details } = await getAnimeData(id);
   const type = (details?.Type || 'SERIES') as 'SERIES' | 'MOVIE';
 
   return (
-    <VideoPlayer animeId={id} episodes={episodes || []} defaultType={type} defaultEpisode={searchParams?.episode} />
+    <VideoPlayer animeId={id} episodes={episodes || []} defaultType={type} defaultEpisode={resolvedSearchParams?.episode} />
   );
 }
