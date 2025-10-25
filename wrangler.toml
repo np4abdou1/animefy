@@ -7,6 +7,10 @@ pages_build_output_dir = ".vercel/output/static"
 # Build command: npx @cloudflare/next-on-pages@1
 # Build output: .vercel/output/static
 
+# Ensure proper routing for dynamic pages
+[build]
+command = "npm run build"
+
 [[kv_namespaces]]
 binding = "KV_BINDING"
 id = "430df556554942d99d22041f101e1f67"

@@ -21,12 +21,15 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
   const { slug } = await params;
   const { name, type } = await searchParams;
   
+  // Check if slug is an AnimeId (numeric) or a title slug
+  const isAnimeId = /^\d+$/.test(slug);
+  
   // CRITICAL: Always use 'name' query param if available (most reliable)
   // Only fall back to slug conversion if name is missing
-  const searchTitle = name || slugToTitle(slug);
+  const searchTitle = name || (isAnimeId ? '' : slugToTitle(slug));
   const animeType = type || 'SERIES';
   
-  console.log('AnimePage - slug:', slug, 'name:', name, 'searchTitle:', searchTitle, 'type:', animeType);
+  console.log('AnimePage - slug:', slug, 'isAnimeId:', isAnimeId, 'name:', name, 'searchTitle:', searchTitle, 'type:', animeType);
   
   try {
     // Fetch complete anime data via API route
@@ -34,7 +37,15 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
       ? 'https://animefy.pages.dev' 
       : 'http://localhost:3000';
     
-    const apiUrl = `${baseUrl}/api/anime/details?title=${encodeURIComponent(searchTitle)}&type=${encodeURIComponent(animeType)}`;
+    let apiUrl: string;
+    
+    if (isAnimeId) {
+      // If we have an AnimeId, use the by-id API endpoint
+      apiUrl = `${baseUrl}/api/anime/by-id?id=${encodeURIComponent(slug)}`;
+    } else {
+      // Use the search title as before
+      apiUrl = `${baseUrl}/api/anime/details?title=${encodeURIComponent(searchTitle)}&type=${encodeURIComponent(animeType)}`;
+    }
     
     console.log('AnimePage - Fetching from API:', apiUrl);
     
