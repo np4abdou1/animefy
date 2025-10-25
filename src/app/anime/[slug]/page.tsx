@@ -22,14 +22,20 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
   const { slug } = await params;
   const { name, type } = await searchParams;
   
-  // Use name from URL params if available, otherwise convert slug to title
+  // CRITICAL: Always use 'name' query param if available (most reliable)
+  // Only fall back to slug conversion if name is missing
   const searchTitle = name || slugToTitle(slug);
   const animeType = type || 'SERIES';
+  
+  console.log('AnimePage - slug:', slug, 'name:', name, 'searchTitle:', searchTitle, 'type:', animeType);
   
   // Fetch complete anime data with title and type
   const data = await getCompleteAnimeDataByTitle(searchTitle, animeType);
   
+  console.log('AnimePage - data found:', !!data, 'anime:', !!data?.anime);
+  
   if (!data || !data.anime) {
+    console.error('AnimePage - 404: No data found for', searchTitle, animeType);
     notFound();
   }
 
