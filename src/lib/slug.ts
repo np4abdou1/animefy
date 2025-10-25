@@ -58,7 +58,7 @@ export function createAnimeUrl(anime: {
   Type?: string;
 }): string {
   // Use AnimeId as the slug for reliable routing
-  const animeId = anime.AnimeId || anime.anime_id || anime.Id || '';
+  const animeId = anime.AnimeId || anime.anime_id || '';
   const title = anime.EN_Title || anime.AR_Title || '';
   const type = anime.Type || 'SERIES';
   
