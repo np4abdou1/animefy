@@ -321,22 +321,58 @@ export async function getCompleteAnimeDataByTitle(searchTitle: string, type: str
   try {
     console.log('API - Searching for:', searchTitle, 'Type:', type);
     
-    // Try multiple search variations to handle special characters
-    const searchVariations = [
-      searchTitle, // Original: "Death Note"
-      searchTitle.replace(/\s+/g, ' ').trim(), // Clean spaces
-      searchTitle.split(' ').slice(0, 3).join(' '), // First 3 words
-      searchTitle.split(' ').slice(0, 2).join(' '), // First 2 words
-      searchTitle.split(' ')[0], // First word only
-    ];
+    // Create comprehensive search variations
+    const searchVariations: string[] = [];
+    
+    // 1. Original title (exactly as provided)
+    searchVariations.push(searchTitle);
+    
+    // 2. Clean spaces
+    const cleanedTitle = searchTitle.replace(/\s+/g, ' ').trim();
+    if (cleanedTitle !== searchTitle) {
+      searchVariations.push(cleanedTitle);
+    }
+    
+    // 3. Replace hyphens with spaces (for slugs like "5-toubun-no-hanayome" -> "5 toubun no hanayome")
+    const hyphenToSpace = searchTitle.replace(/-/g, ' ').replace(/\s+/g, ' ').trim();
+    if (hyphenToSpace !== searchTitle && !searchVariations.includes(hyphenToSpace)) {
+      searchVariations.push(hyphenToSpace);
+    }
+    
+    // 4. Capitalize each word (for better matching)
+    const capitalized = searchTitle
+      .replace(/-/g, ' ')
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+    if (!searchVariations.includes(capitalized)) {
+      searchVariations.push(capitalized);
+    }
+    
+    // 5. Try first 3 words
+    const words = cleanedTitle.split(' ');
+    if (words.length > 3) {
+      searchVariations.push(words.slice(0, 3).join(' '));
+    }
+    
+    // 6. Try first 2 words
+    if (words.length > 2) {
+      searchVariations.push(words.slice(0, 2).join(' '));
+    }
+    
+    // 7. Try first word only (last resort)
+    if (words.length > 1) {
+      searchVariations.push(words[0]);
+    }
 
     console.log('API - Search variations:', searchVariations);
 
+    // Try each variation with both specified type and ALL types
     for (let i = 0; i < searchVariations.length; i++) {
       const variation = searchVariations[i];
-      console.log(`API - Trying variation ${i + 1}:`, variation, 'with type:', type);
       
       // Try with specified type first
+      console.log(`API - Trying variation ${i + 1}:`, variation, 'with type:', type);
       let searchResults = await performSearch(variation, type);
       console.log(`API - Results for "${variation}" + ${type}:`, searchResults?.length || 0);
       
@@ -344,7 +380,6 @@ export async function getCompleteAnimeDataByTitle(searchTitle: string, type: str
         const anime = searchResults[0];
         console.log('API - Found anime:', anime.EN_Title, 'ID:', anime.AnimeId);
         
-        // Fetch details and episodes in PARALLEL (FAST!)
         const [details, episodes] = await Promise.all([
           getAnimeDetails(anime.AnimeId, anime.RelationId),
           getAnimeEpisodes(anime.AnimeId),
@@ -362,7 +397,6 @@ export async function getCompleteAnimeDataByTitle(searchTitle: string, type: str
         const anime = searchResults[0];
         console.log('API - Found anime:', anime.EN_Title, 'ID:', anime.AnimeId);
         
-        // Fetch details and episodes in PARALLEL (FAST!)
         const [details, episodes] = await Promise.all([
           getAnimeDetails(anime.AnimeId, anime.RelationId),
           getAnimeEpisodes(anime.AnimeId),
