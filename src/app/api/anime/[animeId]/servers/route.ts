@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 
 const API_BASE = 'https://animeify.net/animeify/apis_v4/';
