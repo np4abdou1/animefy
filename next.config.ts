@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
   experimental: {
     // This helps with dynamic route handling
   },
+  // Better handling of dynamic routes in production
+  trailingSlash: false,
+  // Ensure proper handling of dynamic segments
+  generateStaticParams: false,
 };
 
 export default nextConfig;

@@ -147,16 +147,22 @@ export async function searchAnime(title: string, type: string = 'SERIES'): Promi
 }
 
 /**
- * Helper function to perform a single search request
+ * Helper function to perform a single search request with retry logic
  */
-async function performSearch(title: string, type: string): Promise<AnimeBasic[]> {
+async function performSearch(title: string, type: string, retryCount = 0): Promise<AnimeBasic[]> {
+  const maxRetries = 2;
+  
   try {
-    console.log('performSearch - Title:', title, 'Type:', type);
+    console.log('performSearch - Title:', title, 'Type:', type, 'Retry:', retryCount);
+    
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
     
     const response = await fetch(`${API_BASE}anime/load_anime_list_v2.php`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
+        'User-Agent': 'Mozilla/5.0 (compatible; Animeify-Website/1.0)',
       },
       body: new URLSearchParams({
         UserId: '0',
@@ -167,13 +173,24 @@ async function performSearch(title: string, type: string): Promise<AnimeBasic[]>
         From: '0',
         Token: TOKEN,
       }),
-      cache: 'no-store',
+      cache: 'no-cache',
+      signal: controller.signal,
     });
+    
+    clearTimeout(timeoutId);
 
     console.log('performSearch - Response status:', response.status);
 
     if (!response.ok) {
       console.error('performSearch - Response not OK:', response.status, response.statusText);
+      
+      // Retry on server errors (5xx) or network issues
+      if (retryCount < maxRetries && (response.status >= 500 || response.status === 0)) {
+        console.log('performSearch - Retrying due to server error...');
+        await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1))); // Exponential backoff
+        return performSearch(title, type, retryCount + 1);
+      }
+      
       return [];
     }
 
@@ -195,6 +212,14 @@ async function performSearch(title: string, type: string): Promise<AnimeBasic[]>
     return results;
   } catch (error) {
     console.error('performSearch - Error:', error);
+    
+    // Retry on network errors or timeouts
+    if (retryCount < maxRetries && (error instanceof Error && (error.name === 'AbortError' || error.message.includes('fetch')))) {
+      console.log('performSearch - Retrying due to network error...');
+      await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1))); // Exponential backoff
+      return performSearch(title, type, retryCount + 1);
+    }
+    
     return [];
   }
 }
@@ -209,6 +234,7 @@ export async function getAnimeDetails(animeId: string, relationId?: string): Pro
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
+        'User-Agent': 'Mozilla/5.0 (compatible; Animeify-Website/1.0)',
       },
       body: new URLSearchParams({
         UserId: '0',
@@ -217,7 +243,7 @@ export async function getAnimeDetails(animeId: string, relationId?: string): Pro
         AnimeRelationId: relationId || '',
         Token: TOKEN,
       }),
-      cache: 'no-store',
+      cache: 'no-cache',
     });
 
     if (!response.ok) {
@@ -242,12 +268,13 @@ export async function getAnimeEpisodes(animeId: string): Promise<Episode[]> {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
+        'User-Agent': 'Mozilla/5.0 (compatible; Animeify-Website/1.0)',
       },
       body: new URLSearchParams({
         AnimeID: animeId,
         Token: TOKEN,
       }),
-      cache: 'no-store',
+      cache: 'no-cache',
     });
 
     console.log('getAnimeEpisodes - Response status:', response.status);

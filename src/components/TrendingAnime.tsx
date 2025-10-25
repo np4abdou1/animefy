@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { createAnimeUrl } from '@/utils/slugify'
+import { createAnimeUrl } from '@/lib/slug'
 import { TrendingUp, Crown } from "lucide-react"
 
 interface TrendingItem {
@@ -73,7 +73,11 @@ export default function TrendingAnime({ trending }: TrendingAnimeProps) {
             return (
               <Link
                 key={`${item.Id || index}`}
-                href={createAnimeUrl(animeId, title, 'SERIES')}
+                href={createAnimeUrl({
+                  AnimeId: animeId,
+                  EN_Title: title,
+                  Type: 'SERIES'
+                })}
                 className="group flex-shrink-0 w-[320px] sm:w-[360px] md:w-[400px] lg:w-[450px]"
               >
                 <div className="relative aspect-[16/9] bg-black transition-all duration-300 ease-out group-hover:scale-105 group-hover:ring-2 group-hover:ring-white/80 rounded-md">

@@ -1,4 +1,3 @@
-export const runtime = 'edge'
 export const dynamic = 'force-dynamic'
 
 import { notFound } from 'next/navigation';
@@ -29,17 +28,18 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
   
   console.log('AnimePage - slug:', slug, 'name:', name, 'searchTitle:', searchTitle, 'type:', animeType);
   
-  // Fetch complete anime data with title and type
-  const data = await getCompleteAnimeDataByTitle(searchTitle, animeType);
-  
-  console.log('AnimePage - data found:', !!data, 'anime:', !!data?.anime);
-  
-  if (!data || !data.anime) {
-    console.error('AnimePage - 404: No data found for', searchTitle, animeType);
-    notFound();
-  }
+  try {
+    // Fetch complete anime data with title and type
+    const data = await getCompleteAnimeDataByTitle(searchTitle, animeType);
+    
+    console.log('AnimePage - data found:', !!data, 'anime:', !!data?.anime);
+    
+    if (!data || !data.anime) {
+      console.error('AnimePage - 404: No data found for', searchTitle, animeType);
+      notFound();
+    }
 
-  const { anime, details, episodes } = data;
+    const { anime, details, episodes } = data;
 
   // Calculate average rating
   const calculateRating = () => {
@@ -255,4 +255,8 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
       </div>
     </div>
   );
+  } catch (error) {
+    console.error('AnimePage - Error loading anime data:', error);
+    notFound();
+  }
 }

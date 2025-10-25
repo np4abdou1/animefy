@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { createAnimeUrl } from '@/utils/slugify'
+import { createAnimeUrl } from '@/lib/slug'
 import { Clock } from "lucide-react"
 
 interface Anime {
@@ -63,7 +63,11 @@ export default function AiringToday({ animes }: AiringTodayProps) {
             return (
               <Link
                 key={`${animeId}-${index}`}
-                href={createAnimeUrl(animeId, title, 'SERIES')}
+                href={createAnimeUrl({
+                  AnimeId: animeId,
+                  EN_Title: title,
+                  Type: 'SERIES'
+                })}
                 className="group flex-shrink-0 w-[180px] sm:w-[200px] md:w-[220px] lg:w-[240px]"
               >
                 <div className="relative aspect-[2/3] bg-black transition-all duration-300 ease-out group-hover:scale-105 group-hover:ring-2 group-hover:ring-white/80 rounded-md">

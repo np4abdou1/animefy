@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link'
-import { createAnimeUrl } from '@/utils/slugify';
+import { createAnimeUrl } from '@/lib/slug';
 
 interface Anime {
   Id?: string;
@@ -151,7 +151,11 @@ export default function ScheduleContent({ schedule, seasons }: ScheduleContentPr
             return (
               <Link
                 key={`${animeId}-${index}`}
-                href={createAnimeUrl(animeId, title, 'SERIES')}
+                href={createAnimeUrl({
+                  AnimeId: animeId,
+                  EN_Title: title,
+                  Type: 'SERIES'
+                })}
                 className="group"
               >
                 <div className="relative aspect-[16/9] bg-white/5 rounded-lg overflow-hidden transition-all duration-300 ease-out group-hover:scale-[1.02] group-hover:ring-2 group-hover:ring-white">
