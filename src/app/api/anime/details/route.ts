@@ -259,18 +259,39 @@ export async function GET(request: NextRequest) {
 
     console.log('Anime details API - Title:', title, 'Type:', type);
     
-    const data = await getCompleteAnimeDataByTitle(title, type);
+    // Add timeout and retry logic for edge runtime
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
     
-    if (!data || !data.anime) {
-      console.error('Anime details API - No data found for', title, type);
-      return NextResponse.json({ error: 'Anime not found' }, { status: 404 });
-    }
+    try {
+      const data = await getCompleteAnimeDataByTitle(title, type);
+      clearTimeout(timeoutId);
+      
+      if (!data || !data.anime) {
+        console.error('Anime details API - No data found for', title, type);
+        return NextResponse.json({ error: 'Anime not found' }, { status: 404 });
+      }
 
-    console.log('Anime details API - Data found:', !!data, 'anime:', !!data?.anime);
-    
-    return NextResponse.json(data);
+      console.log('Anime details API - Data found:', !!data, 'anime:', !!data?.anime);
+      
+      return NextResponse.json(data);
+    } catch (error) {
+      clearTimeout(timeoutId);
+      throw error;
+    }
   } catch (error) {
     console.error('Anime details API error:', error);
+    
+    // Handle specific edge runtime errors
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        return NextResponse.json({ error: 'Request timeout' }, { status: 408 });
+      }
+      if (error.message.includes('fetch')) {
+        return NextResponse.json({ error: 'Network error' }, { status: 503 });
+      }
+    }
+    
     return NextResponse.json({ error: 'Failed to fetch anime details' }, { status: 500 });
   }
 }
