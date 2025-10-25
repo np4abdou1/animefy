@@ -1,4 +1,4 @@
-﻿import HeroSection from '@/components/HeroSection';
+import HeroSection from '@/components/HeroSection';
 import LatestEpisodes from '@/components/LatestEpisodes';
 import AiringToday from '@/components/AiringToday';
 import TrendingAnime from '@/components/TrendingAnime';

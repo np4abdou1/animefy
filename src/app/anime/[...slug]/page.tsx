@@ -1,190 +1,184 @@
-export const runtime = 'edge'
-export const dynamic = 'force-dynamic'
+export const runtime = "edge"
+export const dynamic = "force-dynamic"
 
-import { notFound, redirect } from 'next/navigation';
-import Link from 'next/link';
-import { slugToTitle, createAnimeUrl } from '@/lib/slug';
-import { headers } from 'next/headers';
+import { notFound, redirect } from "next/navigation"
+import Link from "next/link"
+import { slugToTitle, createAnimeUrl } from "@/lib/slug"
+import { headers } from "next/headers"
 
 interface AnimePageProps {
   params: Promise<{
-    slug: string[];
-  }>;
+    slug: string[]
+  }>
   searchParams: Promise<{
-    name?: string;
-    type?: string;
-  }>;
+    name?: string
+    type?: string
+  }>
 }
 
-const THUMBNAILS_BASE = 'https://animeify.net/animeify/files/thumbnails/';
+const THUMBNAILS_BASE = "https://animeify.net/animeify/files/thumbnails/"
 
 export default async function AnimePage({ params, searchParams }: AnimePageProps) {
-  let slugArray: string[];
-  let name: string | undefined;
-  let type: string | undefined;
-  
+  let slugArray: string[]
+  let name: string | undefined
+  let type: string | undefined
+
   try {
-    const resolvedParams = await params;
-    const resolvedSearchParams = await searchParams;
-    
-    slugArray = resolvedParams.slug;
-    name = resolvedSearchParams.name;
-    type = resolvedSearchParams.type;
+    const resolvedParams = await params
+    const resolvedSearchParams = await searchParams
+
+    slugArray = resolvedParams.slug
+    name = resolvedSearchParams.name
+    type = resolvedSearchParams.type
   } catch (error) {
-    console.error('AnimePage - Error resolving params:', error);
-    
+    console.error("AnimePage - Error resolving params:", error)
+
     // Try to get slug from headers as fallback
     try {
-      const headersList = await headers();
-      const pathname = headersList.get('x-pathname') || '';
-      const slug = headersList.get('x-slug') || '';
-      
+      const headersList = await headers()
+      const pathname = headersList.get("x-pathname") || ""
+      const slug = headersList.get("x-slug") || ""
+
       if (slug) {
-        console.log('AnimePage - Using fallback slug from headers:', slug);
-        slugArray = [slug];
+        console.log("AnimePage - Using fallback slug from headers:", slug)
+        slugArray = [slug]
       } else {
-        notFound();
+        notFound()
       }
     } catch (headerError) {
-      console.error('AnimePage - Error getting headers:', headerError);
-      notFound();
+      console.error("AnimePage - Error getting headers:", headerError)
+      notFound()
     }
   }
-  
+
   // Handle different route patterns
   if (slugArray.length === 1) {
     // /anime/[slug] - handle main anime page
-    const slug = slugArray[0];
-    const searchTitle = name || slugToTitle(slug);
-    const animeType = type || 'SERIES';
-    
-    console.log('AnimePage - Handling main anime page:', { slug, searchTitle, animeType });
-    
+    const slug = slugArray[0]
+    const searchTitle = name || slugToTitle(slug)
+    const animeType = type || "SERIES"
+
+    console.log("AnimePage - Handling main anime page:", { slug, searchTitle, animeType })
+
     // Check if slug is an AnimeId (numeric) or a title slug
-    const isAnimeId = /^\d+$/.test(slug);
-    
+    const isAnimeId = /^\d+$/.test(slug)
+
     // Validate inputs
     if (!slug || (!searchTitle && !isAnimeId)) {
-      console.error('AnimePage - Invalid parameters:', { slug, searchTitle, isAnimeId });
-      notFound();
+      console.error("AnimePage - Invalid parameters:", { slug, searchTitle, isAnimeId })
+      notFound()
     }
-    
+
     try {
       // Fetch complete anime data via API route
-      const baseUrl = process.env.NODE_ENV === 'production' 
-        ? 'https://animefy.pages.dev' 
-        : 'http://localhost:3000';
-      
-      let apiUrl: string;
-      
+      let apiUrl: string
+
       if (isAnimeId) {
         // If we have an AnimeId, use the by-id API endpoint
-        apiUrl = `${baseUrl}/api/anime/by-id?id=${encodeURIComponent(slug)}`;
+        apiUrl = `/api/anime/by-id?id=${encodeURIComponent(slug)}`
       } else {
         // Use the search title as before
-        apiUrl = `${baseUrl}/api/anime/details?title=${encodeURIComponent(searchTitle)}&type=${encodeURIComponent(animeType)}`;
+        apiUrl = `/api/anime/details?title=${encodeURIComponent(searchTitle)}&type=${encodeURIComponent(animeType)}`
       }
-      
-      console.log('AnimePage - Fetching from API:', apiUrl);
-      
+
+      console.log("AnimePage - Fetching from API:", apiUrl)
+
       // Add timeout and retry logic for edge runtime
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
-      
-      let response: Response | undefined;
-      let retryCount = 0;
-      const maxRetries = 3;
-      
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
+
+      let response: Response | undefined
+      let retryCount = 0
+      const maxRetries = 3
+
       while (retryCount < maxRetries) {
         try {
           response = await fetch(apiUrl, {
-            cache: 'no-store',
+            cache: "no-store",
             headers: {
-              'User-Agent': 'Mozilla/5.0 (compatible; Animeify-Website/1.0)',
+              "User-Agent": "Mozilla/5.0 (compatible; Animeify-Website/1.0)",
             },
             signal: controller.signal,
-          });
-          
+          })
+
           if (response.ok) {
-            break;
+            break
           }
-          
+
           if (response.status >= 500 && retryCount < maxRetries - 1) {
-            console.log(`AnimePage - Retrying due to server error (${response.status}), attempt ${retryCount + 1}`);
-            await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
-            retryCount++;
-            continue;
+            console.log(`AnimePage - Retrying due to server error (${response.status}), attempt ${retryCount + 1}`)
+            await new Promise((resolve) => setTimeout(resolve, 1000 * (retryCount + 1)))
+            retryCount++
+            continue
           }
-          
-          throw new Error(`API response not OK: ${response.status} ${response.statusText}`);
+
+          throw new Error(`API response not OK: ${response.status} ${response.statusText}`)
         } catch (error) {
-          clearTimeout(timeoutId);
-          
-          if (error instanceof Error && error.name === 'AbortError') {
-            console.error('AnimePage - Request timeout');
-            notFound();
+          clearTimeout(timeoutId)
+
+          if (error instanceof Error && error.name === "AbortError") {
+            console.error("AnimePage - Request timeout")
+            notFound()
           }
-          
+
           if (retryCount < maxRetries - 1) {
-            console.log(`AnimePage - Retrying due to error: ${error}, attempt ${retryCount + 1}`);
-            await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
-            retryCount++;
-            continue;
+            console.log(`AnimePage - Retrying due to error: ${error}, attempt ${retryCount + 1}`)
+            await new Promise((resolve) => setTimeout(resolve, 1000 * (retryCount + 1)))
+            retryCount++
+            continue
           }
-          
-          throw error;
+
+          throw error
         }
       }
-      
-      clearTimeout(timeoutId);
-      
+
+      clearTimeout(timeoutId)
+
       if (!response || !response.ok) {
-        console.error('AnimePage - API response not OK:', response?.status, response?.statusText);
-        notFound();
-      }
-      
-      const data = await response.json();
-      
-      console.log('AnimePage - data found:', !!data, 'anime:', !!data?.anime);
-      
-      if (!data || !data.anime) {
-        console.error('AnimePage - 404: No data found for', searchTitle, animeType);
-        notFound();
+        console.error("AnimePage - API response not OK:", response?.status, response?.statusText)
+        notFound()
       }
 
-      const { anime, details, episodes } = data;
+      const data = await response.json()
+
+      console.log("AnimePage - data found:", !!data, "anime:", !!data?.anime)
+
+      if (!data || !data.anime) {
+        console.error("AnimePage - 404: No data found for", searchTitle, animeType)
+        notFound()
+      }
+
+      const { anime, details, episodes } = data
 
       // Calculate average rating
       const calculateRating = () => {
-        if (!details?.AnimeStatistics) return '0';
-        
-        let totalVotes = 0;
-        let totalScore = 0;
-        
-        for (let i = 1; i <= 10; i++) {
-          const key = `rates_${i}` as keyof typeof details.AnimeStatistics;
-          const votes = parseInt(details.AnimeStatistics[key] as string) || 0;
-          totalVotes += votes;
-          totalScore += votes * i;
-        }
-        
-        return totalVotes > 0 ? (totalScore / totalVotes).toFixed(1) : '0';
-      };
+        if (!details?.AnimeStatistics) return "0"
 
-      const userRating = calculateRating();
-      const malScore = anime.Score ? parseFloat(anime.Score).toFixed(1) : '0';
-      
+        let totalVotes = 0
+        let totalScore = 0
+
+        for (let i = 1; i <= 10; i++) {
+          const key = `rates_${i}` as keyof typeof details.AnimeStatistics
+          const votes = Number.parseInt(details.AnimeStatistics[key] as string) || 0
+          totalVotes += votes
+          totalScore += votes * i
+        }
+
+        return totalVotes > 0 ? (totalScore / totalVotes).toFixed(1) : "0"
+      }
+
+      const userRating = calculateRating()
+      const malScore = anime.Score ? Number.parseFloat(anime.Score).toFixed(1) : "0"
+
       // Display Arabic title if available, otherwise English
-      const displayTitle = anime.AR_Title || anime.EN_Title || anime.Synonyms || 'Unknown';
-      
+      const displayTitle = anime.AR_Title || anime.EN_Title || anime.Synonyms || "Unknown"
+
       // Only show secondary title if it's different from display title
-      const secondaryTitle = anime.AR_Title && anime.EN_Title && anime.AR_Title !== anime.EN_Title 
-        ? anime.EN_Title 
-        : '';
-      
-      const description = details?.Plot || 'لا يوجد وصف متاح.';
-      const viewCount = details?.AnimeStatistics?.views ? parseInt(details.AnimeStatistics.views) : 0;
-      const genres = anime.Genres ? anime.Genres.split(', ') : [];
+      const secondaryTitle = anime.AR_Title && anime.EN_Title && anime.AR_Title !== anime.EN_Title ? anime.EN_Title : ""
+
+      const description = details?.Plot || "لا يوجد وصف متاح."
+      const viewCount = details?.AnimeStatistics?.views ? Number.parseInt(details.AnimeStatistics.views) : 0
+      const genres = anime.Genres ? anime.Genres.split(", ") : []
 
       return (
         <div className="min-h-screen bg-black text-white">
@@ -216,11 +210,15 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
                 <div className="flex-1 space-y-4">
                   {/* Title */}
                   <div>
-                    <h1 className="text-3xl md:text-4xl font-bold mb-1" style={{ fontFamily: 'var(--font-big-titles)' }} dir="rtl">
+                    <h1
+                      className="text-3xl md:text-4xl font-bold mb-1"
+                      style={{ fontFamily: "var(--font-big-titles)" }}
+                      dir="rtl"
+                    >
                       {displayTitle}
                     </h1>
                     {secondaryTitle && (
-                      <p className="text-lg text-gray-400" style={{ fontFamily: 'var(--font-normal-text)' }}>
+                      <p className="text-lg text-gray-400" style={{ fontFamily: "var(--font-normal-text)" }}>
                         {secondaryTitle}
                       </p>
                     )}
@@ -228,27 +226,29 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
 
                   {/* Ratings & Meta */}
                   <div className="flex flex-wrap items-center gap-3 text-sm">
-                    {malScore !== '0' && (
+                    {malScore !== "0" && (
                       <div className="flex items-center gap-1.5">
                         <span className="text-yellow-400">⭐</span>
                         <span className="font-semibold">{malScore}</span>
                       </div>
                     )}
-                    
+
                     <span className="text-gray-400">•</span>
                     <span>{anime.Type}</span>
-                    
+
                     {anime.Episodes && (
                       <>
                         <span className="text-gray-400">•</span>
                         <span>{anime.Episodes} حلقة</span>
                       </>
                     )}
-                    
+
                     {anime.Status && (
                       <>
                         <span className="text-gray-400">•</span>
-                        <span>{anime.Status === 'AIRED' ? 'منتهي' : anime.Status === 'AIRING' ? 'يعرض الآن' : anime.Status}</span>
+                        <span>
+                          {anime.Status === "AIRED" ? "منتهي" : anime.Status === "AIRING" ? "يعرض الآن" : anime.Status}
+                        </span>
                       </>
                     )}
                   </div>
@@ -257,10 +257,7 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
                   {genres.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {genres.map((genre: string) => (
-                        <span
-                          key={genre}
-                          className="px-3 py-1 bg-white/10 rounded text-xs"
-                        >
+                        <span key={genre} className="px-3 py-1 bg-white/10 rounded text-xs">
                           {genre}
                         </span>
                       ))}
@@ -269,7 +266,9 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
 
                   {/* Plot */}
                   <div>
-                    <h2 className="text-lg font-semibold mb-2" dir="rtl">القصة</h2>
+                    <h2 className="text-lg font-semibold mb-2" dir="rtl">
+                      القصة
+                    </h2>
                     <p className="text-gray-300 text-sm leading-relaxed" dir="rtl">
                       {description}
                     </p>
@@ -306,7 +305,7 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
             {/* Episodes */}
             {episodes && episodes.length > 0 && (
               <section className="space-y-4">
-                <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-big-titles)' }} dir="rtl">
+                <h2 className="text-2xl font-semibold" style={{ fontFamily: "var(--font-big-titles)" }} dir="rtl">
                   الحلقات ({episodes.length})
                 </h2>
                 <div className="max-h-[400px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
@@ -318,7 +317,7 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
                         className="relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/30 rounded-lg p-3 text-center transition-all cursor-pointer block"
                       >
                         <div className="text-base font-semibold">{ep.Episode}</div>
-                        {ep.MarkedAs === 'LAST' && (
+                        {ep.MarkedAs === "LAST" && (
                           <div className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
                             ✓
                           </div>
@@ -333,18 +332,14 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
             {/* Related Anime */}
             {details?.RelatedAnime && details.RelatedAnime.length > 0 && (
               <section className="space-y-4">
-                <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-big-titles)' }} dir="rtl">
+                <h2 className="text-2xl font-semibold" style={{ fontFamily: "var(--font-big-titles)" }} dir="rtl">
                   أنمي ذات صلة
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                   {details.RelatedAnime.map((related: any) => {
-                    const relatedUrl = createAnimeUrl(related);
+                    const relatedUrl = createAnimeUrl(related)
                     return (
-                      <Link
-                        key={related.AnimeId}
-                        href={relatedUrl}
-                        className="group relative"
-                      >
+                      <Link key={related.AnimeId} href={relatedUrl} className="group relative">
                         <div className="relative aspect-[2/3] bg-gray-900 rounded-lg overflow-hidden border-2 border-white/10 group-hover:border-white/30 transition-all">
                           <img
                             src={`${THUMBNAILS_BASE}${related.Thumbnail}`}
@@ -360,33 +355,33 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
                           </div>
                         </div>
                       </Link>
-                    );
+                    )
                   })}
                 </div>
               </section>
             )}
           </div>
         </div>
-      );
+      )
     } catch (error) {
-      console.error('AnimePage - Error loading anime data:', error);
-      notFound();
+      console.error("AnimePage - Error loading anime data:", error)
+      notFound()
     }
-  } else if (slugArray.length === 3 && slugArray[1] === 'watch') {
+  } else if (slugArray.length === 3 && slugArray[1] === "watch") {
     // /anime/[slug]/watch/[episode] - handle watch page
-    const slug = slugArray[0];
-    const episode = slugArray[2];
-    const searchTitle = name || slugToTitle(slug);
-    const animeType = type || 'SERIES';
-    
-    console.log('AnimePage - Handling watch page:', { slug, episode, searchTitle, animeType });
-    
+    const slug = slugArray[0]
+    const episode = slugArray[2]
+    const searchTitle = name || slugToTitle(slug)
+    const animeType = type || "SERIES"
+
+    console.log("AnimePage - Handling watch page:", { slug, episode, searchTitle, animeType })
+
     // Redirect to the watch page
-    const redirectUrl = `/anime/${slug}/watch/${episode}?name=${encodeURIComponent(searchTitle)}&type=${encodeURIComponent(animeType)}`;
-    redirect(redirectUrl);
+    const redirectUrl = `/anime/${slug}/watch/${episode}?name=${encodeURIComponent(searchTitle)}&type=${encodeURIComponent(animeType)}`
+    redirect(redirectUrl)
   } else {
     // Invalid route pattern
-    console.error('AnimePage - Invalid route pattern:', slugArray);
-    notFound();
+    console.error("AnimePage - Invalid route pattern:", slugArray)
+    notFound()
   }
 }
