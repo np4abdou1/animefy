@@ -155,9 +155,7 @@ async function performSearch(title: string, type: string, retryCount = 0): Promi
   try {
     console.log('performSearch - Title:', title, 'Type:', type, 'Retry:', retryCount);
     
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
-    
+    // Edge Runtime compatible fetch with timeout
     const response = await fetch(`${API_BASE}anime/load_anime_list_v2.php`, {
       method: 'POST',
       headers: {
@@ -173,11 +171,8 @@ async function performSearch(title: string, type: string, retryCount = 0): Promi
         From: '0',
         Token: TOKEN,
       }),
-      cache: 'no-cache',
-      signal: controller.signal,
+      cache: 'no-store',
     });
-    
-    clearTimeout(timeoutId);
 
     console.log('performSearch - Response status:', response.status);
 
@@ -187,6 +182,7 @@ async function performSearch(title: string, type: string, retryCount = 0): Promi
       // Retry on server errors (5xx) or network issues
       if (retryCount < maxRetries && (response.status >= 500 || response.status === 0)) {
         console.log('performSearch - Retrying due to server error...');
+        // Edge Runtime compatible delay
         await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1))); // Exponential backoff
         return performSearch(title, type, retryCount + 1);
       }
@@ -216,6 +212,7 @@ async function performSearch(title: string, type: string, retryCount = 0): Promi
     // Retry on network errors or timeouts
     if (retryCount < maxRetries && (error instanceof Error && (error.name === 'AbortError' || error.message.includes('fetch')))) {
       console.log('performSearch - Retrying due to network error...');
+      // Edge Runtime compatible delay
       await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1))); // Exponential backoff
       return performSearch(title, type, retryCount + 1);
     }
@@ -243,7 +240,7 @@ export async function getAnimeDetails(animeId: string, relationId?: string): Pro
         AnimeRelationId: relationId || '',
         Token: TOKEN,
       }),
-      cache: 'no-cache',
+      cache: 'no-store',
     });
 
     if (!response.ok) {
@@ -274,7 +271,7 @@ export async function getAnimeEpisodes(animeId: string): Promise<Episode[]> {
         AnimeID: animeId,
         Token: TOKEN,
       }),
-      cache: 'no-cache',
+      cache: 'no-store',
     });
 
     console.log('getAnimeEpisodes - Response status:', response.status);
@@ -407,12 +404,17 @@ export async function getCompleteAnimeDataByTitle(searchTitle: string, type: str
         const anime = searchResults[0];
         console.log('API - Found anime:', anime.EN_Title, 'ID:', anime.AnimeId);
         
-        const [details, episodes] = await Promise.all([
+        // Edge Runtime compatible parallel requests
+        const [details, episodes] = await Promise.allSettled([
           getAnimeDetails(anime.AnimeId, anime.RelationId),
           getAnimeEpisodes(anime.AnimeId),
         ]);
 
-        return { anime, details, episodes };
+        return { 
+          anime, 
+          details: details.status === 'fulfilled' ? details.value : null,
+          episodes: episodes.status === 'fulfilled' ? episodes.value : []
+        };
       }
 
       // Try with ALL types
@@ -424,12 +426,17 @@ export async function getCompleteAnimeDataByTitle(searchTitle: string, type: str
         const anime = searchResults[0];
         console.log('API - Found anime:', anime.EN_Title, 'ID:', anime.AnimeId);
         
-        const [details, episodes] = await Promise.all([
+        // Edge Runtime compatible parallel requests
+        const [details, episodes] = await Promise.allSettled([
           getAnimeDetails(anime.AnimeId, anime.RelationId),
           getAnimeEpisodes(anime.AnimeId),
         ]);
 
-        return { anime, details, episodes };
+        return { 
+          anime, 
+          details: details.status === 'fulfilled' ? details.value : null,
+          episodes: episodes.status === 'fulfilled' ? episodes.value : []
+        };
       }
     }
 
