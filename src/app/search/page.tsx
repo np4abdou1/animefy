@@ -339,7 +339,7 @@ function SearchPageContent() {
               {animeList.map((anime) => (
                 <Link
                   key={anime.AnimeId}
-                  href={createAnimeUrl(anime.AnimeId, anime.AR_Title || anime.EN_Title || anime.Synonyms || '', anime.Type || 'SERIES')}
+                  href={`/anime/${anime.AnimeId}?name=${encodeURIComponent(anime.AR_Title || anime.EN_Title || anime.Synonyms || '')}&type=${anime.Type || 'SERIES'}`}
                   className="group p-1"
                 >
                   <div className="relative aspect-[2/3] bg-black transition-all duration-300 ease-out group-hover:scale-105 group-hover:ring-2 group-hover:ring-white/80 rounded-md">
