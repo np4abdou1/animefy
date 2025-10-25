@@ -151,6 +151,8 @@ export async function searchAnime(title: string, type: string = 'SERIES'): Promi
  */
 async function performSearch(title: string, type: string): Promise<AnimeBasic[]> {
   try {
+    console.log('performSearch - Title:', title, 'Type:', type);
+    
     const response = await fetch(`${API_BASE}anime/load_anime_list_v2.php`, {
       method: 'POST',
       headers: {
@@ -168,13 +170,31 @@ async function performSearch(title: string, type: string): Promise<AnimeBasic[]>
       cache: 'no-store',
     });
 
+    console.log('performSearch - Response status:', response.status);
+
     if (!response.ok) {
+      console.error('performSearch - Response not OK:', response.status, response.statusText);
       return [];
     }
 
     const data = await response.json();
-    return Array.isArray(data.value) ? data.value : [];
+    console.log('performSearch - Response data:', JSON.stringify(data).substring(0, 200));
+    console.log('performSearch - Data type:', typeof data);
+    console.log('performSearch - Is array?:', Array.isArray(data));
+    console.log('performSearch - Has value property?:', 'value' in data);
+    console.log('performSearch - Data keys:', Object.keys(data));
+    
+    // The API returns an array directly, not wrapped in {value: [...]}
+    const results = Array.isArray(data) ? data : (Array.isArray(data.value) ? data.value : []);
+    console.log('performSearch - Results count:', results.length);
+    
+    if (results.length > 0) {
+      console.log('performSearch - First result:', results[0].EN_Title, results[0].AnimeId);
+    }
+    
+    return results;
   } catch (error) {
+    console.error('performSearch - Error:', error);
     return [];
   }
 }
@@ -216,6 +236,8 @@ export async function getAnimeDetails(animeId: string, relationId?: string): Pro
  */
 export async function getAnimeEpisodes(animeId: string): Promise<Episode[]> {
   try {
+    console.log('getAnimeEpisodes - AnimeID:', animeId);
+    
     const response = await fetch(`${API_BASE}episodes/load_episodes.php`, {
       method: 'POST',
       headers: {
@@ -228,12 +250,27 @@ export async function getAnimeEpisodes(animeId: string): Promise<Episode[]> {
       cache: 'no-store',
     });
 
+    console.log('getAnimeEpisodes - Response status:', response.status);
+
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`);
     }
 
     const data = await response.json();
-    return Array.isArray(data.value) ? data.value : [];
+    console.log('getAnimeEpisodes - Response data type:', typeof data);
+    console.log('getAnimeEpisodes - Is array?:', Array.isArray(data));
+    console.log('getAnimeEpisodes - Has value property?:', 'value' in data);
+    console.log('getAnimeEpisodes - Response sample:', JSON.stringify(data).substring(0, 200));
+    
+    // Check if data is array directly or wrapped in value
+    const results = Array.isArray(data) ? data : (Array.isArray(data.value) ? data.value : []);
+    console.log('getAnimeEpisodes - Episodes count:', results.length);
+    
+    if (results.length > 0) {
+      console.log('getAnimeEpisodes - First episode:', results[0].Episode);
+    }
+    
+    return results;
   } catch (error) {
     console.error('Get anime episodes error:', error);
     return [];
@@ -282,21 +319,30 @@ export async function getCompleteAnimeDataById(animeId: string) {
  */
 export async function getCompleteAnimeDataByTitle(searchTitle: string, type: string = 'SERIES') {
   try {
+    console.log('API - Searching for:', searchTitle, 'Type:', type);
+    
     // Try multiple search variations to handle special characters
     const searchVariations = [
-      searchTitle, // Original: "16bit Sensation Another Layer"
+      searchTitle, // Original: "Death Note"
       searchTitle.replace(/\s+/g, ' ').trim(), // Clean spaces
-      searchTitle.split(' ').slice(0, 3).join(' '), // First 3 words: "16bit Sensation Another"
-      searchTitle.split(' ').slice(0, 2).join(' '), // First 2 words: "16bit Sensation"
-      searchTitle.split(' ')[0], // First word only: "16bit"
+      searchTitle.split(' ').slice(0, 3).join(' '), // First 3 words
+      searchTitle.split(' ').slice(0, 2).join(' '), // First 2 words
+      searchTitle.split(' ')[0], // First word only
     ];
 
-    for (const variation of searchVariations) {
+    console.log('API - Search variations:', searchVariations);
+
+    for (let i = 0; i < searchVariations.length; i++) {
+      const variation = searchVariations[i];
+      console.log(`API - Trying variation ${i + 1}:`, variation, 'with type:', type);
+      
       // Try with specified type first
       let searchResults = await performSearch(variation, type);
+      console.log(`API - Results for "${variation}" + ${type}:`, searchResults?.length || 0);
       
       if (searchResults && searchResults.length > 0) {
         const anime = searchResults[0];
+        console.log('API - Found anime:', anime.EN_Title, 'ID:', anime.AnimeId);
         
         // Fetch details and episodes in PARALLEL (FAST!)
         const [details, episodes] = await Promise.all([
@@ -308,10 +354,13 @@ export async function getCompleteAnimeDataByTitle(searchTitle: string, type: str
       }
 
       // Try with ALL types
+      console.log(`API - Trying variation ${i + 1}:`, variation, 'with type: ALL');
       searchResults = await performSearch(variation, 'ALL');
+      console.log(`API - Results for "${variation}" + ALL:`, searchResults?.length || 0);
       
       if (searchResults && searchResults.length > 0) {
         const anime = searchResults[0];
+        console.log('API - Found anime:', anime.EN_Title, 'ID:', anime.AnimeId);
         
         // Fetch details and episodes in PARALLEL (FAST!)
         const [details, episodes] = await Promise.all([
@@ -323,6 +372,7 @@ export async function getCompleteAnimeDataByTitle(searchTitle: string, type: str
       }
     }
 
+    console.error('API - No results found for any variation');
     return null;
   } catch (error) {
     console.error('Get complete anime data by title error:', error);

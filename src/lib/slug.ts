@@ -47,8 +47,8 @@ export function slugToTitle(slug: string): string {
 
 /**
  * Create anime URL from anime data
- * Format: /anime/one-piece?type=SERIES
- * Includes type parameter for accurate API search
+ * Format: /anime/one-piece?name=One+Piece&type=SERIES
+ * Includes name and type parameters for accurate API search
  */
 export function createAnimeUrl(anime: {
   EN_Title?: string;
@@ -57,15 +57,17 @@ export function createAnimeUrl(anime: {
   anime_id?: string;
   Type?: string;
 }): string {
-  // Get the title for the slug
+  // Get the title for the slug and search
   const title = anime.EN_Title || anime.AR_Title || anime.AnimeId || anime.anime_id || '';
   const slug = createSlug(title);
   
   if (!slug) return '/';
   
-  // Add type as query parameter for accurate search
+  // Add name and type as query parameters for accurate search
   const type = anime.Type || 'SERIES';
-  return `/anime/${slug}?type=${type}`;
+  const encodedName = encodeURIComponent(title);
+  
+  return `/anime/${slug}?name=${encodedName}&type=${type}`;
 }
 
 /**

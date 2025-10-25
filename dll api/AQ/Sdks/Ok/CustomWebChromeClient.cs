@@ -1,0 +1,79 @@
+﻿using System;
+using Android.App;
+using Android.Content.PM;
+using Android.Media;
+using Android.Runtime;
+using Android.Views;
+using Android.Webkit;
+using Android.Widget;
+using Java.Interop;
+
+namespace AQ.Sdks.Ok
+{
+	// Token: 0x02000051 RID: 81
+	public class CustomWebChromeClient : WebChromeClient, MediaPlayer.IOnCompletionListener, IJavaObject, IDisposable, IJavaPeerable
+	{
+		// Token: 0x06000309 RID: 777 RVA: 0x0000E375 File Offset: 0x0000C575
+		public void OnCompletion(MediaPlayer mp)
+		{
+			this.VideoView.hideVideoView();
+		}
+
+		// Token: 0x0600030A RID: 778 RVA: 0x0000E382 File Offset: 0x0000C582
+		public CustomWebChromeClient(OkWebVideoView videoView)
+		{
+			this.VideoView = videoView;
+		}
+
+		// Token: 0x170000A6 RID: 166
+		// (get) Token: 0x0600030B RID: 779 RVA: 0x0000E394 File Offset: 0x0000C594
+		public override View VideoLoadingProgressView
+		{
+			get
+			{
+				return new ProgressBar(this.VideoView.Context)
+				{
+					Indeterminate = true
+				};
+			}
+		}
+
+		// Token: 0x0600030C RID: 780 RVA: 0x0000E3BC File Offset: 0x0000C5BC
+		public override void OnShowCustomView(View view, WebChromeClient.ICustomViewCallback callback)
+		{
+			base.OnShowCustomView(view, callback);
+			((Activity)this.VideoView.Context).VolumeControlStream = Stream.Music;
+			this.VideoView.mIsFullscreen = true;
+			this.VideoView.mViewCallback = callback;
+			if (view is FrameLayout)
+			{
+				FrameLayout frameLayout = (FrameLayout)view;
+				if (frameLayout.FocusedChild is VideoView)
+				{
+					VideoView videoView = (VideoView)frameLayout.FocusedChild;
+					frameLayout.RemoveView(videoView);
+					this.VideoView.setupVideoLayout(videoView);
+					this.VideoView.mCustomVideoView = videoView;
+					this.VideoView.mCustomVideoView.SetOnCompletionListener(this);
+					return;
+				}
+				this.VideoView.setupVideoLayout(view);
+			}
+		}
+
+		// Token: 0x0600030D RID: 781 RVA: 0x0000DC34 File Offset: 0x0000BE34
+		public override void OnShowCustomView(View view, ScreenOrientation requestedOrientation, WebChromeClient.ICustomViewCallback callback)
+		{
+			this.OnShowCustomView(view, callback);
+		}
+
+		// Token: 0x0600030E RID: 782 RVA: 0x0000E375 File Offset: 0x0000C575
+		public override void OnHideCustomView()
+		{
+			this.VideoView.hideVideoView();
+		}
+
+		// Token: 0x040001B5 RID: 437
+		public OkWebVideoView VideoView;
+	}
+}
