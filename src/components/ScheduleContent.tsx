@@ -127,7 +127,7 @@ export default function ScheduleContent({ schedule, seasons }: ScheduleContentPr
       {currentAnimes.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {currentAnimes.map((anime, index) => {
-            const animeId = anime.AnimeId || anime.anime_id || anime.Id || '';
+            const animeId = anime.AnimeId || anime.anime_id || '';
             const title = anime.AR_Title || anime.EN_Title || anime.Synonyms || '';
             const thumbnail = anime.Thumbnail || '';
             const episodeNum = anime.EpisodeNumber || '';
