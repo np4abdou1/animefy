@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Cloudflare Pages compatibility
+  skipTrailingSlashRedirect: true,
+  // Ensure dynamic routes work properly
+  experimental: {
+    // This helps with dynamic route handling
+  },
 };
 
 export default nextConfig;
