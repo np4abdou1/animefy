@@ -1,34 +1,32 @@
-export const runtime = 'edge'
-export const dynamic = 'force-dynamic'
+import Link from 'next/link'
+import { Suspense } from 'react'
 
-import { notFound, redirect } from 'next/navigation';
-import { headers } from 'next/headers';
-
-export default async function FallbackPage() {
-  const headersList = await headers();
-  const pathname = headersList.get('x-pathname') || '';
-  
-  console.log('FallbackPage - Pathname:', pathname);
-  
-  // Extract slug from pathname
-  const pathSegments = pathname.split('/');
-  const slugIndex = pathSegments.indexOf('anime');
-  
-  if (slugIndex === -1 || slugIndex + 1 >= pathSegments.length) {
-    console.error('FallbackPage - Invalid pathname:', pathname);
-    notFound();
-  }
-  
-  const slug = pathSegments[slugIndex + 1];
-  
-  if (!slug) {
-    console.error('FallbackPage - No slug found in pathname:', pathname);
-    notFound();
-  }
-  
-  // Redirect to the main anime page
-  const redirectUrl = `/anime/${slug}`;
-  console.log('FallbackPage - Redirecting to:', redirectUrl);
-  
-  redirect(redirectUrl);
+// This page serves as a fallback for dynamic anime routes
+export default function AnimeFallback() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 text-white">
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4">Loading Anime...</h1>
+          <p className="text-gray-300 mb-6">
+            We're fetching the anime details for you. This might take a moment.
+          </p>
+          
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-6"></div>
+          
+          <div className="space-y-4">
+            <p className="text-sm text-gray-400">
+              If this page doesn't load automatically, try refreshing or go back home.
+            </p>
+            <Link 
+              href="/" 
+              className="inline-block bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg transition-colors"
+            >
+              Go Home
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }

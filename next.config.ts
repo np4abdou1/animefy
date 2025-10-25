@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Cloudflare Pages compatibility
+  skipTrailingSlashRedirect: true,
+  trailingSlash: false,
+  
+  // Image configuration
   images: {
+    unoptimized: true, // Required for Cloudflare Pages
     remotePatterns: [
       {
         protocol: 'https',
@@ -11,14 +17,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Cloudflare Pages compatibility
-  skipTrailingSlashRedirect: true,
-  // Ensure dynamic routes work properly
+  
+  // Better handling of dynamic routes
   experimental: {
-    // This helps with dynamic route handling
+    missingSuspenseWithCSRBailout: false,
   },
-  // Better handling of dynamic routes in production
-  trailingSlash: false,
+  
+  // Generate static pages for dynamic routes
+  generateBuildId: async () => {
+    return 'animefy-build-' + Date.now()
+  },
 };
 
 export default nextConfig;
