@@ -3,7 +3,6 @@ export const dynamic = 'force-dynamic'
 
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getCompleteAnimeDataByTitle } from '@/lib/animeify-api';
 import { slugToTitle, createAnimeUrl } from '@/lib/slug';
 
 interface AnimePageProps {
@@ -30,8 +29,28 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
   console.log('AnimePage - slug:', slug, 'name:', name, 'searchTitle:', searchTitle, 'type:', animeType);
   
   try {
-    // Fetch complete anime data with title and type
-    const data = await getCompleteAnimeDataByTitle(searchTitle, animeType);
+    // Fetch complete anime data via API route
+    const baseUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://animefy.pages.dev' 
+      : 'http://localhost:3000';
+    
+    const apiUrl = `${baseUrl}/api/anime/details?title=${encodeURIComponent(searchTitle)}&type=${encodeURIComponent(animeType)}`;
+    
+    console.log('AnimePage - Fetching from API:', apiUrl);
+    
+    const response = await fetch(apiUrl, {
+      cache: 'no-store',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; Animeify-Website/1.0)',
+      },
+    });
+    
+    if (!response.ok) {
+      console.error('AnimePage - API response not OK:', response.status, response.statusText);
+      notFound();
+    }
+    
+    const data = await response.json();
     
     console.log('AnimePage - data found:', !!data, 'anime:', !!data?.anime);
     
