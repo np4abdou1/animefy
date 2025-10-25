@@ -1,3 +1,4 @@
+export const runtime = 'edge'
 export const dynamic = 'force-dynamic'
 
 import { notFound, redirect } from 'next/navigation';
@@ -18,8 +19,37 @@ interface AnimePageProps {
 const THUMBNAILS_BASE = 'https://animeify.net/animeify/files/thumbnails/';
 
 export default async function AnimePage({ params, searchParams }: AnimePageProps) {
-  const { slug: slugArray } = await params;
-  const { name, type } = await searchParams;
+  let slugArray: string[];
+  let name: string | undefined;
+  let type: string | undefined;
+  
+  try {
+    const resolvedParams = await params;
+    const resolvedSearchParams = await searchParams;
+    
+    slugArray = resolvedParams.slug;
+    name = resolvedSearchParams.name;
+    type = resolvedSearchParams.type;
+  } catch (error) {
+    console.error('AnimePage - Error resolving params:', error);
+    
+    // Try to get slug from headers as fallback
+    try {
+      const headersList = await headers();
+      const pathname = headersList.get('x-pathname') || '';
+      const slug = headersList.get('x-slug') || '';
+      
+      if (slug) {
+        console.log('AnimePage - Using fallback slug from headers:', slug);
+        slugArray = [slug];
+      } else {
+        notFound();
+      }
+    } catch (headerError) {
+      console.error('AnimePage - Error getting headers:', headerError);
+      notFound();
+    }
+  }
   
   // Handle different route patterns
   if (slugArray.length === 1) {
@@ -57,15 +87,59 @@ export default async function AnimePage({ params, searchParams }: AnimePageProps
       
       console.log('AnimePage - Fetching from API:', apiUrl);
       
-      const response = await fetch(apiUrl, {
-        cache: 'no-store',
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (compatible; Animeify-Website/1.0)',
-        },
-      });
+      // Add timeout and retry logic for edge runtime
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
       
-      if (!response.ok) {
-        console.error('AnimePage - API response not OK:', response.status, response.statusText);
+      let response: Response | undefined;
+      let retryCount = 0;
+      const maxRetries = 3;
+      
+      while (retryCount < maxRetries) {
+        try {
+          response = await fetch(apiUrl, {
+            cache: 'no-store',
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (compatible; Animeify-Website/1.0)',
+            },
+            signal: controller.signal,
+          });
+          
+          if (response.ok) {
+            break;
+          }
+          
+          if (response.status >= 500 && retryCount < maxRetries - 1) {
+            console.log(`AnimePage - Retrying due to server error (${response.status}), attempt ${retryCount + 1}`);
+            await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
+            retryCount++;
+            continue;
+          }
+          
+          throw new Error(`API response not OK: ${response.status} ${response.statusText}`);
+        } catch (error) {
+          clearTimeout(timeoutId);
+          
+          if (error instanceof Error && error.name === 'AbortError') {
+            console.error('AnimePage - Request timeout');
+            notFound();
+          }
+          
+          if (retryCount < maxRetries - 1) {
+            console.log(`AnimePage - Retrying due to error: ${error}, attempt ${retryCount + 1}`);
+            await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)));
+            retryCount++;
+            continue;
+          }
+          
+          throw error;
+        }
+      }
+      
+      clearTimeout(timeoutId);
+      
+      if (!response || !response.ok) {
+        console.error('AnimePage - API response not OK:', response?.status, response?.statusText);
         notFound();
       }
       

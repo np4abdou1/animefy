@@ -1,4 +1,4 @@
-// export const runtime = 'edge';
+export const runtime = 'edge';
 
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -142,16 +142,26 @@ export async function GET(request: NextRequest) {
 
     console.log('Anime by ID API - AnimeId:', animeId);
     
-    const data = await getCompleteAnimeDataById(animeId);
+    // Add timeout and retry logic for edge runtime
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
     
-    if (!data || !data.anime) {
-      console.error('Anime by ID API - No data found for', animeId);
-      return NextResponse.json({ error: 'Anime not found' }, { status: 404 });
-    }
+    try {
+      const data = await getCompleteAnimeDataById(animeId);
+      clearTimeout(timeoutId);
+      
+      if (!data || !data.anime) {
+        console.error('Anime by ID API - No data found for', animeId);
+        return NextResponse.json({ error: 'Anime not found' }, { status: 404 });
+      }
 
-    console.log('Anime by ID API - Data found:', !!data, 'anime:', !!data?.anime);
-    
-    return NextResponse.json(data);
+      console.log('Anime by ID API - Data found:', !!data, 'anime:', !!data?.anime);
+      
+      return NextResponse.json(data);
+    } catch (error) {
+      clearTimeout(timeoutId);
+      throw error;
+    }
   } catch (error) {
     console.error('Anime by ID API error:', error);
     

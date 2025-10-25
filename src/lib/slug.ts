@@ -47,8 +47,8 @@ export function slugToTitle(slug: string): string {
 
 /**
  * Create anime URL from anime data
- * Format: /anime/slug?name=Title&type=SERIES
- * Creates a safe slug from the title for reliable routing
+ * Format: /anime/AnimeId?name=Title&type=SERIES
+ * Uses AnimeId as slug for reliable routing
  */
 export function createAnimeUrl(anime: {
   EN_Title?: string;
@@ -57,22 +57,17 @@ export function createAnimeUrl(anime: {
   anime_id?: string;
   Type?: string;
 }): string {
+  // Use AnimeId as the slug for reliable routing
+  const animeId = anime.AnimeId || anime.anime_id || '';
   const title = anime.EN_Title || anime.AR_Title || '';
   const type = anime.Type || 'SERIES';
-  const animeId = anime.AnimeId || anime.anime_id || '';
   
-  if (!title && !animeId) return '/';
-  
-  // Create a safe slug from the title
-  const slug = createSlug(title);
-  
-  // If we have an AnimeId, use it as a fallback
-  const finalSlug = slug || animeId;
+  if (!animeId) return '/';
   
   // Add name and type as query parameters for accurate search
   const encodedName = encodeURIComponent(title);
   
-  return `/anime/${finalSlug}?name=${encodedName}&type=${type}`;
+  return `/anime/${animeId}?name=${encodedName}&type=${type}`;
 }
 
 /**
