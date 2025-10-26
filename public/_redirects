@@ -1,0 +1,7 @@
+# Cloudflare Pages SPA routing for dynamic routes
+/anime/:slug /anime/[slug] 200
+/anime/:slug/watch/:episode /anime/[slug]/watch/[episode] 200
+/api/* /api/:splat 200
+
+# Fallback for any unmatched routes
+/* /index.html 200

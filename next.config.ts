@@ -18,14 +18,31 @@ const nextConfig: NextConfig = {
     ],
   },
   
-  // Better handling of dynamic routes
-  experimental: {
-    missingSuspenseWithCSRBailout: false,
-  },
+  // CRITICAL FIX: Use static export for Cloudflare Pages
+  output: 'export',
+  distDir: 'out',
+  
+  // REMOVED: Invalid experimental config that was causing build failure
+  // experimental: { missingSuspenseWithCSRBailout: false }, // This was invalid
   
   // Generate static pages for dynamic routes
   generateBuildId: async () => {
     return 'animefy-build-' + Date.now()
+  },
+  
+  // CRITICAL: Add generateStaticParams equivalent for static export
+  async generateStaticParams() {
+    return []
+  },
+  
+  // Ensure proper routing for Cloudflare Pages
+  async rewrites() {
+    return [
+      {
+        source: '/anime/:slug*',
+        destination: '/anime/:slug*',
+      },
+    ]
   },
 };
 

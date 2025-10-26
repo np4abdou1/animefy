@@ -1,12 +1,33 @@
 name = "animefy-v2"
 compatibility_date = "2024-01-01"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".vercel/output/static"
+
+# CRITICAL FIX: Point to 'out' directory for static export
+pages_build_output_dir = "out"
 
 # Build configuration for Cloudflare Pages
-# Build command: npx @cloudflare/next-on-pages@1
-# Build output: .vercel/output/static
+[build]
+command = "npm run build"
 
+# KV namespace for caching
 [[kv_namespaces]]
 binding = "KV_BINDING"
 id = "430df556554942d99d22041f101e1f67"
+
+# Add custom headers for SPA routing
+[[headers]]
+for = "/*"
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+
+# CRITICAL: Handle SPA routing for dynamic routes
+[[redirects]]
+from = "/anime/*"
+to = "/anime/[slug]"
+status = 200
+
+[[redirects]]
+from = "/anime/*/watch/*"
+to = "/anime/[slug]/watch/[episode]"
+status = 200

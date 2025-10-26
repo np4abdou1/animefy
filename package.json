@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
+    "pages:build": "next build",
+    "pages:deploy": "npm run build && wrangler pages deploy out",
     "pages:watch": "npx @cloudflare/next-on-pages --watch",
-    "pages:dev": "npx wrangler pages dev .vercel/output/static --compatibility-flag=nodejs_compat"
+    "pages:dev": "npx wrangler pages dev out --compatibility-flag=nodejs_compat",
+    "export": "next build",
+    "cf:build": "next build && echo 'Build completed for Cloudflare Pages'"
   },
   "dependencies": {
     "class-variance-authority": "0.7.1",
